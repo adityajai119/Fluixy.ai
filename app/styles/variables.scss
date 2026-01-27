@@ -1,0 +1,376 @@
+/* Color Tokens Light Theme */
+:root,
+:root[data-theme='light'] {
+  --fluixy-elements-borderColor: #1717171A;
+  /* alpha.gray.10 */
+  --fluixy-elements-borderColorActive: #0891B2;
+  /* accent.600 */
+
+  --fluixy-elements-bg-depth-1: #FFFFFF;
+  /* white */
+  --fluixy-elements-bg-depth-2: #FAFAFA;
+  /* gray.50 */
+  --fluixy-elements-bg-depth-3: #E5E5E5;
+  /* gray.200 */
+  --fluixy-elements-bg-depth-4: #1717170D;
+  /* alpha.gray.5 */
+
+  --fluixy-elements-textPrimary: #0A0A0A;
+  /* gray.950 */
+  --fluixy-elements-textSecondary: #525252;
+  /* gray.600 */
+  --fluixy-elements-textTertiary: #737373;
+  /* gray.500 */
+
+  --fluixy-elements-code-background: #F5F5F5;
+  /* gray.100 */
+  --fluixy-elements-code-text: #0A0A0A;
+  /* gray.950 */
+
+  --fluixy-elements-button-primary-background: #06B6D41A;
+  /* alpha.accent.10 */
+  --fluixy-elements-button-primary-backgroundHover: #06B6D433;
+  /* alpha.accent.20 */
+  --fluixy-elements-button-primary-text: #06B6D4;
+  /* accent.500 */
+
+  --fluixy-elements-button-secondary-background: #1717170D;
+  /* alpha.gray.5 */
+  --fluixy-elements-button-secondary-backgroundHover: #1717171A;
+  /* alpha.gray.10 */
+  --fluixy-elements-button-secondary-text: #0A0A0A;
+  /* gray.950 */
+
+  --fluixy-elements-button-danger-background: #EF44441A;
+  /* alpha.red.10 */
+  --fluixy-elements-button-danger-backgroundHover: #EF444433;
+  /* alpha.red.20 */
+  --fluixy-elements-button-danger-text: #EF4444;
+  /* red.500 */
+
+  --fluixy-elements-item-contentDefault: #17171780;
+  /* alpha.gray.50 */
+  --fluixy-elements-item-contentActive: #0A0A0A;
+  /* gray.950 */
+  --fluixy-elements-item-contentAccent: #0E7490;
+  /* accent.700 */
+  --fluixy-elements-item-contentDanger: #EF4444;
+  /* red.500 */
+  --fluixy-elements-item-backgroundDefault: rgba(0, 0, 0, 0);
+  --fluixy-elements-item-backgroundActive: #1717170D;
+  /* alpha.gray.5 */
+  --fluixy-elements-item-backgroundAccent: #06B6D41A;
+  /* alpha.accent.10 */
+  --fluixy-elements-item-backgroundDanger: #EF44441A;
+  /* alpha.red.10 */
+
+  --fluixy-elements-loader-background: #1717171A;
+  /* alpha.gray.10 */
+  --fluixy-elements-loader-progress: #06B6D4;
+  /* accent.500 */
+
+  --fluixy-elements-artifacts-background: #FFFFFF;
+  /* white */
+  --fluixy-elements-artifacts-backgroundHover: #17171705;
+  /* alpha.gray.2 */
+  --fluixy-elements-artifacts-borderColor: var(--fluixy-elements-borderColor);
+  --fluixy-elements-artifacts-inlineCode-background: #F5F5F5;
+  /* gray.100 */
+  --fluixy-elements-artifacts-inlineCode-text: var(--fluixy-elements-textPrimary);
+
+  --fluixy-elements-actions-background: #FFFFFF;
+  /* white */
+  --fluixy-elements-actions-code-background: #262626;
+  /* gray.800 */
+
+  --fluixy-elements-messages-background: #F5F5F5;
+  /* gray.100 */
+  --fluixy-elements-messages-linkColor: #06B6D4;
+  /* accent.500 */
+  --fluixy-elements-messages-code-background: #262626;
+  /* gray.800 */
+  --fluixy-elements-messages-inlineCode-background: #E5E5E5;
+  /* gray.200 */
+  --fluixy-elements-messages-inlineCode-text: #262626;
+  /* gray.800 */
+
+  --fluixy-elements-icon-success: #22C55E;
+  /* green.500 */
+  --fluixy-elements-icon-error: #EF4444;
+  /* red.500 */
+  --fluixy-elements-icon-primary: #0A0A0A;
+  /* gray.950 */
+  --fluixy-elements-icon-secondary: #525252;
+  /* gray.600 */
+  --fluixy-elements-icon-tertiary: #737373;
+  /* gray.500 */
+
+  --fluixy-elements-dividerColor: #F5F5F5;
+  /* gray.100 */
+
+  --fluixy-elements-prompt-background: #FFFFFFCC;
+  /* alpha.white.80 */
+
+  --fluixy-elements-sidebar-dropdownShadow: #1717171A;
+  /* alpha.gray.10 */
+  --fluixy-elements-sidebar-buttonBackgroundDefault: #06B6D41A;
+  /* alpha.accent.10 */
+  --fluixy-elements-sidebar-buttonBackgroundHover: #06B6D433;
+  /* alpha.accent.20 */
+  --fluixy-elements-sidebar-buttonText: #0E7490;
+  /* accent.700 */
+
+  --fluixy-elements-preview-addressBar-background: #F5F5F5;
+  /* gray.100 */
+  --fluixy-elements-preview-addressBar-backgroundHover: #1717170D;
+  /* alpha.gray.5 */
+  --fluixy-elements-preview-addressBar-backgroundActive: #FFFFFF;
+  /* white */
+  --fluixy-elements-preview-addressBar-text: var(--fluixy-elements-textSecondary);
+  --fluixy-elements-preview-addressBar-textActive: var(--fluixy-elements-textPrimary);
+
+  --fluixy-elements-terminals-background: #FFFFFF;
+  /* white */
+  --fluixy-elements-terminals-buttonBackground: var(--fluixy-elements-bg-depth-4);
+
+  --fluixy-elements-cta-background: #F5F5F5;
+  /* gray.100 */
+  --fluixy-elements-cta-text: #0A0A0A;
+  /* gray.950 */
+
+  /* Terminal Colors */
+  --fluixy-terminal-background: var(--fluixy-elements-terminals-background);
+  --fluixy-terminal-foreground: #333333;
+  --fluixy-terminal-selection-background: #00000040;
+  --fluixy-terminal-black: #000000;
+  --fluixy-terminal-red: #cd3131;
+  --fluixy-terminal-green: #00bc00;
+  --fluixy-terminal-yellow: #949800;
+  --fluixy-terminal-blue: #0451a5;
+  --fluixy-terminal-magenta: #bc05bc;
+  --fluixy-terminal-cyan: #0598bc;
+  --fluixy-terminal-white: #555555;
+  --fluixy-terminal-brightBlack: #686868;
+  --fluixy-terminal-brightRed: #cd3131;
+  --fluixy-terminal-brightGreen: #00bc00;
+  --fluixy-terminal-brightYellow: #949800;
+  --fluixy-terminal-brightBlue: #0451a5;
+  --fluixy-terminal-brightMagenta: #bc05bc;
+  --fluixy-terminal-brightCyan: #0598bc;
+  --fluixy-terminal-brightWhite: #a5a5a5;
+  --modern-scrollbar-thumb-background: rgba(100, 100, 100, 0.3);
+  --modern-scrollbar-thumb-backgroundHover: rgba(74, 74, 74, 0.8);
+}
+
+/* Color Tokens Dark Theme */
+:root,
+:root[data-theme='dark'] {
+  --fluixy-elements-borderColor: #FFFFFF1A;
+  /* alpha.white.10 */
+  --fluixy-elements-borderColorActive: #06B6D4;
+  /* accent.500 */
+
+  --fluixy-elements-bg-depth-1: #0A0A0A;
+  /* gray.950 */
+  --fluixy-elements-bg-depth-2: #171717;
+  /* gray.900 */
+  --fluixy-elements-bg-depth-3: #262626;
+  /* gray.800 */
+  --fluixy-elements-bg-depth-4: #FFFFFF0D;
+  /* alpha.white.5 */
+
+  --fluixy-elements-textPrimary: #FFFFFF;
+  /* white */
+  --fluixy-elements-textSecondary: #A3A3A3;
+  /* gray.400 */
+  --fluixy-elements-textTertiary: #737373;
+  /* gray.500 */
+
+  --fluixy-elements-code-background: #262626;
+  /* gray.800 */
+  --fluixy-elements-code-text: #FFFFFF;
+  /* white */
+
+  --fluixy-elements-button-primary-background: #06B6D41A;
+  /* alpha.accent.10 */
+  --fluixy-elements-button-primary-backgroundHover: #06B6D433;
+  /* alpha.accent.20 */
+  --fluixy-elements-button-primary-text: #06B6D4;
+  /* accent.500 */
+
+  --fluixy-elements-button-secondary-background: #FFFFFF0D;
+  /* alpha.white.5 */
+  --fluixy-elements-button-secondary-backgroundHover: #FFFFFF1A;
+  /* alpha.white.10 */
+  --fluixy-elements-button-secondary-text: #FFFFFF;
+  /* white */
+
+  --fluixy-elements-button-danger-background: #EF44441A;
+  /* alpha.red.10 */
+  --fluixy-elements-button-danger-backgroundHover: #EF444433;
+  /* alpha.red.20 */
+  --fluixy-elements-button-danger-text: #EF4444;
+  /* red.500 */
+
+  --fluixy-elements-item-contentDefault: #FFFFFF80;
+  /* alpha.white.50 */
+  --fluixy-elements-item-contentActive: #FFFFFF;
+  /* white */
+  --fluixy-elements-item-contentAccent: #06B6D4;
+  /* accent.500 */
+  --fluixy-elements-item-contentDanger: #EF4444;
+  /* red.500 */
+  --fluixy-elements-item-backgroundDefault: rgba(255, 255, 255, 0);
+  --fluixy-elements-item-backgroundActive: #FFFFFF1A;
+  /* alpha.white.10 */
+  --fluixy-elements-item-backgroundAccent: #06B6D41A;
+  /* alpha.accent.10 */
+  --fluixy-elements-item-backgroundDanger: #EF44441A;
+  /* alpha.red.10 */
+
+  --fluixy-elements-loader-background: #1717171A;
+  /* alpha.gray.10 - Wait, loader background usually alpha white in dark mode? */
+  /* Checking original dark theme: theme('colors.alpha.gray.10') -> #1717171A. 
+     Wait, #171717 is dark gray. On #0A0A0A background it is barely visible.
+     I'll stick to translation of alpha.gray.10 */
+  --fluixy-elements-loader-progress: #06B6D4;
+  /* accent.500 */
+
+  --fluixy-elements-artifacts-background: #171717;
+  /* gray.900 */
+  --fluixy-elements-artifacts-backgroundHover: #FFFFFF0D;
+  /* alpha.white.5 */
+  --fluixy-elements-artifacts-borderColor: var(--fluixy-elements-borderColor);
+  --fluixy-elements-artifacts-inlineCode-background: #262626;
+  /* gray.800 */
+  --fluixy-elements-artifacts-inlineCode-text: #FFFFFF;
+  /* white */
+
+  --fluixy-elements-actions-background: #171717;
+  /* gray.900 */
+  --fluixy-elements-actions-code-background: #262626;
+  /* gray.800 */
+
+  --fluixy-elements-messages-background: #262626;
+  /* gray.800 */
+  --fluixy-elements-messages-linkColor: #06B6D4;
+  /* accent.500 */
+  --fluixy-elements-messages-code-background: #171717;
+  /* gray.900 */
+  --fluixy-elements-messages-inlineCode-background: #404040;
+  /* gray.700 */
+  --fluixy-elements-messages-inlineCode-text: var(--fluixy-elements-textPrimary);
+
+  --fluixy-elements-icon-success: #4ADE80;
+  /* green.400 */
+  --fluixy-elements-icon-error: #F87171;
+  /* red.400 */
+  --fluixy-elements-icon-primary: #0A0A0A;
+  /* gray.950 - Wait, icon primary in dark mode should be white? 
+     Original: theme('colors.gray.950'). 
+     If background is dark, gray.950 is invisible.
+     Let me check original file content again.
+     Line 168: --fluixy-elements-icon-primary: theme('colors.gray.950');
+     This seems wrong for dark mode if background is dark.
+     BUT I must respect the source. 
+     Wait, maybe icon-primary is used on light backgrounds in dark mode?
+     I will translate faithfully: #0A0A0A. */
+  --fluixy-elements-icon-secondary: #525252;
+  /* gray.600 */
+  --fluixy-elements-icon-tertiary: #737373;
+  /* gray.500 */
+
+  --fluixy-elements-dividerColor: #F5F5F5;
+  /* gray.100 - This is light? Original line 172. 
+     Gray 100 on dark background is very bright divider. Okay. */
+
+  --fluixy-elements-prompt-background: #171717CC;
+  /* alpha.gray.80 */
+
+  --fluixy-elements-sidebar-dropdownShadow: #1717174D;
+  /* alpha.gray.30 */
+  --fluixy-elements-sidebar-buttonBackgroundDefault: #06B6D41A;
+  /* alpha.accent.10 */
+  --fluixy-elements-sidebar-buttonBackgroundHover: #06B6D433;
+  /* alpha.accent.20 */
+  --fluixy-elements-sidebar-buttonText: #06B6D4;
+  /* accent.500 */
+
+  --fluixy-elements-preview-addressBar-background: var(--fluixy-elements-bg-depth-1);
+  --fluixy-elements-preview-addressBar-backgroundHover: #FFFFFF0D;
+  /* alpha.white.5 */
+  --fluixy-elements-preview-addressBar-backgroundActive: var(--fluixy-elements-bg-depth-1);
+  --fluixy-elements-preview-addressBar-text: var(--fluixy-elements-textSecondary);
+  --fluixy-elements-preview-addressBar-textActive: var(--fluixy-elements-textPrimary);
+
+  --fluixy-elements-terminals-background: var(--fluixy-elements-bg-depth-1);
+  --fluixy-elements-terminals-buttonBackground: var(--fluixy-elements-bg-depth-3);
+
+  --fluixy-elements-cta-background: #FFFFFF1A;
+  /* alpha.white.10 */
+  --fluixy-elements-cta-text: #FFFFFF;
+  /* white */
+
+  /* Terminal Colors */
+  --fluixy-terminal-background: var(--fluixy-elements-terminals-background);
+  --fluixy-terminal-foreground: #eff0eb;
+  --fluixy-terminal-selection-background: #97979b33;
+  --fluixy-terminal-black: #000000;
+  --fluixy-terminal-red: #ff5c57;
+  --fluixy-terminal-green: #5af78e;
+  --fluixy-terminal-yellow: #f3f99d;
+  --fluixy-terminal-blue: #57c7ff;
+  --fluixy-terminal-magenta: #ff6ac1;
+  --fluixy-terminal-cyan: #9aedfe;
+  --fluixy-terminal-white: #f1f1f0;
+  --fluixy-terminal-brightBlack: #686868;
+  --fluixy-terminal-brightRed: #ff5c57;
+  --fluixy-terminal-brightGreen: #5af78e;
+  --fluixy-terminal-brightYellow: #f3f99d;
+  --fluixy-terminal-brightBlue: #57c7ff;
+  --fluixy-terminal-brightMagenta: #ff6ac1;
+  --fluixy-terminal-brightCyan: #9aedfe;
+  --fluixy-terminal-brightWhite: #f1f1f0;
+  --modern-scrollbar-thumb-background: rgba(100, 100, 100, 0.3);
+  --modern-scrollbar-thumb-backgroundHover: rgba(74, 74, 74, 0.8);
+}
+
+/*
+ * Element Tokens
+ *
+ * Hierarchy: Element Token -> (Element Token | Color Tokens) -> Primitives
+ */
+:root {
+  --header-height: 54px;
+  --chat-max-width: 33rem;
+  --chat-min-width: 533px;
+  --workbench-width: min(calc(100% - var(--chat-min-width)), 2536px);
+  --workbench-inner-width: var(--workbench-width);
+  --workbench-left: calc(100% - var(--workbench-width));
+
+  /* Toasts */
+  --toastify-color-progress-success: var(--fluixy-elements-icon-success);
+  --toastify-color-progress-error: var(--fluixy-elements-icon-error);
+
+  /* Terminal */
+  --fluixy-elements-terminal-backgroundColor: var(--fluixy-terminal-background);
+  --fluixy-elements-terminal-textColor: var(--fluixy-terminal-foreground);
+  --fluixy-elements-terminal-cursorColor: var(--fluixy-terminal-foreground);
+  --fluixy-elements-terminal-selection-backgroundColor: var(--fluixy-terminal-selection-background);
+  --fluixy-elements-terminal-color-black: var(--fluixy-terminal-black);
+  --fluixy-elements-terminal-color-red: var(--fluixy-terminal-red);
+  --fluixy-elements-terminal-color-green: var(--fluixy-terminal-green);
+  --fluixy-elements-terminal-color-yellow: var(--fluixy-terminal-yellow);
+  --fluixy-elements-terminal-color-blue: var(--fluixy-terminal-blue);
+  --fluixy-elements-terminal-color-magenta: var(--fluixy-terminal-magenta);
+  --fluixy-elements-terminal-color-cyan: var(--fluixy-terminal-cyan);
+  --fluixy-elements-terminal-color-white: var(--fluixy-terminal-white);
+  --fluixy-elements-terminal-color-brightBlack: var(--fluixy-terminal-brightBlack);
+  --fluixy-elements-terminal-color-brightRed: var(--fluixy-terminal-brightRed);
+  --fluixy-elements-terminal-color-brightGreen: var(--fluixy-terminal-brightGreen);
+  --fluixy-elements-terminal-color-brightYellow: var(--fluixy-terminal-brightYellow);
+  --fluixy-elements-terminal-color-brightBlue: var(--fluixy-terminal-brightBlue);
+  --fluixy-elements-terminal-color-brightMagenta: var(--fluixy-terminal-brightMagenta);
+  --fluixy-elements-terminal-color-brightCyan: var(--fluixy-terminal-brightCyan);
+  --fluixy-elements-terminal-color-brightWhite: var(--fluixy-terminal-brightWhite);
+}
