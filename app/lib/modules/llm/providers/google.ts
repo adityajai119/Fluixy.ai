@@ -33,6 +33,14 @@ export default class GoogleProvider extends BaseProvider {
       maxTokenAllowed: 1000000,
       maxCompletionTokens: 8192,
     },
+    // Gemini 2.0 Flash: 1M context, 8K output limit, newest and fastest
+    {
+      name: 'gemini-2.0-flash',
+      label: 'Gemini 2.0 Flash',
+      provider: 'Google',
+      maxTokenAllowed: 1000000,
+      maxCompletionTokens: 8192,
+    },
   ];
 
   async getDynamicModels(

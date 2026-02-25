@@ -98,7 +98,15 @@ const COLOR_PRIMITIVES = {
 };
 
 export default defineConfig({
-  safelist: [...Object.keys(customIconCollection[collectionName] || {}).map((x) => `i-fluixy:${x}`)],
+  safelist: [
+    ...Object.keys(customIconCollection[collectionName] || {}).map((x) => `i-fluixy:${x}`),
+    'i-ph:pencil-simple',
+    'i-ph:check',
+    'i-ph:x',
+    'i-ph:key',
+    'i-ph:check-circle-fill',
+    'i-ph:x-circle-fill',
+  ],
   shortcuts: {
     'fluixy-ease-cubic-bezier': 'ease-[cubic-bezier(0.4,0,0.2,1)]',
     'transition-theme': 'transition-[background-color,border-color,color] duration-150 fluixy-ease-cubic-bezier',
