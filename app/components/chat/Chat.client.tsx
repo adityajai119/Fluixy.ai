@@ -584,6 +584,22 @@ export const ChatImpl = memo(
       }
     }, []);
 
+    useEffect(() => {
+      const handleFixDPDP = (event: any) => {
+        const prompt = event.detail;
+
+        if (prompt && sendMessage) {
+          sendMessage(new CustomEvent('fix') as any, prompt);
+        }
+      };
+
+      window.addEventListener('fluixy:fix-dpdp', handleFixDPDP);
+
+      return () => {
+        window.removeEventListener('fluixy:fix-dpdp', handleFixDPDP);
+      };
+    }, [sendMessage]);
+
     const handleModelChange = (newModel: string) => {
       setModel(newModel);
       Cookies.set('selectedModel', newModel, { expires: 30 });

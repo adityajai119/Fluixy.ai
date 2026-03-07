@@ -71,8 +71,7 @@ export function ImportButtons(importChat: ((description: string, messages: Messa
               'text-fluixy-elements-textPrimary',
               'hover:bg-fluixy-elements-background-depth-2',
               'border border-fluixy-elements-borderColor',
-              'h-10 px-4 py-2 min-w-[120px] justify-center',
-              'transition-all duration-200 ease-in-out',
+              'h-10 px-4 py-2 min-w-[120px] justify-center transform-gpu will-change-transform'
             )}
           >
             <span className="i-ph:upload-simple w-4 h-4" />
@@ -86,7 +85,7 @@ export function ImportButtons(importChat: ((description: string, messages: Messa
               'hover:bg-fluixy-elements-background-depth-2',
               'border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)]',
               'h-10 px-4 py-2 min-w-[120px] justify-center',
-              'transition-all duration-200 ease-in-out rounded-lg',
+              'rounded-lg transform-gpu will-change-transform'
             )}
           />
         </div>

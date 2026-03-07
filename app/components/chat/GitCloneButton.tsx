@@ -175,7 +175,6 @@ ${escapefluixyTags(file.content)}
           'hover:bg-fluixy-elements-background-depth-2',
           'border border-fluixy-elements-borderColor',
           'h-10 px-4 py-2 min-w-[120px] justify-center',
-          'transition-all duration-200 ease-in-out',
           className,
         )}
         disabled={!ready || loading}

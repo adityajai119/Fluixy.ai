@@ -6,7 +6,7 @@ export const ExportChatButton = ({ exportChat }: { exportChat?: () => void }) =>
   return (
     <div className="flex border border-fluixy-elements-borderColor rounded-md overflow-hidden">
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="rounded-md items-center justify-center [&:is(:disabled,.disabled)]:cursor-not-allowed [&:is(:disabled,.disabled)]:opacity-60 px-3 py-1.5 text-xs bg-accent-500 text-white hover:text-fluixy-elements-item-contentAccent [&:not(:disabled,.disabled)]:hover:bg-fluixy-elements-button-primary-backgroundHover outline-accent-500 flex gap-1.7">
+        <DropdownMenu.Trigger className="rounded-md items-center justify-center [&:is(:disabled,.disabled)]:cursor-not-allowed [&:is(:disabled,.disabled)]:opacity-60 px-2.5 py-1 text-[11px] bg-accent-500 text-white hover:bg-fluixy-elements-button-primary-backgroundHover flex gap-1.5">
           Export
           <span className={classNames('i-ph:caret-down transition-transform')} />
         </DropdownMenu.Trigger>

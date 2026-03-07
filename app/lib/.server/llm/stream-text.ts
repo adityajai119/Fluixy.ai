@@ -281,8 +281,35 @@ export async function streamText(props: {
       providerSettings,
     }),
     system: chatMode === 'build' ? systemPrompt : discussPrompt(),
+    experimental_activeTools:
+      provider.name === 'Anthropic' ? [] : undefined, // Provide hooks for anthropic-specific experimental flags if needed
     ...tokenParams,
-    messages: convertToCoreMessages(processedMessages as any),
+    messages: convertToCoreMessages(processedMessages as any).map((msg, index, array) => {
+      // Apply Prompt Caching to Anthropic models. We cache the last user message and the system prompt (implicitly handled if supported by ai-sdk)
+      // For messages, we attach cacheControl to the last couple of hefty messages to save tokens.
+      if (provider.name === 'Anthropic' && msg.role === 'user' && index === array.length - 1) {
+        if (typeof msg.content === 'string') {
+          return {
+            ...msg,
+            experimental_providerMetadata: {
+              anthropic: { cacheControl: { type: 'ephemeral' } }
+            }
+          };
+        } else if (Array.isArray(msg.content)) {
+          // Add cache control to the last text part
+          const newContent = [...msg.content];
+          const lastTextPartIndex = newContent.map(p => p.type).lastIndexOf('text');
+          if (lastTextPartIndex >= 0) {
+            newContent[lastTextPartIndex] = {
+              ...(newContent[lastTextPartIndex] as any),
+              experimental_providerMetadata: { anthropic: { cacheControl: { type: 'ephemeral' } } }
+            };
+          }
+          return { ...msg, content: newContent };
+        }
+      }
+      return msg;
+    }),
     ...filteredOptions,
 
     // Set temperature to 1 for reasoning models (required by OpenAI API)

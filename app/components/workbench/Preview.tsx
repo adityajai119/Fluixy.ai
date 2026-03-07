@@ -7,6 +7,8 @@ import { ScreenshotSelector } from './ScreenshotSelector';
 import { expoUrlAtom } from '~/lib/stores/qrCodeStore';
 import { ExpoQrModal } from '~/components/workbench/ExpoQrModal';
 import type { ElementInfo } from './Inspector';
+import { CostEstimator } from './CostEstimator';
+import { AccessibilityBadge } from './AccessibilityBadge';
 
 type ResizeSide = 'left' | 'right' | null;
 

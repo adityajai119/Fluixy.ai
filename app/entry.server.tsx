@@ -70,8 +70,14 @@ export default async function handleRequest(
 
   responseHeaders.set('Content-Type', 'text/html');
 
+  // Hardened Security Headers (Vulnerability Scanner / OSINT best practices)
   responseHeaders.set('Cross-Origin-Embedder-Policy', 'require-corp');
   responseHeaders.set('Cross-Origin-Opener-Policy', 'same-origin');
+  responseHeaders.set('X-Content-Type-Options', 'nosniff');
+  responseHeaders.set('X-Frame-Options', 'DENY');
+  responseHeaders.set('X-XSS-Protection', '1; mode=block');
+  responseHeaders.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  responseHeaders.set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
   return new Response(body, {
     headers: responseHeaders,

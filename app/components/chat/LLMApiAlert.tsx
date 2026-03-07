@@ -74,7 +74,7 @@ export default function LlmErrorAlert({ alert, clearAlert }: Props) {
               <p>{getErrorMessage()}</p>
 
               {description && (
-                <div className="text-xs text-fluixy-elements-textSecondary p-2 bg-fluixy-elements-background-depth-3 rounded mt-4 mb-4">
+                <div className="text-xs text-fluixy-elements-textSecondary p-2 bg-fluixy-elements-background-depth-3 rounded mt-4 mb-4 break-words whitespace-pre-wrap max-h-32 overflow-y-auto">
                   Error Details: {description}
                 </div>
               )}

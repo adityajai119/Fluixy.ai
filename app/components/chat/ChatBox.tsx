@@ -67,13 +67,11 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
   return (
     <div
       className={classNames(
-        'relative bg-fluixy-elements-background-depth-2 backdrop-blur p-3 rounded-lg border border-fluixy-elements-borderColor relative w-full max-w-chat mx-auto z-prompt',
-
-        /*
-         * {
-         *   'sticky bottom-2': chatStarted,
-         * },
-         */
+        'relative bg-fluixy-elements-background-depth-2/80 backdrop-blur-xl p-3 rounded-2xl border border-fluixy-elements-borderColor relative w-full max-w-chat mx-auto z-prompt transition-all duration-300 ease-out',
+        {
+          'hover:shadow-[0_0_20px_rgba(20,136,252,0.15)] hover:border-fluixy-elements-borderColorActive': !props.isStreaming,
+          'shadow-[0_0_25px_rgba(20,136,252,0.25)] border-accent-500/50 scale-[1.01]': props.isStreaming,
+        }
       )}
     >
       <svg className={classNames(styles.PromptEffectContainer)}>
@@ -105,7 +103,7 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
       <div>
         <ClientOnly>
           {() => (
-            <div className={props.isModelSettingsCollapsed ? 'hidden' : ''}>
+            <div className={classNames(props.isModelSettingsCollapsed ? 'hidden' : '', 'w-[80%] mx-auto mb-2')}>
               <ModelSelector
                 key={props.provider?.name + ':' + props.modelList.length}
                 model={props.model}
@@ -167,14 +165,15 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
         </div>
       )}
       <div
-        className={classNames('relative shadow-xs border border-fluixy-elements-borderColor backdrop-blur rounded-lg')}
+        className={classNames(
+          'relative shadow-inner border border-fluixy-elements-borderColor/50 backdrop-blur rounded-xl bg-fluixy-elements-background-depth-1 hover:border-accent-500/50 transition-colors duration-300'
+        )}
       >
         <textarea
           ref={props.textareaRef}
           className={classNames(
             'w-full pl-4 pt-4 pr-16 outline-none resize-none text-fluixy-elements-textPrimary placeholder-fluixy-elements-textTertiary bg-transparent text-sm',
             'transition-all duration-200',
-            'hover:border-fluixy-elements-focus',
           )}
           onDragEnter={(e) => {
             e.preventDefault();

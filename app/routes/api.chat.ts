@@ -41,7 +41,7 @@ function parseCookies(cookieHeader: string): Record<string, string> {
 
 async function chatAction({ context, request }: ActionFunctionArgs) {
   const streamRecovery = new StreamRecoveryManager({
-    timeout: 45000,
+    timeout: 90000, // Increased to 90s to account for large project context selection
     maxRetries: 2,
     onTimeout: () => {
       logger.warn('Stream timeout - attempting recovery');
@@ -134,6 +134,9 @@ async function chatAction({ context, request }: ActionFunctionArgs) {
               }
             },
           });
+
+          streamRecovery.updateActivity();
+
           dataStream.writeData({
             type: 'progress',
             label: 'summary',
@@ -178,6 +181,8 @@ async function chatAction({ context, request }: ActionFunctionArgs) {
               }
             },
           });
+
+          streamRecovery.updateActivity();
 
           if (filteredFiles) {
             logger.debug(`files in context : ${JSON.stringify(Object.keys(filteredFiles))}`);

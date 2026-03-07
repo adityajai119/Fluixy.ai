@@ -139,7 +139,19 @@ export async function getTemplates(templateName: string, title?: string) {
   }
 
   const githubRepo = template.githubRepo;
-  const files = await getGitHubRepoContent(githubRepo);
+  let files = await getGitHubRepoContent(githubRepo);
+
+  // Convert legacy .bolt paths to .fluixy
+  files = files.map((file) => {
+    if (file.path.startsWith('.bolt/')) {
+      return {
+        ...file,
+        path: file.path.replace(/^\.bolt\//, '.fluixy/'),
+      };
+    }
+
+    return file;
+  });
 
   let filteredFiles = files;
 

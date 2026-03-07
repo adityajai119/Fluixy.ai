@@ -211,7 +211,7 @@ export function FileIcon({ filename, size = 'md', className }: FileIconProps) {
     }
 
     if (['go'].includes(extension)) {
-      return 'text-cyan-500';
+      return 'text-purple-500';
     }
 
     if (['rs', 'rust'].includes(extension)) {
@@ -227,7 +227,7 @@ export function FileIcon({ filename, size = 'md', className }: FileIconProps) {
     }
 
     if (['dart'].includes(extension)) {
-      return 'text-cyan-400';
+      return 'text-purple-400';
     }
 
     // Config files

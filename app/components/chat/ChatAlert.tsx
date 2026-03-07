@@ -60,45 +60,51 @@ export default function ChatAlert({ alert, clearAlert, postMessage }: Props) {
               )}
             </motion.div>
 
-            {/* Actions */}
+            {/* Smart Recovery Actions */}
             <motion.div
-              className="mt-4"
+              className="mt-4 flex flex-wrap gap-2"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <div className={classNames(' flex gap-2')}>
-                <button
-                  onClick={() =>
-                    postMessage(
-                      `*Fix this ${isPreview ? 'preview' : 'terminal'} error* \n\`\`\`${isPreview ? 'js' : 'sh'}\n${content}\n\`\`\`\n`,
-                    )
-                  }
-                  className={classNames(
-                    `px-2 py-1.5 rounded-md text-sm font-medium`,
-                    'bg-fluixy-elements-button-primary-background',
-                    'hover:bg-fluixy-elements-button-primary-backgroundHover',
-                    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-fluixy-elements-button-danger-background',
-                    'text-fluixy-elements-button-primary-text',
-                    'flex items-center gap-1.5',
-                  )}
-                >
-                  <div className="i-ph:chat-circle-duotone"></div>
-                  Ask fluixy
-                </button>
-                <button
-                  onClick={clearAlert}
-                  className={classNames(
-                    `px-2 py-1.5 rounded-md text-sm font-medium`,
-                    'bg-fluixy-elements-button-secondary-background',
-                    'hover:bg-fluixy-elements-button-secondary-backgroundHover',
-                    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-fluixy-elements-button-secondary-background',
-                    'text-fluixy-elements-button-secondary-text',
-                  )}
-                >
-                  Dismiss
-                </button>
-              </div>
+              <button
+                onClick={() =>
+                  postMessage(
+                    `*Fix this ${isPreview ? 'preview' : 'terminal'} error* \n\`\`\`${isPreview ? 'js' : 'sh'}\n${content}\n\`\`\`\n`,
+                  )
+                }
+                className="px-3 py-1.5 rounded-md text-xs font-medium bg-fluixy-elements-button-primary-background hover:bg-fluixy-elements-button-primary-backgroundHover text-fluixy-elements-button-primary-text flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <div className="i-ph:wrench-duotone text-sm"></div>
+                Auto-Fix Error
+              </button>
+
+              <button
+                onClick={() =>
+                  postMessage(`This error is persistent. Let's simplify the approach and try an easier alternative.`)
+                }
+                className="px-3 py-1.5 rounded-md text-xs font-medium bg-fluixy-elements-background-depth-3 hover:bg-fluixy-elements-background-depth-4 text-fluixy-elements-textPrimary flex items-center gap-1.5 transition-colors border border-fluixy-elements-borderColor/50"
+              >
+                <div className="i-ph:magic-wand-duotone text-sm"></div>
+                Simplify Approach
+              </button>
+
+              <button
+                onClick={() =>
+                  postMessage(`Let's break down the problem step-by-step and fix this ${isPreview ? 'preview' : 'terminal'} error systematically.`)
+                }
+                className="px-3 py-1.5 rounded-md text-xs font-medium bg-fluixy-elements-background-depth-3 hover:bg-fluixy-elements-background-depth-4 text-fluixy-elements-textPrimary flex items-center gap-1.5 transition-colors border border-fluixy-elements-borderColor/50"
+              >
+                <div className="i-ph:steps-duotone text-sm"></div>
+                Step-by-Step Fix
+              </button>
+
+              <button
+                onClick={clearAlert}
+                className="px-3 py-1.5 rounded-md text-xs font-medium text-fluixy-elements-textTertiary hover:text-fluixy-elements-textPrimary hover:bg-fluixy-elements-background-depth-3 transition-colors ml-auto"
+              >
+                Dismiss
+              </button>
             </motion.div>
           </div>
         </div>

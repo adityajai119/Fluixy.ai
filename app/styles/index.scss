@@ -12,24 +12,112 @@ body {
   height: 100%;
   width: 100%;
   background-color: var(--fluixy-elements-bg-depth-1);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
 }
 
 :root {
   --gradient-opacity: 0.8;
-  --primary-color: rgba(6, 182, 212, var(--gradient-opacity));
-  --secondary-color: rgba(8, 145, 178, var(--gradient-opacity));
-  --accent-color: rgba(14, 116, 144, var(--gradient-opacity));
-  // --primary-color: rgba(147, 112, 219, var(--gradient-opacity));
-  // --secondary-color: rgba(138, 43, 226, var(--gradient-opacity));
-  // --accent-color: rgba(180, 170, 220, var(--gradient-opacity));
+  --primary-color: rgba(139, 92, 246, var(--gradient-opacity));
+  --secondary-color: rgba(99, 102, 241, var(--gradient-opacity));
+  --accent-color: rgba(59, 130, 246, var(--gradient-opacity));
 }
+
+/* ============================================
+   Glassmorphism Utilities
+   ============================================ */
+
+.glass {
+  background: var(--fluixy-glass-background);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border: 1px solid var(--fluixy-glass-border);
+}
+
+.glass-subtle {
+  background: var(--fluixy-glass-background);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border: 1px solid var(--fluixy-glass-border);
+}
+
+.glass-strong {
+  background: var(--fluixy-glass-background);
+  backdrop-filter: blur(40px) saturate(2.0);
+  -webkit-backdrop-filter: blur(40px) saturate(2.0);
+  border: 1px solid var(--fluixy-glass-border);
+}
+
+/* ============================================
+   Glow Effects
+   ============================================ */
+
+.glow-accent {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15), 0 0 40px rgba(139, 92, 246, 0.05);
+}
+
+.glow-accent-hover:hover {
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.25), 0 0 50px rgba(139, 92, 246, 0.10);
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--fluixy-accent-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   Gradient Text
+   ============================================ */
+
+.gradient-text {
+  background: var(--fluixy-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: var(--fluixy-accent-gradient-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Modern Scrollbar
+   ============================================ */
 
 .modern-scrollbar {
   overflow: auto;
 
-  // WebKit scrollbar styling
   &::-webkit-scrollbar {
-    width: 2px;
+    width: 4px;
     height: 4px;
   }
 
@@ -38,36 +126,79 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    // Use CSS variables for colors
-    background-color: var(--modern-scrollbar-thumb-background);
-    border-radius: 9999px; // pill shape
-    border: 2px solid transparent; // for padding-like effect
+    background: var(--modern-scrollbar-thumb-background);
+    border-radius: 9999px;
+    border: 1px solid transparent;
     background-clip: content-box;
-    transition: background-color 0.2s ease-in-out; // Add transition
+    transition: background-color 0.3s ease;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    // Use CSS variable for hover color
-    background-color: var(--modern-scrollbar-thumb-backgroundHover);
+    background: var(--modern-scrollbar-thumb-backgroundHover);
   }
 
-  // Firefox support
   scrollbar-width: thin;
-  // Use CSS variables for Firefox colors
-  scrollbar-color: var(--modern-scrollbar-thumb-backgroundHover) transparent; // Use hover color for thumb for consistency
+  scrollbar-color: var(--modern-scrollbar-thumb-backgroundHover) transparent;
 }
 
 .modern-scrollbar-invert {
   &::-webkit-scrollbar-thumb {
-    // Override with a contrasting color, e.g., primary text color with transparency
     background-color: color-mix(in srgb, var(--fluixy-elements-textPrimary), transparent 70%);
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    // Darker/more opaque version on hover
     background-color: color-mix(in srgb, var(--fluixy-elements-textPrimary), transparent 50%);
   }
 
-  // Firefox support for inverted colors
   scrollbar-color: color-mix(in srgb, var(--fluixy-elements-textPrimary), transparent 50%) transparent;
+}
+
+/* ============================================
+   Transition Utilities
+   ============================================ */
+
+.transition-theme {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.transition-all-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   Global Custom Scrollbar (#13)
+   ============================================ */
+
+* {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.2);
+    border-radius: 99px;
+    transition: background 0.3s ease;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.45);
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.2) transparent;
+}
+
+/* ============================================
+   Global Interactive Polish (#19, #20)
+   ============================================ */
+
+button,
+a,
+[role="button"] {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }

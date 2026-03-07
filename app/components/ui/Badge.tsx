@@ -15,7 +15,7 @@ const badgeVariants = cva(
           'border-transparent bg-fluixy-elements-background text-fluixy-elements-textSecondary hover:bg-fluixy-elements-background/80',
         destructive: 'border-transparent bg-red-500/10 text-red-500 hover:bg-red-500/20',
         outline: 'text-fluixy-elements-textPrimary',
-        primary: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400',
+        primary: 'bg-purple-500/10 text-purple-600 dark:text-purple-400',
         success: 'bg-green-500/10 text-green-600 dark:text-green-400',
         warning: 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400',
         danger: 'bg-red-500/10 text-red-600 dark:text-red-400',

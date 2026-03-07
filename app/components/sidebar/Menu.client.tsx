@@ -332,19 +332,27 @@ export const Menu = () => {
         style={{ width: '340px' }}
         className={classNames(
           'flex selection-accent flex-col side-menu fixed top-0 h-full rounded-r-2xl',
-          'bg-white dark:bg-gray-950 border-r border-fluixy-elements-borderColor',
-          'shadow-sm text-sm',
+          'border-r border-fluixy-elements-borderColor text-sm',
+          'bg-fluixy-elements-background-depth-2',
           isSettingsOpen ? 'z-40' : 'z-sidebar',
         )}
       >
-        <div className="h-12 flex items-center justify-between px-4 border-b border-gray-100 dark:border-gray-800/50 bg-gray-50/50 dark:bg-gray-900/50 rounded-tr-2xl">
-          <div className="text-gray-900 dark:text-white font-medium"></div>
+        <div
+          className="h-12 flex items-center justify-between px-4 border-b border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-3 rounded-tr-2xl"
+        >
+          <div className="text-fluixy-elements-textPrimary font-medium"></div>
           <div className="flex items-center gap-3">
 
-            <span className="font-medium text-sm text-gray-900 dark:text-white truncate">
+            <span className="font-medium text-sm text-fluixy-elements-textPrimary truncate">
               {profile?.username || 'Guest User'}
             </span>
-            <div className="flex items-center justify-center w-[32px] h-[32px] overflow-hidden bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-500 rounded-full shrink-0">
+            <div
+              className="flex items-center justify-center w-[32px] h-[32px] overflow-hidden rounded-full shrink-0"
+              style={{
+                background: 'var(--fluixy-elements-bg-depth-3)',
+                border: '2px solid var(--fluixy-glass-border)',
+              }}
+            >
               {profile?.avatar ? (
                 <img
                   src={profile.avatar}
@@ -354,7 +362,7 @@ export const Menu = () => {
                   decoding="sync"
                 />
               ) : (
-                <div className="i-ph:user-fill text-lg" />
+                <div className="i-ph:user-fill text-lg text-fluixy-elements-textSecondary" />
               )}
             </div>
           </div>
@@ -365,7 +373,12 @@ export const Menu = () => {
             <div className="flex gap-2">
               <a
                 href="/"
-                className="flex-1 flex gap-2 items-center bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 hover:bg-cyan-100 dark:hover:bg-cyan-500/20 rounded-lg px-4 py-2 transition-colors"
+                className="flex-1 flex gap-2 items-center rounded-lg px-4 py-2 transition-all duration-200 hover:scale-[1.02]"
+                style={{
+                  background: 'var(--fluixy-accent-gradient)',
+                  color: 'white',
+                  boxShadow: '0 2px 12px rgba(139, 92, 246, 0.25)',
+                }}
               >
                 <span className="inline-block i-ph:plus-circle h-4 w-4" />
                 <span className="text-sm font-medium">Start new chat</span>
@@ -373,11 +386,20 @@ export const Menu = () => {
               <button
                 onClick={toggleSelectionMode}
                 className={classNames(
-                  'flex gap-1 items-center rounded-lg px-3 py-2 transition-colors',
+                  'flex gap-1 items-center rounded-lg px-3 py-2 transition-all duration-200 border',
                   selectionMode
-                    ? 'bg-cyan-600 dark:bg-cyan-500 text-white border border-cyan-700 dark:border-cyan-600'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700',
+                    ? ''
+                    : '',
                 )}
+                style={{
+                  background: selectionMode
+                    ? 'var(--fluixy-accent-gradient)'
+                    : 'var(--fluixy-elements-bg-depth-4)',
+                  color: selectionMode ? 'white' : 'var(--fluixy-elements-textSecondary)',
+                  borderColor: selectionMode
+                    ? 'transparent'
+                    : 'var(--fluixy-glass-border)',
+                }}
                 aria-label={selectionMode ? 'Exit selection mode' : 'Enter selection mode'}
               >
                 <span className={selectionMode ? 'i-ph:x h-4 w-4' : 'i-ph:check-square h-4 w-4'} />
@@ -385,10 +407,14 @@ export const Menu = () => {
             </div>
             <div className="relative w-full">
               <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                <span className="i-ph:magnifying-glass h-4 w-4 text-gray-400 dark:text-gray-500" />
+                <span className="i-ph:magnifying-glass h-4 w-4 text-fluixy-elements-textTertiary" />
               </div>
               <input
-                className="w-full bg-gray-50 dark:bg-gray-900 relative pl-9 pr-3 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-cyan-500/50 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-500 border border-gray-200 dark:border-gray-800"
+                className="w-full relative pl-9 pr-3 py-2 rounded-lg focus:outline-none text-sm text-fluixy-elements-textPrimary border transition-all duration-200"
+                style={{
+                  background: 'var(--fluixy-elements-bg-depth-4)',
+                  borderColor: 'var(--fluixy-glass-border)',
+                }}
                 type="search"
                 placeholder="Search chats..."
                 onChange={handleSearchChange}
@@ -397,7 +423,7 @@ export const Menu = () => {
             </div>
           </div>
           <div className="flex items-center justify-between text-sm px-4 py-2">
-            <div className="font-medium text-gray-600 dark:text-gray-400">Your Chats</div>
+            <div className="font-medium text-fluixy-elements-textTertiary">Your Chats</div>
             {selectionMode && (
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" onClick={selectAll}>
@@ -414,16 +440,19 @@ export const Menu = () => {
               </div>
             )}
           </div>
-          <div className="flex-1 overflow-auto px-3 pb-3">
+          <div className="flex-1 overflow-auto px-3 pb-3 modern-scrollbar">
             {filteredList.length === 0 && (
-              <div className="px-4 text-gray-500 dark:text-gray-400 text-sm">
+              <div className="px-4 text-fluixy-elements-textTertiary text-sm">
                 {list.length === 0 ? 'No previous conversations' : 'No matches found'}
               </div>
             )}
             <DialogRoot open={dialogContent !== null}>
               {binDates(filteredList).map(({ category, items }) => (
                 <div key={category} className="mt-2 first:mt-0 space-y-1">
-                  <div className="text-xs font-medium text-gray-500 dark:text-gray-400 sticky top-0 z-1 bg-white dark:bg-gray-950 px-4 py-1">
+                  <div
+                    className="text-xs font-medium text-fluixy-elements-textTertiary sticky top-0 z-1 px-4 py-1"
+                    style={{ background: 'var(--fluixy-glass-background)' }}
+                  >
                     {category}
                   </div>
                   <div className="space-y-0.5 pr-1">
@@ -435,7 +464,6 @@ export const Menu = () => {
                         onDelete={(event) => {
                           event.preventDefault();
                           event.stopPropagation();
-                          console.log('Delete triggered for item:', item);
                           setDialogContentWithLogging({ type: 'delete', item });
                         }}
                         onDuplicate={() => handleDuplicate(item.id)}
@@ -450,26 +478,31 @@ export const Menu = () => {
               <Dialog onBackdrop={closeDialog} onClose={closeDialog}>
                 {dialogContent?.type === 'delete' && (
                   <>
-                    <div className="p-6 bg-white dark:bg-gray-950">
-                      <DialogTitle className="text-gray-900 dark:text-white">Delete Chat?</DialogTitle>
-                      <DialogDescription className="mt-2 text-gray-600 dark:text-gray-400">
+                    <div className="p-6" style={{ background: 'var(--fluixy-elements-bg-depth-1)' }}>
+                      <DialogTitle className="text-fluixy-elements-textPrimary">Delete Chat?</DialogTitle>
+                      <DialogDescription className="mt-2 text-fluixy-elements-textSecondary">
                         <p>
                           You are about to delete{' '}
-                          <span className="font-medium text-gray-900 dark:text-white">
+                          <span className="font-medium text-fluixy-elements-textPrimary">
                             {dialogContent.item.description}
                           </span>
                         </p>
                         <p className="mt-2">Are you sure you want to delete this chat?</p>
                       </DialogDescription>
                     </div>
-                    <div className="flex justify-end gap-3 px-6 py-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
+                    <div
+                      className="flex justify-end gap-3 px-6 py-4 border-t"
+                      style={{
+                        background: 'var(--fluixy-elements-bg-depth-2)',
+                        borderColor: 'var(--fluixy-glass-border)',
+                      }}
+                    >
                       <DialogButton type="secondary" onClick={closeDialog}>
                         Cancel
                       </DialogButton>
                       <DialogButton
                         type="danger"
                         onClick={(event) => {
-                          console.log('Dialog delete button clicked for item:', dialogContent.item);
                           deleteItem(event, dialogContent.item);
                           closeDialog();
                         }}
@@ -481,18 +514,24 @@ export const Menu = () => {
                 )}
                 {dialogContent?.type === 'bulkDelete' && (
                   <>
-                    <div className="p-6 bg-white dark:bg-gray-950">
-                      <DialogTitle className="text-gray-900 dark:text-white">Delete Selected Chats?</DialogTitle>
-                      <DialogDescription className="mt-2 text-gray-600 dark:text-gray-400">
+                    <div className="p-6" style={{ background: 'var(--fluixy-elements-bg-depth-1)' }}>
+                      <DialogTitle className="text-fluixy-elements-textPrimary">Delete Selected Chats?</DialogTitle>
+                      <DialogDescription className="mt-2 text-fluixy-elements-textSecondary">
                         <p>
                           You are about to delete {dialogContent.items.length}{' '}
                           {dialogContent.items.length === 1 ? 'chat' : 'chats'}:
                         </p>
-                        <div className="mt-2 max-h-32 overflow-auto border border-gray-100 dark:border-gray-800 rounded-md bg-gray-50 dark:bg-gray-900 p-2">
+                        <div
+                          className="mt-2 max-h-32 overflow-auto rounded-md p-2 border"
+                          style={{
+                            background: 'var(--fluixy-elements-bg-depth-2)',
+                            borderColor: 'var(--fluixy-glass-border)',
+                          }}
+                        >
                           <ul className="list-disc pl-5 space-y-1">
                             {dialogContent.items.map((item) => (
                               <li key={item.id} className="text-sm">
-                                <span className="font-medium text-gray-900 dark:text-white">{item.description}</span>
+                                <span className="font-medium text-fluixy-elements-textPrimary">{item.description}</span>
                               </li>
                             ))}
                           </ul>
@@ -500,19 +539,20 @@ export const Menu = () => {
                         <p className="mt-3">Are you sure you want to delete these chats?</p>
                       </DialogDescription>
                     </div>
-                    <div className="flex justify-end gap-3 px-6 py-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
+                    <div
+                      className="flex justify-end gap-3 px-6 py-4 border-t"
+                      style={{
+                        background: 'var(--fluixy-elements-bg-depth-2)',
+                        borderColor: 'var(--fluixy-glass-border)',
+                      }}
+                    >
                       <DialogButton type="secondary" onClick={closeDialog}>
                         Cancel
                       </DialogButton>
                       <DialogButton
                         type="danger"
                         onClick={() => {
-                          /*
-                           * Pass the current selectedItems to the delete function.
-                           * This captures the state at the moment the user confirms.
-                           */
                           const itemsToDeleteNow = [...selectedItems];
-                          console.log('Bulk delete confirmed for', itemsToDeleteNow.length, 'items', itemsToDeleteNow);
                           deleteSelectedItems(itemsToDeleteNow);
                           closeDialog();
                         }}
@@ -525,7 +565,10 @@ export const Menu = () => {
               </Dialog>
             </DialogRoot>
           </div>
-          <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-800 px-4 py-3">
+          <div
+            className="flex items-center justify-between border-t px-4 py-3"
+            style={{ borderColor: 'var(--fluixy-glass-border)' }}
+          >
             <div className="flex items-center gap-3">
               <SettingsButton onClick={handleSettingsClick} />
             </div>
