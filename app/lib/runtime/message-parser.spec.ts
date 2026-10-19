@@ -29,7 +29,7 @@ describe('StreamingMessageParser', () => {
       ['Foo bar <', 'Foo bar '],
       ['Foo bar <p', 'Foo bar <p'],
       [['Foo bar <', 's', 'p', 'an>some text</span>'], 'Foo bar <span>some text</span>'],
-    ])('should correctly parse chunks and strip out bolt artifacts (%#)', (input, expected) => {
+    ])('should correctly parse chunks and strip out fluixy artifacts (%#)', (input, expected) => {
       runTest(input, expected);
     });
   });
@@ -39,13 +39,13 @@ describe('StreamingMessageParser', () => {
       ['Foo bar <b', 'Foo bar '],
       ['Foo bar <ba', 'Foo bar <ba'],
       ['Foo bar <bol', 'Foo bar '],
-      ['Foo bar <bolt', 'Foo bar '],
-      ['Foo bar <bolta', 'Foo bar <bolta'],
-      ['Foo bar <boltA', 'Foo bar '],
-      ['Foo bar <boltArtifacs></boltArtifact>', 'Foo bar <boltArtifacs></boltArtifact>'],
-      ['Before <oltArtfiact>foo</boltArtifact> After', 'Before <oltArtfiact>foo</boltArtifact> After'],
-      ['Before <boltArtifactt>foo</boltArtifact> After', 'Before <boltArtifactt>foo</boltArtifact> After'],
-    ])('should correctly parse chunks and strip out bolt artifacts (%#)', (input, expected) => {
+      ['Foo bar <fluixy', 'Foo bar '],
+      ['Foo bar <fluixya', 'Foo bar <fluixya'],
+      ['Foo bar <fluixyA', 'Foo bar '],
+      ['Foo bar <fluixyArtifacs></fluixyArtifact>', 'Foo bar <fluixyArtifacs></fluixyArtifact>'],
+      ['Before <oltArtfiact>foo</fluixyArtifact> After', 'Before <oltArtfiact>foo</fluixyArtifact> After'],
+      ['Before <fluixyArtifactt>foo</fluixyArtifact> After', 'Before <fluixyArtifactt>foo</fluixyArtifact> After'],
+    ])('should correctly parse chunks and strip out fluixy artifacts (%#)', (input, expected) => {
       runTest(input, expected);
     });
   });
@@ -53,7 +53,7 @@ describe('StreamingMessageParser', () => {
   describe('valid artifacts without actions', () => {
     it.each<[string | string[], ExpectedResult | string]>([
       [
-        'Some text before <boltArtifact title="Some title" id="artifact_1">foo bar</boltArtifact> Some more text',
+        'Some text before <fluixyArtifact title="Some title" id="artifact_1">foo bar</fluixyArtifact> Some more text',
         {
           output: 'Some text before  Some more text',
           callbacks: { onArtifactOpen: 1, onArtifactClose: 1, onActionOpen: 0, onActionClose: 0 },
@@ -61,9 +61,9 @@ describe('StreamingMessageParser', () => {
       ],
       [
         [
-          'Some text before <boltArti',
+          'Some text before <fluixyArti',
           'fact',
-          ' title="Some title" id="artifact_1" type="bundled" >foo</boltArtifact> Some more text',
+          ' title="Some title" id="artifact_1" type="bundled" >foo</fluixyArtifact> Some more text',
         ],
         {
           output: 'Some text before  Some more text',
@@ -72,12 +72,12 @@ describe('StreamingMessageParser', () => {
       ],
       [
         [
-          'Some text before <boltArti',
+          'Some text before <fluixyArti',
           'fac',
           't title="Some title" id="artifact_1"',
           ' ',
           '>',
-          'foo</boltArtifact> Some more text',
+          'foo</fluixyArtifact> Some more text',
         ],
         {
           output: 'Some text before  Some more text',
@@ -86,11 +86,11 @@ describe('StreamingMessageParser', () => {
       ],
       [
         [
-          'Some text before <boltArti',
+          'Some text before <fluixyArti',
           'fact',
           ' title="Some title" id="artifact_1"',
           ' >fo',
-          'o</boltArtifact> Some more text',
+          'o</fluixyArtifact> Some more text',
         ],
         {
           output: 'Some text before  Some more text',
@@ -99,13 +99,13 @@ describe('StreamingMessageParser', () => {
       ],
       [
         [
-          'Some text before <boltArti',
+          'Some text before <fluixyArti',
           'fact tit',
           'le="Some ',
           'title" id="artifact_1">fo',
           'o',
           '<',
-          '/boltArtifact> Some more text',
+          '/fluixyArtifact> Some more text',
         ],
         {
           output: 'Some text before  Some more text',
@@ -114,11 +114,11 @@ describe('StreamingMessageParser', () => {
       ],
       [
         [
-          'Some text before <boltArti',
+          'Some text before <fluixyArti',
           'fact title="Some title" id="artif',
           'act_1">fo',
           'o<',
-          '/boltArtifact> Some more text',
+          '/fluixyArtifact> Some more text',
         ],
         {
           output: 'Some text before  Some more text',
@@ -126,13 +126,13 @@ describe('StreamingMessageParser', () => {
         },
       ],
       [
-        'Before <boltArtifact title="Some title" id="artifact_1">foo</boltArtifact> After',
+        'Before <fluixyArtifact title="Some title" id="artifact_1">foo</fluixyArtifact> After',
         {
           output: 'Before  After',
           callbacks: { onArtifactOpen: 1, onArtifactClose: 1, onActionOpen: 0, onActionClose: 0 },
         },
       ],
-    ])('should correctly parse chunks and strip out bolt artifacts (%#)', (input, expected) => {
+    ])('should correctly parse chunks and strip out fluixy artifacts (%#)', (input, expected) => {
       runTest(input, expected);
     });
   });
@@ -140,20 +140,20 @@ describe('StreamingMessageParser', () => {
   describe('valid artifacts with actions', () => {
     it.each<[string | string[], ExpectedResult | string]>([
       [
-        'Before <boltArtifact title="Some title" id="artifact_1"><boltAction type="shell">npm install</boltAction></boltArtifact> After',
+        'Before <fluixyArtifact title="Some title" id="artifact_1"><fluixyAction type="shell">npm install</fluixyAction></fluixyArtifact> After',
         {
           output: 'Before  After',
           callbacks: { onArtifactOpen: 1, onArtifactClose: 1, onActionOpen: 1, onActionClose: 1 },
         },
       ],
       [
-        'Before <boltArtifact title="Some title" id="artifact_1"><boltAction type="shell">npm install</boltAction><boltAction type="file" filePath="index.js">some content</boltAction></boltArtifact> After',
+        'Before <fluixyArtifact title="Some title" id="artifact_1"><fluixyAction type="shell">npm install</fluixyAction><fluixyAction type="file" filePath="index.js">some content</fluixyAction></fluixyArtifact> After',
         {
           output: 'Before  After',
           callbacks: { onArtifactOpen: 1, onArtifactClose: 1, onActionOpen: 2, onActionClose: 2 },
         },
       ],
-    ])('should correctly parse chunks and strip out bolt artifacts (%#)', (input, expected) => {
+    ])('should correctly parse chunks and strip out fluixy artifacts (%#)', (input, expected) => {
       runTest(input, expected);
     });
   });
@@ -162,7 +162,7 @@ describe('StreamingMessageParser', () => {
 describe('malformed actions', () => {
   it('should not throw when a file action omits filePath', () => {
     /*
-     * Regression: a `<boltAction type="file">` with no `filePath` is tolerated so
+     * Regression: a `<fluixyAction type="file">` with no `filePath` is tolerated so
      * the model's text is not swallowed, but the streaming path used to dereference
      * the missing path (`currentAction.filePath.endsWith('.md')`). That threw
      * `Cannot read properties of undefined`, which propagated out of the streaming
@@ -179,11 +179,11 @@ describe('malformed actions', () => {
     });
 
     const input = [
-      '<boltArtifact id="artifact_1" title="t">',
-      '<boltAction type="file">',
+      '<fluixyArtifact id="artifact_1" title="t">',
+      '<fluixyAction type="file">',
       'some content',
-      '</boltAction>',
-      '</boltArtifact>',
+      '</fluixyAction>',
+      '</fluixyArtifact>',
     ].join('\n');
 
     expect(() => parser.parse('message_1', input)).not.toThrow();
@@ -195,7 +195,7 @@ describe('malformed actions', () => {
 
     parser.parse(
       'message_1',
-      '<boltArtifact id="artifact_1" title="t"><boltAction type="file">content</boltAction></boltArtifact>',
+      '<fluixyArtifact id="artifact_1" title="t"><fluixyAction type="file">content</fluixyAction></fluixyArtifact>',
     );
 
     /*
@@ -789,7 +789,7 @@ export { Button } from './Button';
 
 /*
  * Gaps closed ahead of the AI SDK upgrade. The server rewrites model reasoning
- * into `<div class="__boltThought__">` text deltas before they reach this
+ * into `<div class="__fluixyThought__">` text deltas before they reach this
  * parser, so the parser must tolerate that wrapper arriving split across
  * arbitrary chunk boundaries.
  */
@@ -807,9 +807,9 @@ describe('StreamingMessageParser thought-div handling', () => {
 
   it('passes thought-div content through when it arrives in one chunk', () => {
     const { parser } = createParser();
-    const output = parser.parse('msg', '<div class="__boltThought__">reasoning here</div>');
+    const output = parser.parse('msg', '<div class="__fluixyThought__">reasoning here</div>');
 
-    expect(output).toBe('<div class="__boltThought__">reasoning here</div>');
+    expect(output).toBe('<div class="__fluixyThought__">reasoning here</div>');
   });
 
   it('mangles a thought-div opening tag split across chunks (known limitation)', () => {
@@ -826,23 +826,23 @@ describe('StreamingMessageParser thought-div handling', () => {
 
     let output = '';
 
-    for (const chunk of ['<div cla', 'ss="__bolt', 'Thought__">thin', 'king</div>']) {
+    for (const chunk of ['<div cla', 'ss="__flui', 'xyThought__">thin', 'king</div>']) {
       output += parser.parse('msg', chunk);
     }
 
-    expect(output).toBe('<div clalt>thin');
+    expect(output).toBe('<div claui_">thin');
   });
 
   it('keeps artifact parsing intact when a thought div precedes an artifact', () => {
     const { parser, callbacks } = createParser();
 
     const input =
-      '<div class="__boltThought__">let me think</div>' +
-      '<boltArtifact id="hello" title="Hello">\n```html\n<h1>hi</h1>\n```\n</boltArtifact>';
+      '<div class="__fluixyThought__">let me think</div>' +
+      '<fluixyArtifact id="hello" title="Hello">\n```html\n<h1>hi</h1>\n```\n</fluixyArtifact>';
 
     const output = parser.parse('msg', input);
 
-    expect(output).toContain('<div class="__boltThought__">let me think</div>');
+    expect(output).toContain('<div class="__fluixyThought__">let me think</div>');
     expect(callbacks.onArtifactOpen).toHaveBeenCalledTimes(1);
   });
 
@@ -851,7 +851,7 @@ describe('StreamingMessageParser thought-div handling', () => {
 
     parser.parse(
       'msg',
-      '<div class="__boltThought__">thought</div><boltArtifact id="a" title="A">\n```html\n<b>x</b>\n```\n</boltArtifact>',
+      '<div class="__fluixyThought__">thought</div><fluixyArtifact id="a" title="A">\n```html\n<b>x</b>\n```\n</fluixyArtifact>',
     );
 
     expect(callbacks.onArtifactOpen).toHaveBeenCalledTimes(1);
@@ -861,7 +861,7 @@ describe('StreamingMessageParser thought-div handling', () => {
   it('does not emit artifacts for thought content that looks like code', () => {
     const { parser, callbacks } = createParser();
 
-    parser.parse('msg', '<div class="__boltThought__">```html\n<h1>hi</h1>\n```</div>');
+    parser.parse('msg', '<div class="__fluixyThought__">```html\n<h1>hi</h1>\n```</div>');
 
     expect(callbacks.onArtifactOpen).not.toHaveBeenCalled();
   });
@@ -881,7 +881,7 @@ describe('StreamingMessageParser thought-div handling', () => {
   it('keeps state isolated per message id', () => {
     const { parser } = createParser();
 
-    parser.parse('idA', '<boltArtifact id="one" title="One">\n');
+    parser.parse('idA', '<fluixyArtifact id="one" title="One">\n');
     parser.parse('idB', 'plain text for B');
 
     expect(parser.parse('idA', '')).toBe('');
@@ -891,8 +891,8 @@ describe('StreamingMessageParser thought-div handling', () => {
     const { parser, callbacks } = createParser();
 
     const message = [
-      '<boltArtifact id="first" title="First">\n```html\n<a>1</a>\n```\n</boltArtifact>',
-      '<boltArtifact id="second" title="Second">\n```html\n<b>2</b>\n```\n</boltArtifact>',
+      '<fluixyArtifact id="first" title="First">\n```html\n<a>1</a>\n```\n</fluixyArtifact>',
+      '<fluixyArtifact id="second" title="Second">\n```html\n<b>2</b>\n```\n</fluixyArtifact>',
     ].join('');
 
     parser.parse('msg', message);
@@ -905,11 +905,11 @@ describe('StreamingMessageParser thought-div handling', () => {
   it('clears per-message state on reset', () => {
     const { parser, callbacks } = createParser();
 
-    parser.parse('msg', '<boltArtifact id="one" title="One">\n```html\n<a>1</a>\n```\n</boltArtifact>');
+    parser.parse('msg', '<fluixyArtifact id="one" title="One">\n```html\n<a>1</a>\n```\n</fluixyArtifact>');
     expect(callbacks.onArtifactOpen).toHaveBeenCalledTimes(1);
 
     parser.reset();
-    parser.parse('msg', '<boltArtifact id="one" title="One">\n```html\n<a>1</a>\n```\n</boltArtifact>');
+    parser.parse('msg', '<fluixyArtifact id="one" title="One">\n```html\n<a>1</a>\n```\n</fluixyArtifact>');
 
     expect(callbacks.onArtifactOpen).toHaveBeenCalledTimes(2);
     expect(callbacks.onArtifactOpen.mock.calls[1][0].id).toBe('msg-0');

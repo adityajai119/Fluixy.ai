@@ -50,7 +50,7 @@ export function McpTools({ open, onOpenChange }: McpToolsProps) {
         <Dialog className="max-w-4xl w-full p-6">
           <div className="space-y-4 max-h-[80vh] overflow-y-auto pr-2">
             <DialogTitle>
-              <div className="i-bolt:mcp text-xl"></div>
+              <div className="i-fluixy:mcp text-xl"></div>
               MCP tools
             </DialogTitle>
 
@@ -62,15 +62,15 @@ export function McpTools({ open, onOpenChange }: McpToolsProps) {
                     disabled={isCheckingServers || serverEntries.length === 0}
                     className={classNames(
                       'px-3 py-1.5 rounded-lg text-sm',
-                      'bg-bolt-elements-background-depth-3 hover:bg-bolt-elements-background-depth-4',
-                      'text-bolt-elements-textPrimary',
+                      'bg-fluixy-elements-background-depth-3 hover:bg-fluixy-elements-background-depth-4',
+                      'text-fluixy-elements-textPrimary',
                       'transition-all duration-200',
                       'flex items-center gap-2',
                       'disabled:opacity-50 disabled:cursor-not-allowed',
                     )}
                   >
                     {isCheckingServers ? (
-                      <div className="i-svg-spinners:90-ring-with-bg w-3 h-3 text-bolt-elements-loader-progress animate-spin" />
+                      <div className="i-svg-spinners:90-ring-with-bg w-3 h-3 text-fluixy-elements-loader-progress animate-spin" />
                     ) : (
                       <div className="i-ph:arrow-counter-clockwise w-3 h-3" />
                     )}
@@ -86,14 +86,14 @@ export function McpTools({ open, onOpenChange }: McpToolsProps) {
                     toggleServerExpanded={toggleServerExpanded}
                   />
                 ) : (
-                  <div className="py-4 text-center text-bolt-elements-textSecondary">
+                  <div className="py-4 text-center text-fluixy-elements-textSecondary">
                     <p>No MCP servers configured</p>
                     <p className="text-xs mt-1">Configure servers in Settings → MCP Servers</p>
                   </div>
                 )}
               </div>
 
-              <div>{error && <p className="mt-2 text-sm text-bolt-elements-icon-error">{error}</p>}</div>
+              <div>{error && <p className="mt-2 text-sm text-fluixy-elements-icon-error">{error}</p>}</div>
             </div>
 
             <div className="flex justify-end gap-2 mt-6">

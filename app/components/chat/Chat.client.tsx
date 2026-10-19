@@ -313,7 +313,7 @@ export const ChatImpl = memo(
           userMessages.length === 1 &&
           !agentMode &&
           !hasNativeProjectTools &&
-          !/<boltAction\s+type=["'](?:shell|start)["']/.test(getMessageText(message))
+          !/<(?:bolt|fluixy)Action\s+type=["'](?:shell|start)["']/.test(getMessageText(message))
         ) {
           void (async () => {
             const completedMessages = messagesRef.current.some((item) => item.id === message.id)
@@ -589,7 +589,7 @@ export const ChatImpl = memo(
 
       if (
         !pendingMessage ||
-        !messages.some((message) => getMessageText(message).includes('<boltArtifact id="imported-files"'))
+        !messages.some((message) => getMessageText(message).includes('<fluixyArtifact id="imported-files"'))
       ) {
         return;
       }
@@ -691,13 +691,13 @@ export const ChatImpl = memo(
 
     useEffect(() => {
       const starterSetupMessage = initialMessages.find((message) =>
-        getMessageText(message).includes('<boltArtifact id="project-setup"'),
+        getMessageText(message).includes('<fluixyArtifact id="project-setup"'),
       );
 
       if (
         !starterSetupMessage?.id ||
         parsedStarterSetupMessagesRef.current.has(starterSetupMessage.id) ||
-        !initialMessages.some((message) => getMessageText(message).includes('<boltArtifact id="imported-files"'))
+        !initialMessages.some((message) => getMessageText(message).includes('<fluixyArtifact id="imported-files"'))
       ) {
         return undefined;
       }
@@ -726,10 +726,10 @@ export const ChatImpl = memo(
         return;
       }
 
-      const autorun = localStorage.getItem('bolt_zip_autorun');
+      const autorun = localStorage.getItem('fluixy_zip_autorun');
 
       if (autorun) {
-        localStorage.removeItem('bolt_zip_autorun');
+        localStorage.removeItem('fluixy_zip_autorun');
         setInput(autorun);
       }
     }, []);
@@ -942,7 +942,7 @@ export const ChatImpl = memo(
 
       if (selectedElement) {
         const encodedElement = encodeURIComponent(JSON.stringify(selectedElement)).replace(/'/g, '%27');
-        const elementInfo = `<div class=\"__boltSelectedElement__\" data-element=\"${encodedElement}\"></div>`;
+        const elementInfo = `<div class=\"__fluixySelectedElement__\" data-element=\"${encodedElement}\"></div>`;
 
         const visualEditPrompt = selectedElement.visualEdits?.length
           ? `\nPlease apply these visual edits to the selected element in the project source: ${selectedElement.visualEdits
@@ -1122,6 +1122,22 @@ export const ChatImpl = memo(
       return () => window.removeEventListener(API_KEYS_UPDATED_EVENT, handleApiKeysUpdated);
     }, []);
 
+    useEffect(() => {
+      const handleFixDPDP = (event: any) => {
+        const prompt = event.detail;
+
+        if (prompt && sendMessage) {
+          sendMessage(new CustomEvent('fix') as any, prompt);
+        }
+      };
+
+      window.addEventListener('fluixy:fix-dpdp', handleFixDPDP);
+
+      return () => {
+        window.removeEventListener('fluixy:fix-dpdp', handleFixDPDP);
+      };
+    }, [sendMessage]);
+
     const handleModelChange = (newModel: string) => {
       setModel(newModel);
       Cookies.set('selectedModel', newModel, { expires: 30 });
@@ -1171,7 +1187,7 @@ export const ChatImpl = memo(
         })}
 
         /*
-         * Markdown's quick-action buttons (__boltQuickAction__) call append to
+         * Markdown's quick-action buttons (__fluixyQuickAction__) call append to
          * re-send a message. Without this they rendered but did nothing.
          */
         append={(message) => sendChatMessage(message as UIMessage)}

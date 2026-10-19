@@ -135,7 +135,7 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
     if (log.category === 'provider') {
       return (
         <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-xs text-bolt-elements-textSecondary">
+          <div className="flex items-center gap-2 text-xs text-fluixy-elements-textSecondary">
             <span>Model: {details.model}</span>
             <span>•</span>
             <span>Tokens: {details.totalTokens}</span>
@@ -144,16 +144,16 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
           </div>
           {details.prompt && (
             <div className="flex flex-col gap-1">
-              <div className="text-xs font-medium text-bolt-elements-textPrimary">Prompt:</div>
-              <pre className="text-xs text-bolt-elements-textSecondary bg-bolt-elements-background-depth-2 rounded p-2 whitespace-pre-wrap">
+              <div className="text-xs font-medium text-fluixy-elements-textPrimary">Prompt:</div>
+              <pre className="text-xs text-fluixy-elements-textSecondary bg-fluixy-elements-background-depth-2 rounded p-2 whitespace-pre-wrap">
                 {details.prompt}
               </pre>
             </div>
           )}
           {details.response && (
             <div className="flex flex-col gap-1">
-              <div className="text-xs font-medium text-bolt-elements-textPrimary">Response:</div>
-              <pre className="text-xs text-bolt-elements-textSecondary bg-bolt-elements-background-depth-2 rounded p-2 whitespace-pre-wrap">
+              <div className="text-xs font-medium text-fluixy-elements-textPrimary">Response:</div>
+              <pre className="text-xs text-fluixy-elements-textSecondary bg-fluixy-elements-background-depth-2 rounded p-2 whitespace-pre-wrap">
                 {details.response}
               </pre>
             </div>
@@ -165,26 +165,26 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
     if (log.category === 'api') {
       return (
         <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-xs text-bolt-elements-textSecondary">
+          <div className="flex items-center gap-2 text-xs text-fluixy-elements-textSecondary">
             <span className={details.method === 'GET' ? 'text-green-500' : 'text-blue-500'}>{details.method}</span>
             <span>•</span>
             <span>Status: {details.statusCode}</span>
             <span>•</span>
             <span>Duration: {details.duration}ms</span>
           </div>
-          <div className="text-xs text-bolt-elements-textSecondary break-all">{details.url}</div>
+          <div className="text-xs text-fluixy-elements-textSecondary break-all">{details.url}</div>
           {details.request && (
             <div className="flex flex-col gap-1">
-              <div className="text-xs font-medium text-bolt-elements-textPrimary">Request:</div>
-              <pre className="text-xs text-bolt-elements-textSecondary bg-bolt-elements-background-depth-2 rounded p-2 whitespace-pre-wrap">
+              <div className="text-xs font-medium text-fluixy-elements-textPrimary">Request:</div>
+              <pre className="text-xs text-fluixy-elements-textSecondary bg-fluixy-elements-background-depth-2 rounded p-2 whitespace-pre-wrap">
                 {JSON.stringify(details.request, null, 2)}
               </pre>
             </div>
           )}
           {details.response && (
             <div className="flex flex-col gap-1">
-              <div className="text-xs font-medium text-bolt-elements-textPrimary">Response:</div>
-              <pre className="text-xs text-bolt-elements-textSecondary bg-bolt-elements-background-depth-2 rounded p-2 whitespace-pre-wrap">
+              <div className="text-xs font-medium text-fluixy-elements-textPrimary">Response:</div>
+              <pre className="text-xs text-fluixy-elements-textSecondary bg-fluixy-elements-background-depth-2 rounded p-2 whitespace-pre-wrap">
                 {JSON.stringify(details.response, null, 2)}
               </pre>
             </div>
@@ -202,7 +202,7 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
     }
 
     return (
-      <pre className="text-xs text-bolt-elements-textSecondary bg-bolt-elements-background-depth-2 rounded whitespace-pre-wrap">
+      <pre className="text-xs text-fluixy-elements-textSecondary bg-fluixy-elements-background-depth-2 rounded whitespace-pre-wrap">
         {JSON.stringify(details, null, 2)}
       </pre>
     );
@@ -215,8 +215,8 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
       className={classNames(
         'flex flex-col gap-2',
         'rounded-lg p-4',
-        'bg-bolt-elements-background-depth-1',
-        'border border-bolt-elements-borderColor',
+        'bg-fluixy-elements-background-depth-1',
+        'border border-fluixy-elements-borderColor',
         style.bg,
         'transition-all duration-200',
       )}
@@ -225,14 +225,14 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
         <div className="flex items-start gap-3">
           <span className={classNames('text-lg', style.icon, style.color)} />
           <div className="flex flex-col gap-1">
-            <div className="text-sm font-medium text-bolt-elements-textPrimary">{log.message}</div>
+            <div className="text-sm font-medium text-fluixy-elements-textPrimary">{log.message}</div>
             {log.details && (
               <>
                 <button
                   type="button"
                   aria-expanded={localExpanded}
                   onClick={() => setLocalExpanded(!localExpanded)}
-                  className="appearance-none self-start rounded border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 px-2 py-1 text-xs font-medium text-bolt-elements-textSecondary transition-colors hover:border-purple-500/40 hover:bg-bolt-elements-background-depth-3 hover:text-purple-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+                  className="appearance-none self-start rounded border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 px-2 py-1 text-xs font-medium text-fluixy-elements-textSecondary transition-colors hover:border-purple-500/40 hover:bg-fluixy-elements-background-depth-3 hover:text-purple-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
                 >
                   {localExpanded ? 'Hide' : 'Show'} Details
                 </button>
@@ -244,14 +244,14 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
                 {log.level}
               </div>
               {log.category && (
-                <div className="px-2 py-0.5 rounded-full text-xs bg-bolt-elements-background-depth-2 text-bolt-elements-textSecondary">
+                <div className="px-2 py-0.5 rounded-full text-xs bg-fluixy-elements-background-depth-2 text-fluixy-elements-textSecondary">
                   {log.category}
                 </div>
               )}
             </div>
           </div>
         </div>
-        {showTimestamp && <time className="shrink-0 text-xs text-bolt-elements-textSecondary">{timestamp}</time>}
+        {showTimestamp && <time className="shrink-0 text-xs text-fluixy-elements-textSecondary">{timestamp}</time>}
       </div>
     </motion.div>
   );
@@ -430,7 +430,7 @@ export function EventLogsTab() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `bolt-event-logs-${new Date().toISOString()}.json`;
+      a.download = `fluixy-event-logs-${new Date().toISOString()}.json`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -466,7 +466,7 @@ export function EventLogsTab() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `bolt-event-logs-${new Date().toISOString()}.csv`;
+      a.download = `fluixy-event-logs-${new Date().toISOString()}.csv`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -515,10 +515,10 @@ export function EventLogsTab() {
       doc.setFont('helvetica', 'bold');
       doc.text('Event Logs Report', margin, 35);
 
-      // Add subtitle with bolt.diy
+      // Add subtitle with fluixy.ai
       doc.setFontSize(12);
       doc.setFont('helvetica', 'normal');
-      doc.text('bolt.diy - AI Development Platform', margin, 45);
+      doc.text('fluixy.ai - AI Development Platform', margin, 45);
       yPos = 70;
 
       // Add report summary section
@@ -715,14 +715,14 @@ export function EventLogsTab() {
         });
 
         // Add footer text
-        doc.text('Generated by bolt.diy', margin, doc.internal.pageSize.getHeight() - 10);
+        doc.text('Generated by fluixy.ai', margin, doc.internal.pageSize.getHeight() - 10);
 
         const dateStr = new Date().toLocaleDateString();
         doc.text(dateStr, pageWidth - margin, doc.internal.pageSize.getHeight() - 10, { align: 'right' });
       }
 
       // Save the PDF
-      doc.save(`bolt-event-logs-${new Date().toISOString()}.pdf`);
+      doc.save(`fluixy-event-logs-${new Date().toISOString()}.pdf`);
       toast.success('Event logs exported successfully as PDF');
     } catch (error) {
       console.error('Failed to export PDF:', error);
@@ -754,7 +754,7 @@ export function EventLogsTab() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `bolt-event-logs-${new Date().toISOString()}.txt`;
+      a.download = `fluixy-event-logs-${new Date().toISOString()}.txt`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -812,9 +812,9 @@ export function EventLogsTab() {
           className={classNames(
             'group flex items-center gap-2',
             'rounded-lg px-3 py-1.5',
-            'text-sm text-bolt-elements-textPrimary',
-            'bg-bolt-elements-background-depth-2',
-            'border border-bolt-elements-borderColor',
+            'text-sm text-fluixy-elements-textPrimary',
+            'bg-fluixy-elements-background-depth-2',
+            'border border-fluixy-elements-borderColor',
             'hover:bg-purple-500/10 dark:hover:bg-purple-500/20',
             'transition-all duration-200',
           )}
@@ -837,17 +837,17 @@ export function EventLogsTab() {
                   onClick={() => handleFormatClick(format.handler)}
                   className={classNames(
                     'flex items-center gap-3 px-4 py-3 text-sm rounded-lg transition-colors w-full text-left',
-                    'bg-bolt-elements-background-depth-1',
-                    'border border-bolt-elements-borderColor',
-                    'hover:bg-bolt-elements-background-depth-2',
+                    'bg-fluixy-elements-background-depth-1',
+                    'border border-fluixy-elements-borderColor',
+                    'hover:bg-fluixy-elements-background-depth-2',
                     'hover:border-purple-200 dark:hover:border-purple-900/30',
-                    'text-bolt-elements-textPrimary',
+                    'text-fluixy-elements-textPrimary',
                   )}
                 >
                   <div className={classNames(format.icon, 'w-5 h-5')} />
                   <div>
                     <div className="font-medium">{format.label}</div>
-                    <div className="text-xs text-bolt-elements-textSecondary mt-0.5">
+                    <div className="text-xs text-fluixy-elements-textSecondary mt-0.5">
                       {format.id === 'json' && 'Export as a structured JSON file'}
                       {format.id === 'csv' && 'Export as a CSV spreadsheet'}
                       {format.id === 'pdf' && 'Export as a formatted PDF document'}
@@ -872,9 +872,9 @@ export function EventLogsTab() {
               className={classNames(
                 'flex items-center gap-2',
                 'rounded-lg px-3 py-1.5',
-                'text-sm text-bolt-elements-textPrimary',
-                'bg-bolt-elements-background-depth-2',
-                'border border-bolt-elements-borderColor',
+                'text-sm text-fluixy-elements-textPrimary',
+                'bg-fluixy-elements-background-depth-2',
+                'border border-fluixy-elements-borderColor',
                 'hover:bg-purple-500/10 dark:hover:bg-purple-500/20',
                 'transition-all duration-200',
               )}
@@ -890,7 +890,7 @@ export function EventLogsTab() {
 
           <DropdownMenu.Portal>
             <DropdownMenu.Content
-              className="min-w-[200px] bg-bolt-elements-background-depth-1 rounded-lg shadow-lg py-1 z-[250] animate-in fade-in-0 zoom-in-95 border border-bolt-elements-borderColor"
+              className="min-w-[200px] bg-fluixy-elements-background-depth-1 rounded-lg shadow-lg py-1 z-[250] animate-in fade-in-0 zoom-in-95 border border-fluixy-elements-borderColor"
               sideOffset={5}
               align="start"
               side="bottom"
@@ -949,9 +949,9 @@ export function EventLogsTab() {
             className={classNames(
               'group flex items-center gap-2',
               'rounded-lg px-3 py-1.5',
-              'text-sm text-bolt-elements-textPrimary',
-              'bg-bolt-elements-background-depth-2',
-              'border border-bolt-elements-borderColor',
+              'text-sm text-fluixy-elements-textPrimary',
+              'bg-fluixy-elements-background-depth-2',
+              'border border-fluixy-elements-borderColor',
               'hover:bg-purple-500/10 dark:hover:bg-purple-500/20',
               'transition-all duration-200',
               { 'animate-spin': isRefreshing },
@@ -974,9 +974,9 @@ export function EventLogsTab() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className={classNames(
               'w-full px-4 py-2 pl-10 rounded-lg',
-              'bg-bolt-elements-background-depth-2',
-              'border border-bolt-elements-borderColor',
-              'text-bolt-elements-textPrimary placeholder:text-bolt-elements-textTertiary',
+              'bg-fluixy-elements-background-depth-2',
+              'border border-fluixy-elements-borderColor',
+              'text-fluixy-elements-textPrimary placeholder:text-fluixy-elements-textTertiary',
               'focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500',
               'transition-all duration-200',
             )}
@@ -993,13 +993,13 @@ export function EventLogsTab() {
             className={classNames(
               'flex flex-col items-center justify-center gap-4',
               'rounded-lg p-8 text-center',
-              'bg-bolt-elements-background-depth-2',
-              'border border-bolt-elements-borderColor',
+              'bg-fluixy-elements-background-depth-2',
+              'border border-fluixy-elements-borderColor',
             )}
           >
             <span className="i-ph:clipboard-text text-4xl text-gray-400 dark:text-gray-600" />
             <div className="flex flex-col gap-1">
-              <h3 className="text-sm font-medium text-bolt-elements-textPrimary">No Logs Found</h3>
+              <h3 className="text-sm font-medium text-fluixy-elements-textPrimary">No Logs Found</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">Try adjusting your search or filters</p>
             </div>
           </motion.div>

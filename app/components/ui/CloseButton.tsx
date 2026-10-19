@@ -32,8 +32,8 @@ export function CloseButton({ onClick, className, size = 'md' }: CloseButtonProp
       type="button"
       onClick={onClick}
       className={classNames(
-        'text-bolt-elements-textTertiary hover:text-bolt-elements-textSecondary dark:text-bolt-elements-textTertiary-dark dark:hover:text-bolt-elements-textSecondary-dark',
-        'rounded-lg hover:bg-bolt-elements-background-depth-2 dark:hover:bg-bolt-elements-background-depth-3',
+        'text-fluixy-elements-textTertiary hover:text-fluixy-elements-textSecondary dark:text-fluixy-elements-textTertiary-dark dark:hover:text-fluixy-elements-textSecondary-dark',
+        'rounded-lg hover:bg-fluixy-elements-background-depth-2 dark:hover:bg-fluixy-elements-background-depth-3',
         'transition-colors duration-200',
         'focus:outline-none focus:ring-2 focus:ring-purple-500/50',
         sizeClasses[size],

@@ -89,12 +89,12 @@ export function createCommandsMessage(commands: ProjectCommands): UIMessage | nu
 
   if (commands.setupCommand) {
     commandString += `
-<boltAction type="shell">${commands.setupCommand}</boltAction>`;
+<fluixyAction type="shell">${commands.setupCommand}</fluixyAction>`;
   }
 
   if (commands.startCommand) {
     commandString += `
-<boltAction type="start">${commands.startCommand}</boltAction>
+<fluixyAction type="start">${commands.startCommand}</fluixyAction>
 `;
   }
 
@@ -103,15 +103,15 @@ export function createCommandsMessage(commands: ProjectCommands): UIMessage | nu
     id: generateId(),
     text: `
 ${commands.followupMessage ? `\n\n${commands.followupMessage}` : ''}
-<boltArtifact id="project-setup" title="Project Setup">
+<fluixyArtifact id="project-setup" title="Project Setup">
 ${commandString}
-</boltArtifact>`,
+</fluixyArtifact>`,
   }) as UIMessage;
 }
 
-export function escapeBoltArtifactTags(input: string) {
-  // Regular expression to match boltArtifact tags and their content
-  const regex = /(<boltArtifact[^>]*>)([\s\S]*?)(<\/boltArtifact>)/g;
+export function escapefluixyArtifactTags(input: string) {
+  // Regular expression to match fluixyArtifact tags and their content
+  const regex = /(<fluixyArtifact[^>]*>)([\s\S]*?)(<\/fluixyArtifact>)/g;
 
   return input.replace(regex, (match, openTag, content, closeTag) => {
     // Escape the opening tag
@@ -125,9 +125,9 @@ export function escapeBoltArtifactTags(input: string) {
   });
 }
 
-export function escapeBoltAActionTags(input: string) {
-  // Regular expression to match boltArtifact tags and their content
-  const regex = /(<boltAction[^>]*>)([\s\S]*?)(<\/boltAction>)/g;
+export function escapefluixyAActionTags(input: string) {
+  // Regular expression to match fluixyArtifact tags and their content
+  const regex = /(<fluixyAction[^>]*>)([\s\S]*?)(<\/fluixyAction>)/g;
 
   return input.replace(regex, (match, openTag, content, closeTag) => {
     // Escape the opening tag
@@ -141,8 +141,8 @@ export function escapeBoltAActionTags(input: string) {
   });
 }
 
-export function escapeBoltTags(input: string) {
-  return escapeBoltArtifactTags(escapeBoltAActionTags(input));
+export function escapefluixyTags(input: string) {
+  return escapefluixyArtifactTags(escapefluixyAActionTags(input));
 }
 
 // We have this seperate function to simplify the restore snapshot process in to one single artifact.
@@ -156,12 +156,12 @@ export function createCommandActionsString(commands: ProjectCommands): string {
 
   if (commands.setupCommand) {
     commandString += `
-<boltAction type="shell">${commands.setupCommand}</boltAction>`;
+<fluixyAction type="shell">${commands.setupCommand}</fluixyAction>`;
   }
 
   if (commands.startCommand) {
     commandString += `
-<boltAction type="start">${commands.startCommand}</boltAction>
+<fluixyAction type="start">${commands.startCommand}</fluixyAction>
 `;
   }
 

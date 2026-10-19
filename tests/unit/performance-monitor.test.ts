@@ -1,6 +1,6 @@
 /**
  * Performance Monitor Unit Tests
- * 
+ *
  * Tests the core functionality of the PerformanceMonitor utility
  * Following TDD principles: test behavior, edge cases, and error conditions
  */
@@ -34,9 +34,9 @@ describe('PerformanceMonitor', () => {
     it('should store events in localStorage', () => {
       PerformanceMonitor.trackJourney('test', 50);
 
-      const stored = localStorage.getItem('bolt_performance_events');
+      const stored = localStorage.getItem('fluixy_performance_events');
       expect(stored).toBeTruthy();
-      
+
       const events = JSON.parse(stored!);
       expect(events).toHaveLength(1);
       expect(events[0].journey).toBe('test');
@@ -71,9 +71,7 @@ describe('PerformanceMonitor', () => {
     it('should track duration even when operation throws', async () => {
       const operation = vi.fn().mockRejectedValue(new Error('test error'));
 
-      await expect(
-        PerformanceMonitor.measureAsync('failing-test', operation)
-      ).rejects.toThrow('test error');
+      await expect(PerformanceMonitor.measureAsync('failing-test', operation)).rejects.toThrow('test error');
 
       const events = PerformanceMonitor.getEvents();
       expect(events).toHaveLength(1);
@@ -220,14 +218,14 @@ describe('PerformanceMonitor', () => {
 
     it('should remove data from localStorage', () => {
       PerformanceMonitor.trackJourney('test', 10);
-      
+
       // Verify data exists
-      expect(localStorage.getItem('bolt_performance_events')).toBeTruthy();
-      
+      expect(localStorage.getItem('fluixy_performance_events')).toBeTruthy();
+
       PerformanceMonitor.clearEvents();
-      
+
       // Verify data is removed
-      expect(localStorage.getItem('bolt_performance_events')).toBeNull();
+      expect(localStorage.getItem('fluixy_performance_events')).toBeNull();
     });
   });
 

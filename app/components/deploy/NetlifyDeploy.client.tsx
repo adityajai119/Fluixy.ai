@@ -67,12 +67,10 @@ export function useNetlifyDeploy() {
       // Then run it
       await artifact.runner.runAction(actionData);
 
-      const buildOutput = artifact.runner.buildOutput;
-
-      if (!buildOutput || buildOutput.exitCode !== 0) {
+      if (!artifact.runner.buildOutput) {
         // Notify that build failed
         deployArtifact.runner.handleDeployAction('building', 'failed', {
-          error: formatBuildFailureOutput(buildOutput?.output),
+          error: 'Build failed. Check the terminal for details.',
           source: 'netlify',
         });
         throw new Error('Build failed');
@@ -85,7 +83,7 @@ export function useNetlifyDeploy() {
       const container = await webcontainer;
 
       // Remove /home/project from buildPath if it exists
-      const buildPath = buildOutput.path.replace('/home/project', '');
+      const buildPath = artifact.runner.buildOutput.path.replace('/home/project', '');
 
       console.log('Original buildPath', buildPath);
 

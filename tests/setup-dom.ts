@@ -78,15 +78,15 @@ class WorkerMock {
   terminate() {}
 }
 
-global.Worker = WorkerMock as any;
+(global as any).Worker = WorkerMock as any;
 
 // Mock window.requestAnimationFrame
-global.requestAnimationFrame = vi.fn((callback) => {
+(global as any).requestAnimationFrame = vi.fn((callback) => {
   setTimeout(callback, 0);
   return 0;
 });
 
-global.cancelAnimationFrame = vi.fn();
+(global as any).cancelAnimationFrame = vi.fn();
 
 // Mock performance.mark and performance.measure
 if (typeof performance !== 'undefined') {

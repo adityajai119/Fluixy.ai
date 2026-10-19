@@ -66,9 +66,9 @@ export class ImportExportService {
         // Core settings
         core: {
           // User profile and main settings
-          bolt_user_profile: this._safeGetItem('bolt_user_profile'),
-          bolt_settings: this._safeGetItem('bolt_settings'),
-          bolt_profile: this._safeGetItem('bolt_profile'),
+          fluixy_user_profile: this._safeGetItem('fluixy_user_profile'),
+          fluixy_settings: this._safeGetItem('fluixy_settings'),
+          fluixy_profile: this._safeGetItem('fluixy_profile'),
           theme: this._safeGetItem('theme'),
         },
 
@@ -91,8 +91,8 @@ export class ImportExportService {
         // Feature settings
         features: {
           // Feature flags
-          viewed_features: this._safeGetItem('bolt_viewed_features'),
-          developer_mode: this._safeGetItem('bolt_developer_mode'),
+          viewed_features: this._safeGetItem('fluixy_viewed_features'),
+          developer_mode: this._safeGetItem('fluixy_developer_mode'),
 
           // Context optimization
           contextOptimizationEnabled: this._safeGetItem('contextOptimizationEnabled'),
@@ -114,7 +114,7 @@ export class ImportExportService {
         // UI configuration
         ui: {
           // Tab configuration
-          bolt_tab_configuration: this._safeGetItem('bolt_tab_configuration'),
+          fluixy_tab_configuration: this._safeGetItem('fluixy_tab_configuration'),
           tabConfiguration: allCookies.tabConfiguration,
 
           // Prompt settings
@@ -135,12 +135,12 @@ export class ImportExportService {
         debug: {
           // Debug settings
           isDebugEnabled: allCookies.isDebugEnabled,
-          acknowledged_debug_issues: this._safeGetItem('bolt_acknowledged_debug_issues'),
-          acknowledged_connection_issue: this._safeGetItem('bolt_acknowledged_connection_issue'),
+          acknowledged_debug_issues: this._safeGetItem('fluixy_acknowledged_debug_issues'),
+          acknowledged_connection_issue: this._safeGetItem('fluixy_acknowledged_connection_issue'),
 
           // Error logs
           error_logs: this._safeGetItem('error_logs'),
-          bolt_read_logs: this._safeGetItem('bolt_read_logs'),
+          fluixy_read_logs: this._safeGetItem('fluixy_read_logs'),
 
           // Event logs
           eventLogs: allCookies.eventLogs,
@@ -149,7 +149,7 @@ export class ImportExportService {
         // Update settings
         updates: {
           update_settings: this._safeGetItem('update_settings'),
-          last_acknowledged_update: this._safeGetItem('bolt_last_acknowledged_version'),
+          last_acknowledged_update: this._safeGetItem('fluixy_last_acknowledged_version'),
         },
 
         // Chat snapshots (for chat history)
@@ -343,7 +343,7 @@ export class ImportExportService {
    */
   static async deleteAllChats(db: IDBDatabase): Promise<void> {
     // Clear chat history from localStorage
-    localStorage.removeItem('bolt_chat_history');
+    localStorage.removeItem('fluixy_chat_history');
 
     // Clear chats from IndexedDB
     if (!db) {
@@ -416,9 +416,9 @@ export class ImportExportService {
     // Import UI configuration
     if (data.ui) {
       // Import localStorage UI settings
-      if (data.ui.bolt_tab_configuration) {
+      if (data.ui.fluixy_tab_configuration) {
         try {
-          this._safeSetItem('bolt_tab_configuration', data.ui.bolt_tab_configuration);
+          this._safeSetItem('fluixy_tab_configuration', data.ui.fluixy_tab_configuration);
         } catch (err) {
           console.error('Error importing tab configuration:', err);
         }
@@ -472,10 +472,10 @@ export class ImportExportService {
     if (data.debug) {
       // Import debug localStorage settings
       const debugLocalStorageKeys = [
-        'bolt_acknowledged_debug_issues',
-        'bolt_acknowledged_connection_issue',
+        'fluixy_acknowledged_debug_issues',
+        'fluixy_acknowledged_connection_issue',
         'error_logs',
-        'bolt_read_logs',
+        'fluixy_read_logs',
       ];
 
       debugLocalStorageKeys.forEach((key) => {
@@ -513,7 +513,7 @@ export class ImportExportService {
 
       if (data.updates.last_acknowledged_update) {
         try {
-          this._safeSetItem('bolt_last_acknowledged_version', data.updates.last_acknowledged_update);
+          this._safeSetItem('fluixy_last_acknowledged_version', data.updates.last_acknowledged_update);
         } catch (err) {
           console.error('Error importing last acknowledged update:', err);
         }

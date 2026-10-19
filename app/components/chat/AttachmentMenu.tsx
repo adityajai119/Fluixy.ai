@@ -44,10 +44,10 @@ export function AttachmentMenu({
           type="button"
           title="Add attachment or connector"
           className={classNames(
-            'flex items-center text-bolt-elements-item-contentDefault bg-transparent',
-            'hover:text-bolt-elements-item-contentActive rounded-md p-1',
-            'hover:bg-bolt-elements-item-backgroundActive',
-            'focus:outline-none focus:ring-2 focus:ring-bolt-elements-focus focus:ring-offset-1',
+            'flex items-center text-fluixy-elements-item-contentDefault bg-transparent',
+            'hover:text-fluixy-elements-item-contentActive rounded-md p-1',
+            'hover:bg-fluixy-elements-item-backgroundActive',
+            'focus:outline-none focus:ring-2 focus:ring-fluixy-elements-focus focus:ring-offset-1',
             'transition-all',
           )}
         >
@@ -59,8 +59,8 @@ export function AttachmentMenu({
         <DropdownMenu.Content
           className={classNames(
             'min-w-[200px] rounded-lg p-1',
-            'bg-bolt-elements-background-depth-2',
-            'border border-bolt-elements-borderColor',
+            'bg-fluixy-elements-background-depth-2',
+            'border border-fluixy-elements-borderColor',
             'shadow-lg',
             'animate-in fade-in-80 zoom-in-95',
             'data-[side=bottom]:slide-in-from-top-2',
@@ -75,9 +75,9 @@ export function AttachmentMenu({
           <DropdownMenu.Item
             className={classNames(
               'flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer',
-              'text-bolt-elements-textPrimary',
-              'hover:bg-bolt-elements-background-depth-3',
-              'data-[highlighted]:bg-bolt-elements-background-depth-3',
+              'text-fluixy-elements-textPrimary',
+              'hover:bg-fluixy-elements-background-depth-3',
+              'data-[highlighted]:bg-fluixy-elements-background-depth-3',
               'outline-none transition-colors',
             )}
             onSelect={onAttachFile}
@@ -89,9 +89,9 @@ export function AttachmentMenu({
           <DropdownMenu.Item
             className={classNames(
               'flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer',
-              'text-bolt-elements-textPrimary',
-              'hover:bg-bolt-elements-background-depth-3',
-              'data-[highlighted]:bg-bolt-elements-background-depth-3',
+              'text-fluixy-elements-textPrimary',
+              'hover:bg-fluixy-elements-background-depth-3',
+              'data-[highlighted]:bg-fluixy-elements-background-depth-3',
               'outline-none transition-colors',
             )}
             onSelect={onOpenDesignDialog}
@@ -103,9 +103,9 @@ export function AttachmentMenu({
           <DropdownMenu.Item
             className={classNames(
               'flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer',
-              'text-bolt-elements-textPrimary',
-              'hover:bg-bolt-elements-background-depth-3',
-              'data-[highlighted]:bg-bolt-elements-background-depth-3',
+              'text-fluixy-elements-textPrimary',
+              'hover:bg-fluixy-elements-background-depth-3',
+              'data-[highlighted]:bg-fluixy-elements-background-depth-3',
               'outline-none transition-colors',
               isEnhanceDisabled && 'opacity-50 cursor-not-allowed',
             )}
@@ -113,9 +113,9 @@ export function AttachmentMenu({
             disabled={isEnhanceDisabled}
           >
             {enhancingPrompt ? (
-              <div className="i-svg-spinners:90-ring-with-bg text-bolt-elements-loader-progress text-lg animate-spin"></div>
+              <div className="i-svg-spinners:90-ring-with-bg text-fluixy-elements-loader-progress text-lg animate-spin"></div>
             ) : (
-              <div className="i-bolt:stars text-lg"></div>
+              <div className="i-fluixy:stars text-lg"></div>
             )}
             <span>Enhance Prompt</span>
           </DropdownMenu.Item>
@@ -123,27 +123,27 @@ export function AttachmentMenu({
           <DropdownMenu.Item
             className={classNames(
               'flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer',
-              'text-bolt-elements-textPrimary',
-              'hover:bg-bolt-elements-background-depth-3',
-              'data-[highlighted]:bg-bolt-elements-background-depth-3',
+              'text-fluixy-elements-textPrimary',
+              'hover:bg-fluixy-elements-background-depth-3',
+              'data-[highlighted]:bg-fluixy-elements-background-depth-3',
               'outline-none transition-colors',
               !mcpToolsInitialized && 'opacity-50 cursor-not-allowed',
             )}
             onSelect={onOpenMcpTools}
             disabled={!mcpToolsInitialized}
           >
-            <div className="i-bolt:mcp text-lg"></div>
+            <div className="i-fluixy:mcp text-lg"></div>
             <span>MCP Tools Available</span>
           </DropdownMenu.Item>
 
-          <DropdownMenu.Separator className="h-px bg-bolt-elements-borderColor my-1" />
+          <DropdownMenu.Separator className="h-px bg-fluixy-elements-borderColor my-1" />
 
           <DropdownMenu.Sub>
             <DropdownMenu.SubTrigger
               className={classNames(
                 'flex items-center justify-between gap-2 px-3 py-2 rounded-md text-sm cursor-pointer',
-                'text-bolt-elements-textPrimary',
-                'hover:bg-bolt-elements-background-depth-3',
+                'text-fluixy-elements-textPrimary',
+                'hover:bg-fluixy-elements-background-depth-3',
                 'outline-none transition-colors',
               )}
             >
@@ -158,8 +158,8 @@ export function AttachmentMenu({
               <DropdownMenu.SubContent
                 className={classNames(
                   'min-w-[180px] rounded-lg p-1',
-                  'bg-bolt-elements-background-depth-2',
-                  'border border-bolt-elements-borderColor',
+                  'bg-fluixy-elements-background-depth-2',
+                  'border border-fluixy-elements-borderColor',
                   'shadow-lg',
                   'animate-in fade-in-80 zoom-in-95',
                   'data-[side=right]:slide-in-from-left-2',
@@ -173,8 +173,8 @@ export function AttachmentMenu({
                   className={classNames(
                     'flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer',
                     'justify-between',
-                    'text-bolt-elements-textPrimary',
-                    'hover:bg-bolt-elements-background-depth-3',
+                    'text-fluixy-elements-textPrimary',
+                    'hover:bg-fluixy-elements-background-depth-3',
                     'outline-none transition-colors',
                   )}
                 >
@@ -195,8 +195,8 @@ export function AttachmentMenu({
                     className={classNames(
                       'flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer',
                       'justify-between',
-                      'text-bolt-elements-textPrimary',
-                      'hover:bg-bolt-elements-background-depth-3',
+                      'text-fluixy-elements-textPrimary',
+                      'hover:bg-fluixy-elements-background-depth-3',
                       'outline-none transition-colors',
                     )}
                     onSelect={() => onConnectorEnabledChange(connector.id, !connector.enabled)}

@@ -1,50 +1,239 @@
+/* ============================================
+   FLUIXY.AI — Animation Library
+   Premium micro-interactions & effects
+   ============================================ */
+
+/* Gradient mesh shift — for background */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  25% {
+    background-position: 50% 100%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  75% {
+    background-position: 50% 0%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Pulse glow — for interactive elements */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.15), 0 0 30px rgba(139, 92, 246, 0.05);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.30), 0 0 50px rgba(139, 92, 246, 0.10);
+  }
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Float — gentle floating */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Float delayed variant */
+@keyframes float-delayed {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-6px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(3px) rotate(-1deg);
+  }
+}
+
+/* Typing cursor blink */
+@keyframes typing-cursor {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Slide up fade in */
+@keyframes slide-up-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale in */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Border gradient rotation */
+@keyframes border-rotate {
+  0% {
+    --angle: 0deg;
+  }
+
+  100% {
+    --angle: 360deg;
+  }
+}
+
+/* Particle drift */
+@keyframes particle-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.6;
+  }
+
+  90% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translate(var(--drift-x, 50px), var(--drift-y, -100px)) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Rotate slow */
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Morphing blob for background */
+@keyframes morph-blob {
+
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
+  }
+
+  75% {
+    border-radius: 60% 30% 60% 40% / 70% 40% 50% 60%;
+  }
+}
+
+/* Glow ring — for voice input */
+@keyframes glow-ring {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 12px rgba(139, 92, 246, 0);
+  }
+}
+
+/* Progress sweep */
+@keyframes progress-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade in */
 .animated {
+  animation-duration: 0.3s;
   animation-fill-mode: both;
-  animation-duration: var(--animate-duration, 0.2s);
-  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-
-  &.fadeInRight {
-    animation-name: fadeInRight;
-  }
-
-  &.fadeOutRight {
-    animation-name: fadeOutRight;
-  }
 }
 
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translate3d(100%, 0, 0);
+    transform: translateX(40px);
   }
 
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 }
 
 @keyframes fadeOutRight {
   from {
     opacity: 1;
+    transform: translateX(0);
   }
 
   to {
     opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-}
-
-.dropdown-animation {
-  opacity: 0;
-  animation: fadeMoveDown 0.15s forwards;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes fadeMoveDown {
-  to {
-    opacity: 1;
-    transform: translateY(6px);
+    transform: translateX(40px);
   }
 }
 
@@ -74,5 +263,20 @@
 @media (prefers-reduced-motion: reduce) {
   .thinking-ellipsis span {
     animation: none;
+  }
+}
+
+.fadeInRight {
+  animation-name: fadeInRight;
+}
+
+.fadeOutRight {
+  animation-name: fadeOutRight;
+}
+
+/* Stagger children animation util */
+@for $i from 1 through 10 {
+  .stagger-#{$i} {
+    animation-delay: #{$i * 0.08}s;
   }
 }

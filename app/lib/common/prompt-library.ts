@@ -1,4 +1,5 @@
 import { getFineTunedPrompt } from './prompts/new-prompt';
+import { getSystemPrompt } from './prompts/prompts';
 import optimized from './prompts/optimized';
 import { getProjectToolPrompt } from './prompts/project-tools';
 import { getTinyTimPrompt } from './prompts/tiny-tim';
@@ -45,6 +46,16 @@ export class PromptLibrary {
     'experimental-prompt': {
       label: 'Experimental Prompt',
       description: 'Experimental version of the prompt for lower token usage',
+      get: (options) => optimized(options),
+    },
+    original: {
+      label: 'Old Default Prompt',
+      description: 'The OG battle tested default system Prompt',
+      get: (options) => getSystemPrompt(options.cwd, options.supabase, options.designScheme),
+    },
+    optimized: {
+      label: 'Optimized Prompt',
+      description: 'An Experimental version of the prompt for lower token usage',
       get: (options) => optimized(options),
     },
   };

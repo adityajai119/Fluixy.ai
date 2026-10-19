@@ -5,8 +5,8 @@ import { classNames } from '~/utils/classNames';
 // Predefined gradient colors
 const GRADIENT_COLORS = [
   'from-purple-500/10 to-blue-500/5',
-  'from-blue-500/10 to-cyan-500/5',
-  'from-cyan-500/10 to-green-500/5',
+  'from-blue-500/10 to-purple-500/5',
+  'from-purple-500/10 to-green-500/5',
   'from-green-500/10 to-yellow-500/5',
   'from-yellow-500/10 to-orange-500/5',
   'from-orange-500/10 to-red-500/5',
@@ -72,7 +72,7 @@ export function GradientCard({
         'p-5 rounded-xl bg-gradient-to-br',
         gradientClass,
         borderEffect
-          ? 'border border-bolt-elements-borderColor dark:border-bolt-elements-borderColor-dark hover:border-purple-500/40'
+          ? 'border border-fluixy-elements-borderColor dark:border-fluixy-elements-borderColor-dark hover:border-purple-500/40'
           : '',
         'transition-all duration-300 shadow-sm',
         hoverEffect ? 'hover:shadow-md' : '',

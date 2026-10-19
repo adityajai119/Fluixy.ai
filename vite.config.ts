@@ -12,6 +12,8 @@ import { browserPolyfills } from './scripts/vite/browser-polyfills.ts';
  */
 process.env.CLOUDFLARE_CF_FETCH_ENABLED ??= 'false';
 
+import path from 'node:path';
+
 // Load environment variables without duplicate loading or console noise
 dotenv.config({ path: ['.env.local', '.env'], quiet: true });
 
@@ -25,6 +27,9 @@ export default defineConfig((config) => {
     },
     resolve: {
       tsconfigPaths: true,
+      alias: {
+        '~': path.resolve(__dirname, './app'),
+      },
     },
     build: {
       target: 'esnext',
@@ -213,7 +218,7 @@ function chrome129IssuePlugin() {
           if (version === 129) {
             res.setHeader('content-type', 'text/html');
             res.end(
-              '<body><h1>Please use Chrome Canary for testing.</h1><p>Chrome 129 has an issue with JavaScript modules & Vite local development, see <a href="https://github.com/stackblitz/bolt.new/issues/86#issuecomment-2395519258">for more information.</a></p><p><b>Note:</b> This only impacts <u>local development</u>. `pnpm run build` and `pnpm run start` will work fine in this browser.</p></body>',
+              '<body><h1>Please use Chrome Canary for testing.</h1><p>Chrome 129 has an issue with JavaScript modules & Vite local development, see <a href="https://github.com/stackblitz-labs/bolt.diy/issues/86">for more information.</a></p><p><b>Note:</b> This only impacts <u>local development</u>. `pnpm run build` and `pnpm run start` will work fine in this browser.</p></body>',
             );
 
             return;

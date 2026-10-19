@@ -45,11 +45,11 @@ const MARKETPLACE_URL = 'https://github.com/dustinwloring1988/bolt-marketplace';
 const CATEGORIES = pluginCategorySchema.options;
 
 const buttonClass =
-  'inline-flex appearance-none items-center justify-center gap-2 rounded-lg border border-bolt-elements-borderColor bg-transparent px-3 py-2 text-sm font-medium text-bolt-elements-textPrimary transition-colors hover:bg-bolt-elements-background-depth-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 disabled:cursor-not-allowed disabled:opacity-50';
+  'inline-flex appearance-none items-center justify-center gap-2 rounded-lg border border-fluixy-elements-borderColor bg-transparent px-3 py-2 text-sm font-medium text-fluixy-elements-textPrimary transition-colors hover:bg-fluixy-elements-background-depth-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 disabled:cursor-not-allowed disabled:opacity-50';
 const primaryButtonClass =
   'inline-flex appearance-none items-center justify-center gap-2 rounded-lg border border-purple-500 bg-purple-600 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 disabled:cursor-not-allowed disabled:opacity-50';
 const inputClass =
-  'w-full rounded-lg border border-bolt-elements-borderColor bg-bolt-elements-background-depth-1 px-3 py-2 text-sm text-bolt-elements-textPrimary outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20';
+  'w-full rounded-lg border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-1 px-3 py-2 text-sm text-fluixy-elements-textPrimary outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20';
 
 function ErrorMessage({ message }: { message: string }) {
   return (
@@ -61,7 +61,7 @@ function ErrorMessage({ message }: { message: string }) {
 
 function CategoryPill({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-full border border-bolt-elements-borderColor px-2.5 py-1 text-xs text-bolt-elements-textSecondary">
+    <span className="rounded-full border border-fluixy-elements-borderColor px-2.5 py-1 text-xs text-fluixy-elements-textSecondary">
       {children}
     </span>
   );
@@ -81,7 +81,7 @@ function PluginCard({
   const manifest = plugin.manifest;
 
   return (
-    <article className="flex min-h-[220px] flex-col rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-4 transition-colors hover:border-purple-500/50">
+    <article className="flex min-h-[220px] flex-col rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-4 transition-colors hover:border-purple-500/50">
       <button
         type="button"
         onClick={onOpen}
@@ -91,18 +91,18 @@ function PluginCard({
           <Blocks className="h-5 w-5" />
         </span>
         <span className="min-w-0">
-          <span className="block truncate font-semibold text-bolt-elements-textPrimary">{manifest.name}</span>
-          <span className="mt-0.5 block text-xs text-bolt-elements-textTertiary">
+          <span className="block truncate font-semibold text-fluixy-elements-textPrimary">{manifest.name}</span>
+          <span className="mt-0.5 block text-xs text-fluixy-elements-textTertiary">
             {manifest.publisher} · v{manifest.version}
           </span>
-          <span className="mt-3 line-clamp-3 block text-sm leading-5 text-bolt-elements-textSecondary">
+          <span className="mt-3 line-clamp-3 block text-sm leading-5 text-fluixy-elements-textSecondary">
             {manifest.description}
           </span>
         </span>
       </button>
       <div className="mt-4 flex items-center justify-between gap-2">
         <CategoryPill>{manifest.category}</CategoryPill>
-        <span className="text-xs text-bolt-elements-textTertiary">
+        <span className="text-xs text-fluixy-elements-textTertiary">
           {updateAvailable ? 'Update available' : installed ? 'Installed' : ''}
         </span>
         <button type="button" onClick={onOpen} className={buttonClass}>
@@ -371,8 +371,8 @@ export default function PluginTab() {
           <header className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-purple-400">Extensions</p>
-              <h2 className="mt-1 text-2xl font-semibold text-bolt-elements-textPrimary">Plugin Marketplace</h2>
-              <p className="mt-1 max-w-2xl text-sm text-bolt-elements-textSecondary">
+              <h2 className="mt-1 text-2xl font-semibold text-fluixy-elements-textPrimary">Plugin Marketplace</h2>
+              <p className="mt-1 max-w-2xl text-sm text-fluixy-elements-textSecondary">
                 Discover and manage reviewed plugins from the Bolt marketplace.
               </p>
             </div>
@@ -402,7 +402,7 @@ export default function PluginTab() {
             </div>
           </header>
 
-          <nav aria-label="Plugin views" className="flex flex-wrap gap-1 border-b border-bolt-elements-borderColor">
+          <nav aria-label="Plugin views" className="flex flex-wrap gap-1 border-b border-fluixy-elements-borderColor">
             {(
               [
                 ['marketplace', 'Marketplace'],
@@ -418,8 +418,8 @@ export default function PluginTab() {
                 className={classNames(
                   'appearance-none rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors',
                   view === id
-                    ? 'border-bolt-elements-borderColorActive bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent'
-                    : 'border-bolt-elements-borderColor bg-transparent text-bolt-elements-textSecondary hover:border-bolt-elements-borderColorActive hover:text-bolt-elements-textPrimary',
+                    ? 'border-fluixy-elements-borderColorActive bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent'
+                    : 'border-fluixy-elements-borderColor bg-transparent text-fluixy-elements-textSecondary hover:border-fluixy-elements-borderColorActive hover:text-fluixy-elements-textPrimary',
                 )}
               >
                 {label}
@@ -429,7 +429,7 @@ export default function PluginTab() {
                   </span>
                 ) : null}
                 {id === 'installed' ? (
-                  <span className="ml-2 rounded-full bg-bolt-elements-background-depth-3 px-1.5 py-0.5 text-xs">
+                  <span className="ml-2 rounded-full bg-fluixy-elements-background-depth-3 px-1.5 py-0.5 text-xs">
                     {plugins.length}
                   </span>
                 ) : null}
@@ -439,7 +439,7 @@ export default function PluginTab() {
 
           <div className="flex flex-wrap gap-3">
             <label className="relative min-w-[220px] flex-1">
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-bolt-elements-textTertiary" />
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-fluixy-elements-textTertiary" />
               <input
                 className={`${inputClass} pl-9`}
                 value={search}
@@ -467,9 +467,9 @@ export default function PluginTab() {
           {(operationError || storeError) && <ErrorMessage message={operationError ?? storeError ?? ''} />}
 
           {catalogError && !snapshot ? (
-            <div className="space-y-3 rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-6 text-center">
-              <h3 className="font-medium text-bolt-elements-textPrimary">Marketplace unavailable</h3>
-              <p className="text-sm text-bolt-elements-textSecondary">{catalogError}</p>
+            <div className="space-y-3 rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-6 text-center">
+              <h3 className="font-medium text-fluixy-elements-textPrimary">Marketplace unavailable</h3>
+              <p className="text-sm text-fluixy-elements-textSecondary">{catalogError}</p>
               <div className="flex flex-wrap justify-center gap-2">
                 <button type="button" className={buttonClass} onClick={() => void refreshCatalog()}>
                   Try again
@@ -489,16 +489,16 @@ export default function PluginTab() {
           )}
 
           {loadingCatalog && !snapshot ? (
-            <div className="flex items-center justify-center gap-2 py-16 text-sm text-bolt-elements-textSecondary">
+            <div className="flex items-center justify-center gap-2 py-16 text-sm text-fluixy-elements-textSecondary">
               <LoaderCircle className="h-4 w-4 animate-spin" /> Loading marketplace…
             </div>
           ) : null}
 
           {snapshot && !catalogError && catalogPlugins.length === 0 && view === 'marketplace' ? (
-            <div className="rounded-xl border border-dashed border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 px-6 py-12 text-center">
-              <Blocks className="mx-auto h-9 w-9 text-bolt-elements-textTertiary" />
-              <h3 className="mt-3 font-medium text-bolt-elements-textPrimary">No plugins published yet</h3>
-              <p className="mx-auto mt-1 max-w-md text-sm text-bolt-elements-textSecondary">
+            <div className="rounded-xl border border-dashed border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 px-6 py-12 text-center">
+              <Blocks className="mx-auto h-9 w-9 text-fluixy-elements-textTertiary" />
+              <h3 className="mt-3 font-medium text-fluixy-elements-textPrimary">No plugins published yet</h3>
+              <p className="mx-auto mt-1 max-w-md text-sm text-fluixy-elements-textSecondary">
                 The marketplace repository is connected. Import a reviewed ZIP package or create a plugin draft to get
                 started.
               </p>
@@ -509,7 +509,7 @@ export default function PluginTab() {
           ) : null}
 
           {snapshot && catalogPlugins.length > 0 && displayedPlugins.length === 0 && (
-            <p className="rounded-xl border border-bolt-elements-borderColor p-8 text-center text-sm text-bolt-elements-textSecondary">
+            <p className="rounded-xl border border-fluixy-elements-borderColor p-8 text-center text-sm text-fluixy-elements-textSecondary">
               {view === 'installed' && plugins.length === 0
                 ? 'No plugins installed yet.'
                 : view === 'updates' && updates.length === 0
@@ -610,12 +610,12 @@ function InstallConfirmation({
               event.preventDefault();
             }
           }}
-          className="fixed left-1/2 top-1/2 z-[131] w-[min(32rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 space-y-4 rounded-2xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-1 p-6 shadow-2xl focus:outline-none"
+          className="fixed left-1/2 top-1/2 z-[131] w-[min(32rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 space-y-4 rounded-2xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-1 p-6 shadow-2xl focus:outline-none"
         >
-          <RadixDialog.Title className="text-lg font-semibold text-bolt-elements-textPrimary">
+          <RadixDialog.Title className="text-lg font-semibold text-fluixy-elements-textPrimary">
             {installed ? `Update ${plugin.manifest.name}?` : `Install ${plugin.manifest.name}?`}
           </RadixDialog.Title>
-          <RadixDialog.Description className="text-sm text-bolt-elements-textSecondary">
+          <RadixDialog.Description className="text-sm text-fluixy-elements-textSecondary">
             Version {version} by {plugin.manifest.publisher}. The package will be checked against the catalog before it
             is stored.
           </RadixDialog.Description>
@@ -633,15 +633,15 @@ function InstallConfirmation({
               </p>
             )}
           {changelogLoading && (
-            <p role="status" className="text-sm text-bolt-elements-textSecondary">
+            <p role="status" className="text-sm text-fluixy-elements-textSecondary">
               Loading release notes…
             </p>
           )}
           {changelogError && <ErrorMessage message={changelogError} />}
           {changelog && (
-            <section className="max-h-48 overflow-auto rounded-lg border border-bolt-elements-borderColor p-3">
-              <h3 className="mb-2 text-sm font-medium text-bolt-elements-textPrimary">Release notes</h3>
-              <pre className="whitespace-pre-wrap break-words text-xs text-bolt-elements-textSecondary">
+            <section className="max-h-48 overflow-auto rounded-lg border border-fluixy-elements-borderColor p-3">
+              <h3 className="mb-2 text-sm font-medium text-fluixy-elements-textPrimary">Release notes</h3>
+              <pre className="whitespace-pre-wrap break-words text-xs text-fluixy-elements-textSecondary">
                 {changelog}
               </pre>
             </section>
@@ -708,26 +708,26 @@ function PluginDetails({
       <button
         type="button"
         onClick={onBack}
-        className="inline-flex appearance-none items-center gap-1 rounded-md border-0 bg-transparent px-2 py-1 text-sm font-medium text-bolt-elements-textSecondary transition-colors hover:text-bolt-elements-textPrimary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+        className="inline-flex appearance-none items-center gap-1 rounded-md border-0 bg-transparent px-2 py-1 text-sm font-medium text-fluixy-elements-textSecondary transition-colors hover:text-fluixy-elements-textPrimary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
       >
         <ChevronLeft className="h-4 w-4" /> {installed ? 'Installed Plugins' : 'Marketplace'}
       </button>
-      <header className="flex flex-wrap items-start justify-between gap-4 rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5">
+      <header className="flex flex-wrap items-start justify-between gap-4 rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5">
         <div className="flex gap-4">
           <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400">
             <Blocks className="h-7 w-7" />
           </span>
           <div>
-            <h2 className="text-xl font-semibold text-bolt-elements-textPrimary">{manifest.name}</h2>
-            <p className="mt-1 text-sm text-bolt-elements-textSecondary">
+            <h2 className="text-xl font-semibold text-fluixy-elements-textPrimary">{manifest.name}</h2>
+            <p className="mt-1 text-sm text-fluixy-elements-textSecondary">
               Version {manifest.version} · {manifest.publisher}
             </p>
-            <p className="mt-2 max-w-2xl text-sm text-bolt-elements-textSecondary">{manifest.description}</p>
+            <p className="mt-2 max-w-2xl text-sm text-fluixy-elements-textSecondary">{manifest.description}</p>
           </div>
         </div>
         {installed && (
           <div className="flex flex-wrap items-center gap-3">
-            <label className="inline-flex items-center gap-2 text-sm text-bolt-elements-textSecondary">
+            <label className="inline-flex items-center gap-2 text-sm text-fluixy-elements-textSecondary">
               <span>{installed.enabled ? 'Enabled' : 'Disabled'}</span>
               <input
                 type="checkbox"
@@ -746,7 +746,7 @@ function PluginDetails({
       </header>
       <nav
         aria-label="Plugin details"
-        className="flex gap-2 overflow-x-auto border-b border-bolt-elements-borderColor pb-2"
+        className="flex gap-2 overflow-x-auto border-b border-fluixy-elements-borderColor pb-2"
       >
         {(['overview', 'settings', 'permissions', 'logs'] as const).map((tab) => (
           <button
@@ -757,8 +757,8 @@ function PluginDetails({
             className={classNames(
               'appearance-none rounded-lg border px-3 py-1.5 text-sm font-medium capitalize transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500',
               detailTab === tab
-                ? 'border-bolt-elements-borderColorActive bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent'
-                : 'border-bolt-elements-borderColor bg-transparent text-bolt-elements-textSecondary hover:border-bolt-elements-borderColorActive hover:text-bolt-elements-textPrimary',
+                ? 'border-fluixy-elements-borderColorActive bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent'
+                : 'border-fluixy-elements-borderColor bg-transparent text-fluixy-elements-textSecondary hover:border-fluixy-elements-borderColorActive hover:text-fluixy-elements-textPrimary',
             )}
           >
             {tab}
@@ -768,31 +768,31 @@ function PluginDetails({
       {error && <ErrorMessage message={error} />}
       {detailTab === 'overview' && (
         <section className="grid gap-4 md:grid-cols-[1fr_280px]">
-          <div className="space-y-4 rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5">
-            <h3 className="font-semibold text-bolt-elements-textPrimary">About</h3>
-            <p className="text-sm leading-6 text-bolt-elements-textSecondary">{manifest.description}</p>
+          <div className="space-y-4 rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5">
+            <h3 className="font-semibold text-fluixy-elements-textPrimary">About</h3>
+            <p className="text-sm leading-6 text-fluixy-elements-textSecondary">{manifest.description}</p>
             <div className="flex flex-wrap gap-2">
               <CategoryPill>{manifest.category}</CategoryPill>
               <CategoryPill>{manifest.license}</CategoryPill>
             </div>
             {installed && (
-              <p className="text-xs text-bolt-elements-textTertiary">
+              <p className="text-xs text-fluixy-elements-textTertiary">
                 {installed.source === 'marketplace'
                   ? `Marketplace · commit ${installed.sourceCommit?.slice(0, 8)}`
                   : 'Imported local package · source not verified'}
               </p>
             )}
           </div>
-          <div className="space-y-3 rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5">
-            <h3 className="font-semibold text-bolt-elements-textPrimary">Plugin status</h3>
-            <p className="text-sm text-bolt-elements-textSecondary">
+          <div className="space-y-3 rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5">
+            <h3 className="font-semibold text-fluixy-elements-textPrimary">Plugin status</h3>
+            <p className="text-sm text-fluixy-elements-textSecondary">
               {installed
                 ? installed.enabled
                   ? 'Enabled in this browser profile'
                   : 'Installed and disabled'
                 : 'Available to install'}
             </p>
-            <p className="text-sm text-bolt-elements-textSecondary">
+            <p className="text-sm text-fluixy-elements-textSecondary">
               {manifest.tools.length} tool{manifest.tools.length === 1 ? '' : 's'} · no additional capabilities
             </p>
             {onUpdate && (
@@ -814,12 +814,12 @@ function PluginDetails({
         </section>
       )}
       {detailTab === 'settings' && (
-        <section className="space-y-4 rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5">
-          <h3 className="font-semibold text-bolt-elements-textPrimary">Configuration</h3>
+        <section className="space-y-4 rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5">
+          <h3 className="font-semibold text-fluixy-elements-textPrimary">Configuration</h3>
           {installed ? (
             manifest.settings.length ? (
               manifest.settings.map((setting) => (
-                <label key={setting.key} className="block space-y-1 text-sm text-bolt-elements-textPrimary">
+                <label key={setting.key} className="block space-y-1 text-sm text-fluixy-elements-textPrimary">
                   <span>{setting.label}</span>
                   {setting.type === 'toggle' ? (
                     <input
@@ -843,15 +843,15 @@ function PluginDetails({
                     />
                   )}
                   {setting.description && (
-                    <p className="text-xs text-bolt-elements-textSecondary">{setting.description}</p>
+                    <p className="text-xs text-fluixy-elements-textSecondary">{setting.description}</p>
                   )}
                 </label>
               ))
             ) : (
-              <p className="text-sm text-bolt-elements-textSecondary">This plugin has no additional settings.</p>
+              <p className="text-sm text-fluixy-elements-textSecondary">This plugin has no additional settings.</p>
             )
           ) : (
-            <p className="text-sm text-bolt-elements-textSecondary">Install this plugin to configure it.</p>
+            <p className="text-sm text-fluixy-elements-textSecondary">Install this plugin to configure it.</p>
           )}
           {installed &&
             manifest.tools.map((tool) => {
@@ -861,10 +861,10 @@ function PluginDetails({
               return (
                 <label
                   key={tool}
-                  className="flex items-center justify-between border-t border-bolt-elements-borderColor py-3 text-sm text-bolt-elements-textSecondary"
+                  className="flex items-center justify-between border-t border-fluixy-elements-borderColor py-3 text-sm text-fluixy-elements-textSecondary"
                 >
                   <span>
-                    <span className="block capitalize text-bolt-elements-textPrimary">
+                    <span className="block capitalize text-fluixy-elements-textPrimary">
                       {tool.replace('-', ' ')} tool
                     </span>
                     <code className="text-xs">{toolName}</code>
@@ -883,37 +883,37 @@ function PluginDetails({
         </section>
       )}
       {detailTab === 'permissions' && (
-        <section className="rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5">
+        <section className="rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5">
           <div className="flex items-center gap-2 text-emerald-400">
             <ShieldCheck className="h-5 w-5" />
             <h3 className="font-semibold">Permissions</h3>
           </div>
-          <p className="mt-3 text-sm text-bolt-elements-textSecondary">
+          <p className="mt-3 text-sm text-fluixy-elements-textSecondary">
             This reviewed adapter requests no network, project-file, credential, or storage access. Its tools only
             process text arguments supplied by the model.
           </p>
-          <p className="mt-3 text-xs text-bolt-elements-textTertiary">Declared capabilities: none</p>
+          <p className="mt-3 text-xs text-fluixy-elements-textTertiary">Declared capabilities: none</p>
         </section>
       )}
       {detailTab === 'logs' && (
-        <section className="space-y-3 rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5">
-          <h3 className="font-semibold text-bolt-elements-textPrimary">Activity</h3>
+        <section className="space-y-3 rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5">
+          <h3 className="font-semibold text-fluixy-elements-textPrimary">Activity</h3>
           {!installed ? (
-            <p className="text-sm text-bolt-elements-textSecondary">Install the plugin to see activity.</p>
+            <p className="text-sm text-fluixy-elements-textSecondary">Install the plugin to see activity.</p>
           ) : logs?.length ? (
             logs.map((log) => (
               <div
                 key={log.id}
-                className="flex flex-wrap justify-between gap-2 border-t border-bolt-elements-borderColor py-3 text-sm"
+                className="flex flex-wrap justify-between gap-2 border-t border-fluixy-elements-borderColor py-3 text-sm"
               >
-                <span className={log.level === 'error' ? 'text-red-400' : 'text-bolt-elements-textSecondary'}>
+                <span className={log.level === 'error' ? 'text-red-400' : 'text-fluixy-elements-textSecondary'}>
                   {log.message}
                 </span>
-                <time className="text-xs text-bolt-elements-textTertiary">{new Date(log.time).toLocaleString()}</time>
+                <time className="text-xs text-fluixy-elements-textTertiary">{new Date(log.time).toLocaleString()}</time>
               </div>
             ))
           ) : (
-            <p className="text-sm text-bolt-elements-textSecondary">No activity recorded yet.</p>
+            <p className="text-sm text-fluixy-elements-textSecondary">No activity recorded yet.</p>
           )}
         </section>
       )}
@@ -952,8 +952,8 @@ function DeveloperWizard({
       <header className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-purple-400">Extensions</p>
-          <h2 className="mt-1 text-2xl font-semibold text-bolt-elements-textPrimary">Develop Plugin</h2>
-          <p className="mt-1 text-sm text-bolt-elements-textSecondary">
+          <h2 className="mt-1 text-2xl font-semibold text-fluixy-elements-textPrimary">Develop Plugin</h2>
+          <p className="mt-1 text-sm text-fluixy-elements-textSecondary">
             Create a validated draft for a supported Bolt adapter.
           </p>
         </div>
@@ -970,10 +970,10 @@ function DeveloperWizard({
               'rounded-lg border px-3 py-2 text-xs',
               step === index
                 ? 'border-purple-500/50 bg-purple-500/10 text-purple-300'
-                : 'border-bolt-elements-borderColor text-bolt-elements-textSecondary',
+                : 'border-fluixy-elements-borderColor text-fluixy-elements-textSecondary',
             )}
           >
-            <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-bolt-elements-background-depth-3">
+            <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-fluixy-elements-background-depth-3">
               {index + 1}
             </span>
             {label}
@@ -981,17 +981,17 @@ function DeveloperWizard({
         ))}
       </ol>
       {error && <ErrorMessage message={error} />}
-      <section className="space-y-4 rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5">
+      <section className="space-y-4 rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5">
         {step === 0 && (
           <>
-            <h3 className="font-semibold text-bolt-elements-textPrimary">Basic Information</h3>
+            <h3 className="font-semibold text-fluixy-elements-textPrimary">Basic Information</h3>
             <div className="grid gap-4 md:grid-cols-2">
-              <label className="space-y-1 text-sm text-bolt-elements-textSecondary">
+              <label className="space-y-1 text-sm text-fluixy-elements-textSecondary">
                 Plugin ID
                 <input className={inputClass} value={draft.id} onChange={(event) => update('id', event.target.value)} />
                 <span className="block text-xs">Use publisher.slug, lowercase letters and hyphens.</span>
               </label>
-              <label className="space-y-1 text-sm text-bolt-elements-textSecondary">
+              <label className="space-y-1 text-sm text-fluixy-elements-textSecondary">
                 Plugin Name
                 <input
                   className={inputClass}
@@ -1000,7 +1000,7 @@ function DeveloperWizard({
                   onChange={(event) => update('name', event.target.value)}
                 />
               </label>
-              <label className="space-y-1 text-sm text-bolt-elements-textSecondary">
+              <label className="space-y-1 text-sm text-fluixy-elements-textSecondary">
                 Publisher
                 <input
                   className={inputClass}
@@ -1009,7 +1009,7 @@ function DeveloperWizard({
                   onChange={(event) => update('publisher', event.target.value)}
                 />
               </label>
-              <label className="space-y-1 text-sm text-bolt-elements-textSecondary">
+              <label className="space-y-1 text-sm text-fluixy-elements-textSecondary">
                 License
                 <input
                   className={inputClass}
@@ -1018,7 +1018,7 @@ function DeveloperWizard({
                   onChange={(event) => update('license', event.target.value)}
                 />
               </label>
-              <label className="space-y-1 text-sm text-bolt-elements-textSecondary">
+              <label className="space-y-1 text-sm text-fluixy-elements-textSecondary">
                 Version
                 <input
                   className={inputClass}
@@ -1026,7 +1026,7 @@ function DeveloperWizard({
                   onChange={(event) => update('version', event.target.value)}
                 />
               </label>
-              <label className="space-y-1 text-sm text-bolt-elements-textSecondary">
+              <label className="space-y-1 text-sm text-fluixy-elements-textSecondary">
                 Category
                 <select
                   className={inputClass}
@@ -1038,7 +1038,7 @@ function DeveloperWizard({
                   ))}
                 </select>
               </label>
-              <label className="space-y-1 text-sm text-bolt-elements-textSecondary md:col-span-2">
+              <label className="space-y-1 text-sm text-fluixy-elements-textSecondary md:col-span-2">
                 Description
                 <textarea
                   className={`${inputClass} min-h-24`}
@@ -1052,12 +1052,12 @@ function DeveloperWizard({
         )}
         {step === 1 && (
           <>
-            <h3 className="font-semibold text-bolt-elements-textPrimary">Capabilities</h3>
+            <h3 className="font-semibold text-fluixy-elements-textPrimary">Capabilities</h3>
             <div className="flex items-start gap-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
               <ShieldCheck className="mt-0.5 h-5 w-5 text-emerald-400" />
               <div>
-                <p className="text-sm font-medium text-bolt-elements-textPrimary">No additional access requested</p>
-                <p className="mt-1 text-sm text-bolt-elements-textSecondary">
+                <p className="text-sm font-medium text-fluixy-elements-textPrimary">No additional access requested</p>
+                <p className="mt-1 text-sm text-fluixy-elements-textSecondary">
                   Version 1 supports the reviewed Text Utilities host adapter. It cannot access the network, project
                   files, credentials, or plugin storage.
                 </p>
@@ -1067,14 +1067,14 @@ function DeveloperWizard({
         )}
         {step === 2 && (
           <>
-            <h3 className="font-semibold text-bolt-elements-textPrimary">Configuration</h3>
-            <p className="text-sm text-bolt-elements-textSecondary">
+            <h3 className="font-semibold text-fluixy-elements-textPrimary">Configuration</h3>
+            <p className="text-sm text-fluixy-elements-textSecondary">
               Choose which deterministic tools this package contributes. These tools only process text you provide.
             </p>
             {(['count', 'transform'] as const).map((tool) => (
               <label
                 key={tool}
-                className="flex items-center gap-3 rounded-lg border border-bolt-elements-borderColor p-3 text-sm text-bolt-elements-textPrimary"
+                className="flex items-center gap-3 rounded-lg border border-fluixy-elements-borderColor p-3 text-sm text-fluixy-elements-textPrimary"
               >
                 <input
                   type="checkbox"
@@ -1102,7 +1102,7 @@ function DeveloperWizard({
         )}
         {step === 3 && (
           <>
-            <h3 className="font-semibold text-bolt-elements-textPrimary">Review</h3>
+            <h3 className="font-semibold text-fluixy-elements-textPrimary">Review</h3>
             <dl className="grid gap-3 text-sm sm:grid-cols-2">
               {Object.entries({
                 Name: draft.name,
@@ -1113,24 +1113,24 @@ function DeveloperWizard({
                 Category: draft.category,
               }).map(([label, value]) => (
                 <div key={label}>
-                  <dt className="text-xs uppercase text-bolt-elements-textTertiary">{label}</dt>
-                  <dd className="mt-1 text-bolt-elements-textPrimary">{value}</dd>
+                  <dt className="text-xs uppercase text-fluixy-elements-textTertiary">{label}</dt>
+                  <dd className="mt-1 text-fluixy-elements-textPrimary">{value}</dd>
                 </div>
               ))}
             </dl>
-            <p className="border-t border-bolt-elements-borderColor pt-4 text-sm text-bolt-elements-textSecondary">
+            <p className="border-t border-fluixy-elements-borderColor pt-4 text-sm text-fluixy-elements-textSecondary">
               {draft.description}
             </p>
-            <p className="text-sm text-bolt-elements-textSecondary">
+            <p className="text-sm text-fluixy-elements-textSecondary">
               Tools: {tools.join(', ') || 'none'} · Extra capabilities: none
             </p>
-            <p className="text-xs text-bolt-elements-textTertiary">
+            <p className="text-xs text-fluixy-elements-textTertiary">
               The ZIP contains a declarative manifest only. Publishing requires a reviewed change to the marketplace
               repository.
             </p>
           </>
         )}
-        <div className="flex justify-between border-t border-bolt-elements-borderColor pt-4">
+        <div className="flex justify-between border-t border-fluixy-elements-borderColor pt-4">
           <button
             type="button"
             onClick={() => setStep(Math.max(0, step - 1))}

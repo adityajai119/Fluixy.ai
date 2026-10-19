@@ -113,20 +113,20 @@ export default function BrowserUseCloudTab() {
   return (
     <div className="max-w-2xl space-y-6">
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-bolt-elements-background-depth-3 text-bolt-elements-item-contentAccent">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-fluixy-elements-background-depth-3 text-fluixy-elements-item-contentAccent">
           <div className="i-ph:globe-hemisphere-west w-5 h-5" />
         </div>
         <div>
-          <h2 className="text-lg font-medium text-bolt-elements-textPrimary">Browser Use Cloud</h2>
-          <p className="mt-1 text-sm text-bolt-elements-textSecondary">
-            Give Bolt hosted browser tools for visiting websites, interacting with pages, and reporting results.
+          <h2 className="text-lg font-medium text-fluixy-elements-textPrimary">Browser Use Cloud</h2>
+          <p className="mt-1 text-sm text-fluixy-elements-textSecondary">
+            Give Fluixy.Ai hosted browser tools for visiting websites, interacting with pages, and reporting results.
           </p>
         </div>
       </div>
 
-      <div className="rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5 space-y-4">
+      <div className="rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5 space-y-4">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="text-sm font-semibold text-bolt-elements-textPrimary">Connection</h3>
+          <h3 className="text-sm font-semibold text-fluixy-elements-textPrimary">Connection</h3>
           <span
             className={classNames(
               'rounded-full px-2.5 py-1 text-xs font-medium',
@@ -134,7 +134,7 @@ export default function BrowserUseCloudTab() {
                 ? 'bg-green-500/10 text-green-600 dark:text-green-400'
                 : serverStatus?.status === 'unavailable'
                   ? 'bg-red-500/10 text-red-500'
-                  : 'bg-bolt-elements-background-depth-3 text-bolt-elements-textSecondary',
+                  : 'bg-fluixy-elements-background-depth-3 text-fluixy-elements-textSecondary',
             )}
           >
             {connected ? 'Connected' : serverStatus?.status === 'unavailable' ? 'Needs attention' : 'Not connected'}
@@ -142,7 +142,7 @@ export default function BrowserUseCloudTab() {
         </div>
 
         <div>
-          <label htmlFor="browser-use-api-key" className="mb-2 block text-sm text-bolt-elements-textSecondary">
+          <label htmlFor="browser-use-api-key" className="mb-2 block text-sm text-fluixy-elements-textSecondary">
             Browser Use API key
           </label>
           <input
@@ -152,24 +152,24 @@ export default function BrowserUseCloudTab() {
             value={apiKey}
             onChange={(event) => setApiKey(event.target.value)}
             placeholder="bu_…"
-            className="w-full rounded-lg border border-bolt-elements-borderColor bg-bolt-elements-background-depth-1 px-3 py-2 text-sm text-bolt-elements-textPrimary focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+            className="w-full rounded-lg border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-1 px-3 py-2 text-sm text-fluixy-elements-textPrimary focus:outline-none focus:ring-2 focus:ring-purple-500/50"
           />
-          <p className="mt-2 text-xs text-bolt-elements-textSecondary">
+          <p className="mt-2 text-xs text-fluixy-elements-textSecondary">
             Create a key with browser read and write permissions in{' '}
             <a
               href="https://cloud.browser-use.com/settings"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-bolt-elements-link hover:underline"
+              className="text-fluixy-elements-link hover:underline"
             >
               Browser Use settings
             </a>
-            . The key is saved in Bolt’s MCP settings in this browser.
+            . The key is saved in Fluixy.Ai’s MCP settings in this browser.
           </p>
         </div>
 
         {serverStatus?.status === 'unavailable' && (
-          <p role="alert" className="text-sm text-bolt-elements-icon-error">
+          <p role="alert" className="text-sm text-fluixy-elements-icon-error">
             {serverStatus.error}
           </p>
         )}
@@ -179,7 +179,7 @@ export default function BrowserUseCloudTab() {
             type="button"
             onClick={connect}
             disabled={!isInitialized || isUpdatingConfig || !apiKey.trim()}
-            className="bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent hover:bg-bolt-elements-item-backgroundActive"
+            className="bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent hover:bg-fluixy-elements-item-backgroundActive"
           >
             {isUpdatingConfig ? 'Connecting…' : connected ? 'Save and reconnect' : 'Connect'}
           </Button>
@@ -199,7 +199,7 @@ export default function BrowserUseCloudTab() {
               onClick={disconnect}
               disabled={!isInitialized || isUpdatingConfig}
               variant="outline"
-              className="hover:text-bolt-elements-icon-error"
+              className="hover:text-fluixy-elements-icon-error"
             >
               Disconnect
             </Button>
@@ -208,11 +208,11 @@ export default function BrowserUseCloudTab() {
       </div>
 
       {connected && (
-        <div className="rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5">
+        <div className="rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5">
           <div className="mb-4">
-            <h3 className="text-sm font-semibold text-bolt-elements-textPrimary">Action permissions</h3>
-            <p className="mt-1 text-xs text-bolt-elements-textSecondary">
-              Choose which Browser Use actions Bolt can access. Enabled actions still ask before each run.
+            <h3 className="text-sm font-semibold text-fluixy-elements-textPrimary">Action permissions</h3>
+            <p className="mt-1 text-xs text-fluixy-elements-textSecondary">
+              Choose which Browser Use actions Fluixy.Ai can access. Enabled actions still ask before each run.
             </p>
           </div>
           <div className="space-y-2">
@@ -223,11 +223,11 @@ export default function BrowserUseCloudTab() {
               return (
                 <div
                   key={toolName}
-                  className="flex items-center gap-3 rounded-lg border border-bolt-elements-borderColor bg-bolt-elements-background-depth-1 px-3 py-2.5"
+                  className="flex items-center gap-3 rounded-lg border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-1 px-3 py-2.5"
                 >
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-bolt-elements-textPrimary">{toolName}</p>
-                    <p className="text-xs text-bolt-elements-textSecondary">{description}</p>
+                    <p className="text-sm font-medium text-fluixy-elements-textPrimary">{toolName}</p>
+                    <p className="text-xs text-fluixy-elements-textSecondary">{description}</p>
                   </div>
                   <Switch
                     checked={enabled}
@@ -242,10 +242,10 @@ export default function BrowserUseCloudTab() {
         </div>
       )}
 
-      <div className="rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-5">
-        <h3 className="mb-2 text-sm font-semibold text-bolt-elements-textPrimary">Using the connector</h3>
-        <p className="text-sm text-bolt-elements-textSecondary">
-          Once connected, Browser Use tools appear with your other MCP tools in chat. Ask Bolt to use Browser Use Cloud
+      <div className="rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-5">
+        <h3 className="mb-2 text-sm font-semibold text-fluixy-elements-textPrimary">Using the connector</h3>
+        <p className="text-sm text-fluixy-elements-textSecondary">
+          Once connected, Browser Use tools appear with your other MCP tools in chat. Ask Fluixy.Ai to use Browser Use Cloud
           for a task; starting a hosted browser run may incur usage charges with Browser Use.
         </p>
       </div>

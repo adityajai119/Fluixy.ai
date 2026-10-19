@@ -263,9 +263,9 @@ export const ControlPanel = ({ open, onClose, initialTab }: ControlPanelProps) =
             <div
               className={classNames(
                 'w-[min(1440px,calc(100vw-2rem))] h-[90vh]',
-                'bg-bolt-elements-background-depth-1 text-bolt-elements-textPrimary',
+                'bg-fluixy-elements-background-depth-1 text-fluixy-elements-textPrimary',
                 'rounded-2xl shadow-2xl',
-                'border border-bolt-elements-borderColor',
+                'border border-fluixy-elements-borderColor',
                 'flex flex-col overflow-hidden',
                 'relative',
                 'transform transition-all duration-200 ease-out',
@@ -273,17 +273,17 @@ export const ControlPanel = ({ open, onClose, initialTab }: ControlPanelProps) =
               )}
             >
               <div className="relative z-10 flex h-full min-h-0">
-                <aside className="flex w-[248px] shrink-0 flex-col border-r border-bolt-elements-borderColor bg-bolt-elements-background-depth-2">
+                <aside className="flex w-[248px] shrink-0 flex-col border-r border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2">
                   <button
                     onClick={handleClose}
-                    className="mx-4 mt-4 flex appearance-none items-center gap-2 border-0 border-b border-solid border-bolt-elements-borderColor bg-transparent px-2 pb-5 pt-2 text-left text-sm font-semibold text-bolt-elements-textPrimary hover:text-bolt-elements-item-contentAccent"
+                    className="mx-4 mt-4 flex appearance-none items-center gap-2 border-0 border-b border-solid border-fluixy-elements-borderColor bg-transparent px-2 pb-5 pt-2 text-left text-sm font-semibold text-fluixy-elements-textPrimary hover:text-fluixy-elements-item-contentAccent"
                   >
                     <span className="i-ph:arrow-left w-4 h-4" /> Back to project
                   </button>
                   <nav className="min-h-0 flex-1 overflow-y-auto modern-scrollbar px-3 py-4">
                     {navigationTabs.map((group) => (
                       <div key={group.label} className="mb-5">
-                        <p className="mb-2 px-2 text-[11px] font-medium uppercase tracking-wide text-bolt-elements-textTertiary">
+                        <p className="mb-2 px-2 text-[11px] font-medium uppercase tracking-wide text-fluixy-elements-textTertiary">
                           {group.label}
                         </p>
                         {group.tabs.map((tabId) => {
@@ -297,8 +297,8 @@ export const ControlPanel = ({ open, onClose, initialTab }: ControlPanelProps) =
                               className={classNames(
                                 'flex w-full appearance-none items-center gap-3 rounded-md border-0 px-2 py-2 text-left text-sm transition-colors',
                                 selected
-                                  ? 'bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent'
-                                  : 'bg-transparent text-bolt-elements-textSecondary hover:bg-bolt-elements-item-backgroundActive hover:text-bolt-elements-textPrimary',
+                                  ? 'bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent'
+                                  : 'bg-transparent text-fluixy-elements-textSecondary hover:bg-fluixy-elements-item-backgroundActive hover:text-fluixy-elements-textPrimary',
                               )}
                             >
                               <Icon className="h-4 w-4" /> {TAB_LABELS[tabId]}
@@ -308,7 +308,7 @@ export const ControlPanel = ({ open, onClose, initialTab }: ControlPanelProps) =
                       </div>
                     ))}
                   </nav>
-                  <div className="flex h-16 items-center border-t border-bolt-elements-borderColor px-3">
+                  <div className="flex h-16 items-center border-t border-fluixy-elements-borderColor px-3">
                     <AvatarDropdown onSelectTab={handleTabClick} onOpenDocs={() => setIsDocumentationOpen(true)} />
                   </div>
                 </aside>
@@ -317,10 +317,10 @@ export const ControlPanel = ({ open, onClose, initialTab }: ControlPanelProps) =
                     <div className="mx-auto max-w-5xl">{getTabComponent(activeTab)}</div>
                   ) : !activeTab ? (
                     <div className="mx-auto max-w-5xl">
-                      <DialogTitle className="mb-1 text-2xl font-semibold text-bolt-elements-textPrimary">
+                      <DialogTitle className="mb-1 text-2xl font-semibold text-fluixy-elements-textPrimary">
                         Control Panel
                       </DialogTitle>
-                      <p className="mb-6 text-sm text-bolt-elements-textSecondary">
+                      <p className="mb-6 text-sm text-fluixy-elements-textSecondary">
                         Manage your account, preferences, providers, and connected services.
                       </p>
                       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

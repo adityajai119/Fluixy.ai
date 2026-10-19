@@ -19,11 +19,11 @@ vi.mock('~/lib/stores/workbench', () => ({
 }));
 
 const artifactText = (id: string, filePath: string) =>
-  `<boltArtifact id="${id}" title="${id}" type="bundled">
-  <boltAction type="file" filePath="${filePath}">
+  `<fluixyArtifact id="${id}" title="${id}" type="bundled">
+  <fluixyAction type="file" filePath="${filePath}">
 const value = 1;
-  </boltAction>
-</boltArtifact>`;
+  </fluixyAction>
+</fluixyArtifact>`;
 
 describe('useMessageParser.resetParsedMessages', () => {
   beforeEach(() => {

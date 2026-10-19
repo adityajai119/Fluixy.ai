@@ -76,11 +76,23 @@ export async function getTemplates(templateName: string, title?: string, signal?
   }
 
   const githubRepo = template.githubRepo;
-  const files = await getGitHubRepoContent(githubRepo, signal);
+  let files = await getGitHubRepoContent(githubRepo, signal);
 
   if (!files.length) {
     throw new Error('The starter template did not contain any files.');
   }
+
+  // Convert legacy .bolt paths to .fluixy
+  files = files.map((file) => {
+    if (file.path.startsWith('.bolt/')) {
+      return {
+        ...file,
+        path: file.path.replace(/^\.bolt\//, '.fluixy/'),
+      };
+    }
+
+    return file;
+  });
 
   let filteredFiles = files;
 
@@ -101,11 +113,11 @@ export async function getTemplates(templateName: string, title?: string, signal?
      */
   }
 
-  // exclude    .bolt
-  filteredFiles = filteredFiles.filter((x) => x.path.startsWith('.bolt') == false);
+  // exclude    .fluixy
+  filteredFiles = filteredFiles.filter((x) => x.path.startsWith('.fluixy') == false);
 
-  // check for ignore file in .bolt folder
-  const templateIgnoreFile = files.find((x) => x.path.startsWith('.bolt') && x.name == 'ignore');
+  // check for ignore file in .fluixy folder
+  const templateIgnoreFile = files.find((x) => x.path.startsWith('.fluixy') && x.name == 'ignore');
 
   const filesToImport = {
     files: filteredFiles,
@@ -125,28 +137,27 @@ export async function getTemplates(templateName: string, title?: string, signal?
   }
 
   const assistantMessage = `
-Bolt is initializing your project with the required files using the ${template.name} template.
-<boltArtifact id="imported-files" title="${title || 'Create initial files'}" type="bundled">
+fluixy is initializing your project with the required files using the ${template.name} template.
+<fluixyArtifact id="imported-files" title="${title || 'Create initial files'}" type="bundled">
 ${filesToImport.files
-  .map(
-    (file) =>
-      `<boltAction type="file" filePath="${file.path}">
+      .map(
+        (file) =>
+          `<fluixyAction type="file" filePath="${file.path}">
 ${file.content}
-</boltAction>`,
-  )
-  .join('\n')}
-</boltArtifact>
+</fluixyAction>`,
+      )
+      .join('\n')}
+</fluixyArtifact>
 `;
 
   const commandActions = createCommandActionsString(await detectProjectCommands(filesToImport.files));
 
   const setupMessage = commandActions
-    ? `<boltArtifact id="project-setup" title="Project Setup" type="bundled">${commandActions}\n</boltArtifact>`
+    ? `<fluixyArtifact id="project-setup" title="Project Setup" type="bundled">${commandActions}\n</fluixyArtifact>`
     : '';
 
   let userMessage = ``;
-
-  const templatePromptFile = files.filter((x) => x.path.startsWith('.bolt')).find((x) => x.name == 'prompt');
+  const templatePromptFile = files.filter((x) => x.path.startsWith('.fluixy')).find((x) => x.name == 'prompt');
 
   if (templatePromptFile) {
     userMessage = `

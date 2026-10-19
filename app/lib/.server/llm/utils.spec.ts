@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createFilesContext, extractCurrentContext, extractPropertiesFromMessage, simplifyBoltActions } from './utils';
+import { createFilesContext, extractCurrentContext, extractPropertiesFromMessage, simplifyfluixyActions } from './utils';
 
 const WORK_DIR = '/home/project';
 const MODEL_REGEX = /^\[Model: (.*?)\]\n\n/;
@@ -108,28 +108,28 @@ describe('extractPropertiesFromMessage', () => {
   });
 });
 
-describe('simplifyBoltActions', () => {
+describe('simplifyfluixyActions', () => {
   it('elides the body of file actions', () => {
-    const input = '<boltAction type="file" filePath="a.ts">const a = 1;</boltAction>';
+    const input = '<fluixyAction type="file" filePath="a.ts">const a = 1;</fluixyAction>';
 
-    expect(simplifyBoltActions(input)).toContain('...');
-    expect(simplifyBoltActions(input)).not.toContain('const a = 1;');
+    expect(simplifyfluixyActions(input)).toContain('...');
+    expect(simplifyfluixyActions(input)).not.toContain('const a = 1;');
   });
 
   it('leaves non-file actions untouched', () => {
-    const input = '<boltAction type="start">npm run dev</boltAction>';
+    const input = '<fluixyAction type="start">npm run dev</fluixyAction>';
 
-    expect(simplifyBoltActions(input)).toBe(input);
+    expect(simplifyfluixyActions(input)).toBe(input);
   });
 });
 
 describe('createFilesContext', () => {
-  it('wraps file contents in a bolt artifact', () => {
+  it('wraps file contents in a fluixy artifact', () => {
     const context = createFilesContext({
       [`${WORK_DIR}/index.html`]: { type: 'file', content: '<h1>hi</h1>', isBinary: false },
     });
 
-    expect(context).toContain('<boltArtifact id="code-content" title="Code Content"');
+    expect(context).toContain('<fluixyArtifact id="code-content" title="Code Content"');
     expect(context).toContain('filePath="/home/project/index.html"');
     expect(context).toContain('<h1>hi</h1>');
   });

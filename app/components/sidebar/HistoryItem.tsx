@@ -40,7 +40,6 @@ export function HistoryItem({
       if (selectionMode) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Item clicked in selection mode:', item.id);
         onToggleSelection?.(item.id);
       }
     },
@@ -48,7 +47,6 @@ export function HistoryItem({
   );
 
   const handleCheckboxChange = useCallback(() => {
-    console.log('Checkbox changed for item:', item.id);
     onToggleSelection?.(item.id);
   }, [item.id, onToggleSelection]);
 
@@ -56,7 +54,6 @@ export function HistoryItem({
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault();
       event.stopPropagation();
-      console.log('Delete button clicked for item:', item.id);
 
       if (onDelete) {
         onDelete(event as unknown as React.UIEvent);
@@ -68,10 +65,17 @@ export function HistoryItem({
   return (
     <div
       className={classNames(
-        'group rounded-lg text-sm text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary hover:bg-bolt-elements-item-backgroundActive overflow-hidden flex justify-between items-center px-3 py-2 transition-colors',
-        { 'text-bolt-elements-textPrimary bg-bolt-elements-item-backgroundActive': isActiveChat },
+        'group rounded-xl text-sm text-fluixy-elements-textSecondary hover:text-fluixy-elements-textPrimary overflow-hidden flex justify-between items-center px-3 py-2 transition-all duration-200',
         { 'cursor-pointer': selectionMode },
       )}
+      style={{
+        background: isActiveChat
+          ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.06))'
+          : isSelected
+            ? 'rgba(139, 92, 246, 0.08)'
+            : 'transparent',
+        borderLeft: isActiveChat ? '2px solid rgba(139, 92, 246, 0.6)' : '2px solid transparent',
+      }}
       onClick={selectionMode ? handleItemClick : undefined}
       onMouseEnter={() => prefetchChat(db, item.urlId || item.id)}
     >
@@ -90,7 +94,11 @@ export function HistoryItem({
         <form onSubmit={handleSubmit} className="flex-1 flex items-center gap-2">
           <input
             type="text"
-            className="flex-1 bg-bolt-elements-background-depth-2 text-bolt-elements-textPrimary rounded-md px-3 py-1.5 text-sm border border-bolt-elements-borderColor focus:outline-none focus:ring-1 focus:ring-bolt-elements-borderColorActive/50"
+            className="flex-1 rounded-lg px-3 py-1.5 text-sm text-fluixy-elements-textPrimary focus:outline-none border transition-all duration-200"
+            style={{
+              background: 'var(--fluixy-elements-bg-depth-4)',
+              borderColor: 'var(--fluixy-glass-border)',
+            }}
             autoFocus
             value={currentDescription}
             onChange={handleChange}
@@ -99,7 +107,8 @@ export function HistoryItem({
           />
           <button
             type="submit"
-            className="i-ph:check h-4 w-4 text-gray-500 hover:text-purple-500 transition-colors"
+            className="i-ph:check h-4 w-4 text-fluixy-elements-textTertiary transition-colors"
+            style={{ color: 'var(--fluixy-elements-item-contentAccent)' }}
             onMouseDown={handleSubmit}
           />
         </form>
@@ -117,7 +126,7 @@ export function HistoryItem({
               'absolute right-0 top-0 bottom-0 flex items-center bg-transparent px-2 transition-colors',
             )}
           >
-            <div className="flex items-center gap-2.5 text-gray-400 dark:text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="flex items-center gap-2.5 text-fluixy-elements-textTertiary opacity-0 group-hover:opacity-100 transition-opacity">
               <ChatActionButton
                 toolTipContent="Export"
                 icon="i-ph:download-simple h-4 w-4"
@@ -147,7 +156,7 @@ export function HistoryItem({
               <ChatActionButton
                 toolTipContent="Delete"
                 icon="i-ph:trash h-4 w-4"
-                className="hover:text-red-500 dark:hover:text-red-400"
+                className="hover:text-red-400"
                 onClick={handleDeleteClick}
               />
             </div>
@@ -179,7 +188,7 @@ const ChatActionButton = forwardRef(
         <button
           ref={ref}
           type="button"
-          className={`text-gray-400 dark:text-gray-500 hover:text-purple-500 dark:hover:text-purple-400 transition-colors ${icon} ${className ? className : ''}`}
+          className={`text-fluixy-elements-textTertiary hover:text-fluixy-elements-item-contentAccent transition-colors ${icon} ${className ? className : ''}`}
           onClick={onClick}
         />
       </WithTooltip>

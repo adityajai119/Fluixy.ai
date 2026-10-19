@@ -87,9 +87,9 @@ export function TabsWithSlider({
             tab.id === activeTab
               ? classNames('text-white shadow-sm shadow-purple-500/20', activeTabClassName)
               : classNames(
-                  'bg-bolt-elements-background-depth-2 dark:bg-bolt-elements-background-depth-3 text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary-dark hover:bg-bolt-elements-background-depth-3 dark:hover:bg-bolt-elements-background-depth-4 border border-bolt-elements-borderColor dark:border-bolt-elements-borderColor-dark',
-                  tabClassName,
-                ),
+                'bg-fluixy-elements-background-depth-2 dark:bg-fluixy-elements-background-depth-3 text-fluixy-elements-textPrimary dark:text-fluixy-elements-textPrimary-dark hover:bg-fluixy-elements-background-depth-3 dark:hover:bg-fluixy-elements-background-depth-4 border border-fluixy-elements-borderColor dark:border-fluixy-elements-borderColor-dark',
+                tabClassName,
+              ),
           )}
         >
           <span className={classNames('flex items-center gap-2', tab.id === activeTab ? 'font-medium' : '')}>

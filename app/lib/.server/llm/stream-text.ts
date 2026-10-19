@@ -1,6 +1,14 @@
 import { streamText as _streamText, type ModelMessage, type UIMessage } from 'ai';
 import { withAgentStreamDeadlines, withAgentToolCallRecovery } from './agent-stream';
-import { MAX_TOKENS, PROVIDER_COMPLETION_LIMITS, isReasoningModel, type FileMap } from './constants';
+import {
+  MAX_TOKENS,
+  PROVIDER_COMPLETION_LIMITS,
+  GROQ_FREE_TIER_COMPLETION_BUDGET,
+  GROQ_FREE_TIER_SAFETY_BUFFER,
+  GROQ_FREE_TIER_TPM_LIMIT,
+  isReasoningModel,
+  type FileMap,
+} from './constants';
 import { prepareModelMessages } from './model-messages';
 import { withDevelopmentCommentaryWorkstyle } from './prompt-workstyle';
 import { createFilesContext, extractPropertiesFromMessage } from './utils';
@@ -64,11 +72,140 @@ function getCompletionTokenLimit(modelDetails: any): number {
 }
 
 function sanitizeText(text: string): string {
-  let sanitized = text.replace(/<div class=\\"__boltThought__\\">.*?<\/div>/s, '');
+  let sanitized = text.replace(/<div class=\\"__fluixyThought__\\">.*?<\/div>/s, '');
   sanitized = sanitized.replace(/<think>.*?<\/think>/s, '');
-  sanitized = sanitized.replace(/<boltAction type="file" filePath="package-lock\.json">[\s\S]*?<\/boltAction>/g, '');
+  sanitized = sanitized.replace(/<fluixyAction type="file" filePath="package-lock\.json">[\s\S]*?<\/fluixyAction>/g, '');
 
   return sanitized.trim();
+}
+
+/*
+ * Groq free-tier token budgeting helpers (Fluixy.Ai).
+ * The free tier enforces a tokens-per-minute window, so oversized prompts are
+ * trimmed to a conservative budget before the request is sent.
+ */
+function extractTextFromMessageContent(content: unknown): string {
+  if (typeof content === 'string') {
+    return content;
+  }
+
+  if (Array.isArray(content)) {
+    return content
+      .map((part) => {
+        if ((part as any)?.type === 'text') {
+          return String((part as any).text || '');
+        }
+
+        return '';
+      })
+      .join('\n');
+  }
+
+  return '';
+}
+
+function estimateTokensFromText(text: string): number {
+  // Practical approximation across mixed English/code payloads.
+  return Math.ceil(text.length / 4);
+}
+
+function estimateMessageTokens(message: Record<string, any>): number {
+  return estimateTokensFromText(extractTextFromMessageContent(message.content));
+}
+
+function trimTextToTokenBudget(text: string, tokenBudget: number): string {
+  if (tokenBudget <= 0) {
+    return '';
+  }
+
+  const maxChars = tokenBudget * 4;
+
+  if (text.length <= maxChars) {
+    return text;
+  }
+
+  // Keep the most recent tail, which is typically the most relevant context.
+  return text.slice(text.length - maxChars);
+}
+
+function trimMessageToTokenBudget(message: Record<string, any>, tokenBudget: number): Record<string, any> {
+  const content = message.content;
+
+  if (typeof content === 'string') {
+    return {
+      ...message,
+      content: trimTextToTokenBudget(content, tokenBudget),
+    };
+  }
+
+  if (Array.isArray(content)) {
+    let remainingBudget = tokenBudget;
+    const trimmedParts = [...content];
+
+    for (let i = trimmedParts.length - 1; i >= 0; i--) {
+      const part: any = trimmedParts[i];
+
+      if (part?.type !== 'text') {
+        continue;
+      }
+
+      const partText = String(part.text || '');
+      const partTokens = estimateTokensFromText(partText);
+
+      if (partTokens <= remainingBudget) {
+        remainingBudget -= partTokens;
+        continue;
+      }
+
+      trimmedParts[i] = {
+        ...part,
+        text: trimTextToTokenBudget(partText, remainingBudget),
+      };
+      remainingBudget = 0;
+    }
+
+    return {
+      ...message,
+      content: trimmedParts,
+    };
+  }
+
+  return message;
+}
+
+function trimMessagesToTokenBudget(
+  messages: Record<string, any>[],
+  tokenBudget: number,
+): { messages: Record<string, any>[]; estimatedTokens: number } {
+  if (messages.length === 0 || tokenBudget <= 0) {
+    return { messages: [], estimatedTokens: 0 };
+  }
+
+  let used = 0;
+  const kept: Record<string, any>[] = [];
+
+  for (let i = messages.length - 1; i >= 0; i--) {
+    const message = messages[i];
+    const messageTokens = estimateMessageTokens(message);
+
+    if (used + messageTokens <= tokenBudget) {
+      kept.unshift(message);
+      used += messageTokens;
+      continue;
+    }
+
+    // Ensure at least the latest message is preserved, trimmed if needed.
+    if (kept.length === 0) {
+      const remaining = Math.max(tokenBudget - used, 1);
+      const trimmed = trimMessageToTokenBudget(message, remaining);
+      kept.unshift(trimmed);
+      used += estimateMessageTokens(trimmed);
+    }
+
+    break;
+  }
+
+  return { messages: kept, estimatedTokens: used };
 }
 
 export async function streamText(props: {
@@ -141,7 +278,7 @@ export async function streamText(props: {
      * `parts`. convertToModelMessages reads only `parts` and dereferences
      * `message.parts.some(...)` on its first statement, so a message left
      * without parts is an immediate TypeError rather than a soft degradation.
-     * `data-*` parts are preserved rather than flattened away, because bolt
+     * `data-*` parts are preserved rather than flattened away, because Fluixy.Ai
      * reads annotations back off them.
      */
     const sanitizedParts = Array.isArray(message.parts)
@@ -209,11 +346,7 @@ export async function streamText(props: {
   const dynamicMaxTokens = modelDetails ? getCompletionTokenLimit(modelDetails) : Math.min(MAX_TOKENS, 16384);
 
   // Use model-specific limits directly - no artificial cap needed
-  const safeMaxTokens = dynamicMaxTokens;
-
-  logger.info(
-    `Token limits for model ${modelDetails.name}: maxTokens=${safeMaxTokens}, maxTokenAllowed=${modelDetails.maxTokenAllowed}, maxCompletionTokens=${modelDetails.maxCompletionTokens}`,
-  );
+  let safeMaxTokens = dynamicMaxTokens;
 
   let systemPrompt =
     PromptLibrary.getPropmtFromLibrary(promptId || 'default', {
@@ -306,6 +439,44 @@ export async function streamText(props: {
     console.log('No locked files found from any source for prompt.');
   }
 
+  /*
+   * Groq free-tier safe budgeting: cap completion tokens and trim the prompt so
+   * the request stays under the per-minute token window (429 avoidance).
+   */
+  if (provider.name === 'Groq') {
+    safeMaxTokens = Math.min(safeMaxTokens, GROQ_FREE_TIER_COMPLETION_BUDGET);
+
+    const inputTokenBudget = Math.max(
+      GROQ_FREE_TIER_TPM_LIMIT - safeMaxTokens - GROQ_FREE_TIER_SAFETY_BUFFER,
+      1000,
+    );
+    const systemPromptBudget = Math.floor(inputTokenBudget * 0.35);
+    const messageBudget = Math.max(inputTokenBudget - systemPromptBudget, 500);
+
+    const trimmedSystemPrompt = trimTextToTokenBudget(systemPrompt, systemPromptBudget);
+    const { messages: trimmedMessages, estimatedTokens: trimmedMessageTokens } = trimMessagesToTokenBudget(
+      processedMessages,
+      messageBudget,
+    );
+
+    const estimatedInputTokens = estimateTokensFromText(trimmedSystemPrompt) + trimmedMessageTokens;
+    const originalInputTokens =
+      estimateTokensFromText(systemPrompt) +
+      processedMessages.reduce((acc, msg) => acc + estimateMessageTokens(msg), 0);
+
+    if (trimmedSystemPrompt !== systemPrompt || trimmedMessages.length !== processedMessages.length) {
+      logger.info(
+        `Applied Groq token budgeting: estimated input ${originalInputTokens} -> ${estimatedInputTokens}, messages ${processedMessages.length} -> ${trimmedMessages.length}, maxTokens=${safeMaxTokens}`,
+      );
+      systemPrompt = trimmedSystemPrompt;
+      processedMessages = trimmedMessages;
+    }
+  }
+
+  logger.info(
+    `Token limits for model ${modelDetails.name}: maxTokens=${safeMaxTokens}, maxTokenAllowed=${modelDetails.maxTokenAllowed}, maxCompletionTokens=${modelDetails.maxCompletionTokens}`,
+  );
+
   logger.info(`Sending llm call to ${provider.name} with model ${modelDetails.name}`);
 
   // Log reasoning model detection and token parameters
@@ -327,19 +498,19 @@ export async function streamText(props: {
   const filteredOptions =
     isReasoning && options
       ? Object.fromEntries(
-          Object.entries(options).filter(
-            ([key]) =>
-              ![
-                'temperature',
-                'topP',
-                'presencePenalty',
-                'frequencyPenalty',
-                'logprobs',
-                'topLogprobs',
-                'logitBias',
-              ].includes(key),
-          ),
-        )
+        Object.entries(options).filter(
+          ([key]) =>
+            ![
+              'temperature',
+              'topP',
+              'presencePenalty',
+              'frequencyPenalty',
+              'logprobs',
+              'topLogprobs',
+              'logitBias',
+            ].includes(key),
+        ),
+      )
       : options || {};
 
   // DEBUG: Log filtered options
@@ -360,7 +531,7 @@ export async function streamText(props: {
   );
 
   /*
-   * supabaseConnection is Bolt's own option, not a v7 one. It is consumed above
+   * supabaseConnection is Fluixy.Ai's own option, not a v7 one. It is consumed above
    * to build the system prompt, and must not be forwarded, because v7 spreads
    * unknown keys all the way into the model call where they are silently
    * ignored. messages is excluded because this module builds the prompt itself.

@@ -1,5 +1,5 @@
 import { generateText, type UIMessage } from 'ai';
-import { extractCurrentContext, extractPropertiesFromMessage, simplifyBoltActions } from './utils';
+import { extractCurrentContext, extractPropertiesFromMessage, simplifyfluixyActions } from './utils';
 import { LLMManager } from '~/lib/modules/llm/manager';
 import { createMessage, getFirstTextPart, getMessageText } from '~/lib/persistence/messageMigration';
 import type { IProviderSetting } from '~/types/model';
@@ -36,7 +36,8 @@ export async function createSummary(props: {
        * `message.parts.some(...)` when it is undefined, so an assistant
        * message left without parts is a hard TypeError, not a soft degradation.
        */
-      let text = simplifyBoltActions(getMessageText(message));
+      let text = simplifyfluixyActions(getMessageText(message));
+      text = text.replace(/<div class=\\"__fluixyThought__\\">.*?<\/div>/s, '');
       text = text.replace(/<think>.*?<\/think>/s, '');
 
       return createMessage({ id: message.id, role: 'assistant', text }) as UIMessage;
@@ -176,10 +177,10 @@ Below is the chat after that:
 ---
 <new_chats>
 ${slicedMessages
-  .map((x) => {
-    return `---\n[${x.role}] ${extractTextContent(x)}\n---`;
-  })
-  .join('\n')}
+        .map((x) => {
+          return `---\n[${x.role}] ${extractTextContent(x)}\n---`;
+        })
+        .join('\n')}
 </new_chats>
 ---
 

@@ -41,6 +41,6 @@ describe('ImportZipButton', () => {
 
     await waitFor(() => expect(toastSuccess).toHaveBeenCalledWith('ZIP imported successfully'));
 
-    expect(localStorage.getItem('bolt_zip_autorun')).toBeNull();
+    expect(localStorage.getItem('fluixy_zip_autorun')).toBeNull();
   });
 });

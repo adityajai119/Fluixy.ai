@@ -228,7 +228,7 @@ export async function createProjectMcpBridge() {
     }
   };
 
-  const server = new McpServer({ name: 'bolt-project', version: '1.0.0' });
+  const server = new McpServer({ name: 'fluixy-project', version: '1.0.0' });
   const fileRevisionsReadByModel = new Map<string, string>();
 
   server.registerTool(
@@ -675,7 +675,7 @@ export async function createProjectMcpBridge() {
 
           const processId = crypto.randomUUID();
           workbenchStore.toggleTerminal(true);
-          workbenchStore.writeToBoltTerminal(`\r\n$ ${command}\r\n`);
+          workbenchStore.writeTofluixyTerminal(`\r\n$ ${command}\r\n`);
 
           const record: ProcessRecord = {
             command,
@@ -696,7 +696,7 @@ export async function createProjectMcpBridge() {
                     workbenchStore.projectGeneration.get() === bridgeProjectGeneration &&
                     chatId.get() === bridgeChatId
                   ) {
-                    workbenchStore.writeToBoltTerminal(chunk);
+                    workbenchStore.writeTofluixyTerminal(chunk);
                   }
                 },
               }),
@@ -714,7 +714,7 @@ export async function createProjectMcpBridge() {
               await record.done;
 
               if (workbenchStore.projectGeneration.get() === bridgeProjectGeneration && chatId.get() === bridgeChatId) {
-                workbenchStore.writeToBoltTerminal(`\r\n[Command exited with code ${exitCode}]\r\n`);
+                workbenchStore.writeTofluixyTerminal(`\r\n[Command exited with code ${exitCode}]\r\n`);
               }
             })
             .catch(() => {
@@ -733,7 +733,7 @@ export async function createProjectMcpBridge() {
         const result = failure(error);
 
         if (workbenchStore.projectGeneration.get() === bridgeProjectGeneration && chatId.get() === bridgeChatId) {
-          workbenchStore.writeToBoltTerminal(`\r\n[Command failed: ${result.content[0].text}]\r\n`);
+          workbenchStore.writeTofluixyTerminal(`\r\n[Command failed: ${result.content[0].text}]\r\n`);
         }
 
         return result;
@@ -848,7 +848,7 @@ export async function createProjectMcpBridge() {
   );
 
   const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
-  const client = new Client({ name: 'bolt-project-client', version: '1.0.0' });
+  const client = new Client({ name: 'fluixy-project-client', version: '1.0.0' });
   await Promise.all([server.connect(serverTransport), client.connect(clientTransport)]);
 
   let closed = false;

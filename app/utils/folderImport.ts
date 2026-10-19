@@ -1,6 +1,6 @@
 import type { UIMessage } from 'ai';
 import { generateId } from './fileUtils';
-import { detectProjectCommands, createCommandsMessage, escapeBoltTags } from './projectCommands';
+import { detectProjectCommands, createCommandsMessage, escapefluixyTags } from './projectCommands';
 import { createMessage } from '~/lib/persistence/messageMigration';
 
 export const createChatFromFolder = async (
@@ -40,15 +40,15 @@ export const createChatFromFolder = async (
     id: generateId(),
     text: `I've imported the contents of the "${folderName}" folder.${binaryFilesMessage}
 
-<boltArtifact id="imported-files" title="Imported Files" type="bundled" >
+<fluixyArtifact id="imported-files" title="Imported Files" type="bundled" >
 ${fileArtifacts
   .map(
-    (file) => `<boltAction type="file" filePath="${file.path}">
-${escapeBoltTags(file.content)}
-</boltAction>`,
+    (file) => `<fluixyAction type="file" filePath="${file.path}">
+${escapefluixyTags(file.content)}
+</fluixyAction>`,
   )
   .join('\n\n')}
-</boltArtifact>`,
+</fluixyArtifact>`,
   });
 
   const userMessage = createMessage({

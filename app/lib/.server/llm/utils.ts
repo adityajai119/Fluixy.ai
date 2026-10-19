@@ -58,9 +58,9 @@ export function extractPropertiesFromMessage(message: AnyMessage): {
   return { model, provider, content: strip(textContent) };
 }
 
-export function simplifyBoltActions(input: string): string {
-  // Using regex to match boltAction tags that have type="file"
-  const regex = /(<boltAction[^>]*type="file"[^>]*>)([\s\S]*?)(<\/boltAction>)/g;
+export function simplifyfluixyActions(input: string): string {
+  // Using regex to match fluixyAction tags that have type="file"
+  const regex = /(<fluixyAction[^>]*type="file"[^>]*>)([\s\S]*?)(<\/fluixyAction>)/g;
 
   // Replace each matching occurrence
   return input.replace(regex, (_0, openingTag, _2, closingTag) => {
@@ -97,10 +97,10 @@ export function createFilesContext(files: FileMap, useRelativePath?: boolean) {
         filePath = path.replace('/home/project/', '');
       }
 
-      return `<boltAction type="file" filePath="${filePath}">${codeWithLinesNumbers}</boltAction>`;
+      return `<fluixyAction type="file" filePath="${filePath}">${codeWithLinesNumbers}</fluixyAction>`;
     });
 
-  return `<boltArtifact id="code-content" title="Code Content" >\n${fileContexts.join('\n')}\n</boltArtifact>`;
+  return `<fluixyArtifact id="code-content" title="Code Content" >\n${fileContexts.join('\n')}\n</fluixyArtifact>`;
 }
 
 export function extractCurrentContext(

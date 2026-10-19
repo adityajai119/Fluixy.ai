@@ -94,8 +94,24 @@ export abstract class BaseProvider implements ProviderInfo {
 
     const apiTokenKey = this.config.apiTokenKey || defaultApiTokenKey;
 
+    /*
+     * Provider key resolution: cookie keys may arrive under the provider name,
+     * the token env key, or a normalized variant ("Groq", "groq",
+     * "GROQ_API_KEY"), so match all three before falling back to env sources.
+     */
+    const normalizedProviderName = this.name.replace(/[^a-z0-9]/gi, '').toLowerCase();
+    const normalizedApiTokenKey = apiTokenKey.replace(/[^a-z0-9]/gi, '').toLowerCase();
+    const apiKeyFromCookies =
+      apiKeys?.[this.name] ||
+      apiKeys?.[apiTokenKey] ||
+      Object.entries(apiKeys || {}).find(([key]) => {
+        const normalizedKey = key.replace(/[^a-z0-9]/gi, '').toLowerCase();
+
+        return normalizedKey === normalizedProviderName || normalizedKey === normalizedApiTokenKey;
+      })?.[1];
+
     const apiKey =
-      apiKeys?.[this.name] || serverEnv?.[apiTokenKey] || process?.env?.[apiTokenKey] || managerEnv?.[apiTokenKey];
+      apiKeyFromCookies || serverEnv?.[apiTokenKey] || process?.env?.[apiTokenKey] || managerEnv?.[apiTokenKey];
 
     return {
       baseUrl,

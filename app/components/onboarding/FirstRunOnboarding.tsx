@@ -10,7 +10,7 @@ import { setTheme, themeStore } from '~/lib/stores/theme';
 import { THEMES, type Theme } from '~/types/theme';
 import { PROVIDER_LIST } from '~/utils/constants';
 
-const COMPLETED_KEY = 'bolt_onboarding_completed';
+const COMPLETED_KEY = 'fluixy_onboarding_completed';
 const EMPTY_MCP_CONFIG = { mcpServers: {} };
 
 export function FirstRunOnboarding() {
@@ -25,7 +25,7 @@ export function FirstRunOnboarding() {
 
   const [interfaceOptions, setInterfaceOptions] = useState(() => {
     try {
-      const saved = JSON.parse(localStorage.getItem('bolt_interface_options') || '{}');
+      const saved = JSON.parse(localStorage.getItem('fluixy_interface_options') || '{}');
       return {
         accentIntensity: typeof saved.accentIntensity === 'number' ? saved.accentIntensity : 50,
         cornerRadius: ['sharp', 'soft', 'round'].includes(saved.cornerRadius) ? saved.cornerRadius : 'soft',
@@ -54,14 +54,14 @@ export function FirstRunOnboarding() {
       }
 
       try {
-        const storedProfile = localStorage.getItem('bolt_profile');
+        const storedProfile = localStorage.getItem('fluixy_profile');
         const profile = storedProfile ? (JSON.parse(storedProfile) as { username?: string }) : undefined;
 
         const hasExistingSetup = Boolean(
           profile?.username ||
-          localStorage.getItem('bolt_theme') ||
+          localStorage.getItem('fluixy_theme') ||
           localStorage.getItem('provider_settings') ||
-          localStorage.getItem('bolt_user_profile') ||
+          localStorage.getItem('fluixy_user_profile') ||
           Cookies.get('apiKeys'),
         );
 
@@ -161,7 +161,7 @@ export function FirstRunOnboarding() {
 
     if (step === 3) {
       setTheme(selectedTheme);
-      localStorage.setItem('bolt_interface_options', JSON.stringify(interfaceOptions));
+      localStorage.setItem('fluixy_interface_options', JSON.stringify(interfaceOptions));
 
       const root = document.documentElement;
       root.dataset.accentIntensity = String(interfaceOptions.accentIntensity);
@@ -208,7 +208,7 @@ export function FirstRunOnboarding() {
               />
             ))}
           </div>
-          <DialogTitle className="text-xl font-semibold">Welcome to Bolt</DialogTitle>
+          <DialogTitle className="text-xl font-semibold">Welcome to Fluixy.Ai</DialogTitle>
           <DialogDescription className="mt-1 text-sm !text-[#a09baa]">
             Let’s get your workspace ready. Optional details can be left blank and changed later in Settings.
           </DialogDescription>

@@ -27,10 +27,10 @@ export function Breadcrumbs({
   const displayItems =
     maxItems > 0 && items.length > maxItems
       ? [
-          ...items.slice(0, 1),
-          { label: '...', onClick: undefined, href: undefined },
-          ...items.slice(-Math.max(1, maxItems - 2)),
-        ]
+        ...items.slice(0, 1),
+        { label: '...', onClick: undefined, href: undefined },
+        ...items.slice(-Math.max(1, maxItems - 2)),
+      ]
       : items;
 
   const defaultRenderItem = (item: BreadcrumbItem, index: number, isLast: boolean) => {
@@ -40,8 +40,8 @@ export function Breadcrumbs({
         <span
           className={classNames(
             isLast
-              ? 'font-medium text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary-dark'
-              : 'text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary-dark hover:text-bolt-elements-textPrimary dark:hover:text-bolt-elements-textPrimary-dark',
+              ? 'font-medium text-fluixy-elements-textPrimary dark:text-fluixy-elements-textPrimary-dark'
+              : 'text-fluixy-elements-textSecondary dark:text-fluixy-elements-textSecondary-dark hover:text-fluixy-elements-textPrimary dark:hover:text-fluixy-elements-textPrimary-dark',
             item.onClick || item.href ? 'cursor-pointer' : '',
           )}
         >
@@ -88,7 +88,7 @@ export function Breadcrumbs({
                 <span
                   className={classNames(
                     separator,
-                    'w-3 h-3 mx-1 text-bolt-elements-textTertiary dark:text-bolt-elements-textTertiary-dark',
+                    'w-3 h-3 mx-1 text-fluixy-elements-textTertiary dark:text-fluixy-elements-textTertiary-dark',
                   )}
                 />
               )}

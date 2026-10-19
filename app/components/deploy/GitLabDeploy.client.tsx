@@ -67,12 +67,10 @@ export function useGitLabDeploy() {
       // Then run it
       await artifact.runner.runAction(actionData);
 
-      const buildOutput = artifact.runner.buildOutput;
-
-      if (!buildOutput || buildOutput.exitCode !== 0) {
+      if (!artifact.runner.buildOutput) {
         // Notify that build failed
         deployArtifact.runner.handleDeployAction('building', 'failed', {
-          error: formatBuildFailureOutput(buildOutput?.output),
+          error: 'Build failed. Check the terminal for details.',
           source: 'gitlab',
         });
         throw new Error('Build failed');
@@ -155,7 +153,7 @@ export function useGitLabDeploy() {
       return {
         success: true,
         files: fileContents,
-        projectName: artifact.title || 'bolt-project',
+        projectName: artifact.title || 'fluixy-project',
       };
     } catch (err) {
       console.error('GitLab deploy error:', err);

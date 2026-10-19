@@ -12,7 +12,7 @@ import { description } from '~/lib/persistence';
 import { ActionRunner } from '~/lib/runtime/action-runner';
 import type { ActionCallbackData, ArtifactCallbackData } from '~/lib/runtime/message-parser';
 import { webcontainer } from '~/lib/webcontainer';
-import type { ActionAlert, BoltAction, DeployAlert, SupabaseAlert } from '~/types/actions';
+import type { ActionAlert, fluixyAction, DeployAlert, SupabaseAlert } from '~/types/actions';
 import type { ITerminal } from '~/types/terminal';
 import { extractRelativePath } from '~/utils/diff';
 import { createScopedLogger } from '~/utils/logger';
@@ -49,7 +49,7 @@ export class WorkbenchStore {
    * File actions the model emitted without a path. They cannot be written, and the streaming
    * sampler re-invokes the same action on an interval, so they are only reported once.
    */
-  #skippedFileActions = new WeakSet<BoltAction>();
+  #skippedFileActions = new WeakSet<fluixyAction>();
 
   artifacts: Artifacts = import.meta.hot?.data.artifacts ?? map({});
 
@@ -195,8 +195,8 @@ export class WorkbenchStore {
   get showTerminal() {
     return this.#terminalStore.showTerminal;
   }
-  get boltTerminal() {
-    return this.#terminalStore.boltTerminal;
+  get fluixyTerminal() {
+    return this.#terminalStore.fluixyTerminal;
   }
   get alert() {
     return this.actionAlert;
@@ -247,7 +247,7 @@ export class WorkbenchStore {
     this.#pendingStreamActions.clear();
 
     const outgoingArtifacts = Object.values(this.artifacts.get());
-    const outgoingExecution = this.boltTerminal.executionState.get();
+    const outgoingExecution = this.fluixyTerminal.executionState.get();
 
     for (const artifact of outgoingArtifacts) {
       artifact.runner.abortAllActions();
@@ -257,7 +257,7 @@ export class WorkbenchStore {
      * Capture and interrupt the outgoing command before awaiting the queue.
      * A later command must never be stopped by a delayed reset.
      */
-    const stopped = outgoingExecution?.active ? this.boltTerminal.stop(outgoingExecution.sessionId) : Promise.resolve();
+    const stopped = outgoingExecution?.active ? this.fluixyTerminal.stop(outgoingExecution.sessionId) : Promise.resolve();
 
     await Promise.all([this.waitForExecutionQueue(), stopped]);
 
@@ -286,15 +286,15 @@ export class WorkbenchStore {
     this.#terminalStore.toggleTerminal(value);
   }
 
-  writeToBoltTerminal(data: string) {
-    this.#terminalStore.writeToBoltTerminal(data);
+  writeTofluixyTerminal(data: string) {
+    this.#terminalStore.writeTofluixyTerminal(data);
   }
 
   attachTerminal(terminal: ITerminal) {
     this.#terminalStore.attachTerminal(terminal);
   }
-  attachBoltTerminal(terminal: ITerminal) {
-    this.#terminalStore.attachBoltTerminal(terminal);
+  attachfluixyTerminal(terminal: ITerminal) {
+    this.#terminalStore.attachfluixyTerminal(terminal);
   }
 
   detachTerminal(terminal: ITerminal) {
@@ -664,9 +664,9 @@ export class WorkbenchStore {
       }
     }
 
-    if (this.boltTerminal) {
+    if (this.fluixyTerminal) {
       try {
-        this.boltTerminal.terminal?.input('\x03');
+        this.fluixyTerminal.terminal?.input('\x03');
       } catch (error) {
         console.error('Failed to interrupt terminal during abort:', error);
       }
@@ -697,7 +697,7 @@ export class WorkbenchStore {
       type,
       runner: new ActionRunner(
         webcontainer,
-        () => this.boltTerminal,
+        () => this.fluixyTerminal,
         (alert) => {
           if (this.#reloadedMessages.has(messageId)) {
             return;

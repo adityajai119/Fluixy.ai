@@ -1,15 +1,15 @@
 import type { WebContainer, WebContainerProcess } from '@webcontainer/api';
 import { atom, type WritableAtom } from 'nanostores';
 import type { ITerminal } from '~/types/terminal';
-import { newBoltShellProcess, newShellProcess } from '~/utils/shell';
+import { newfluixyShellProcess, newShellProcess } from '~/utils/shell';
 import { coloredText } from '~/utils/terminal';
 
 export class TerminalStore {
   #webcontainer: Promise<WebContainer>;
   #terminals: Array<{ terminal: ITerminal; process: WebContainerProcess }> = [];
-  #boltTerminal = newBoltShellProcess();
-  #pendingBoltOutput = '';
-  #boltOutputReady = false;
+  #fluixyTerminal = newfluixyShellProcess();
+  #pendingfluixyOutput = '';
+  #fluixyOutputReady = false;
 
   showTerminal: WritableAtom<boolean> = import.meta.hot?.data.showTerminal ?? atom(true);
 
@@ -20,40 +20,39 @@ export class TerminalStore {
       import.meta.hot.data.showTerminal = this.showTerminal;
     }
   }
-  get boltTerminal() {
-    return this.#boltTerminal;
+  get fluixyTerminal() {
+    return this.#fluixyTerminal;
   }
 
   toggleTerminal(value?: boolean) {
     this.showTerminal.set(value !== undefined ? value : !this.showTerminal.get());
   }
+  writeTofluixyTerminal(data: string) {
+    const terminal = this.#fluixyTerminal.terminal;
 
-  writeToBoltTerminal(data: string) {
-    const terminal = this.#boltTerminal.terminal;
-
-    if (terminal && this.#boltOutputReady) {
+    if (terminal && this.#fluixyOutputReady) {
       terminal.write(data);
     } else {
       // Tools can start before the workbench mounts its terminal.
-      this.#pendingBoltOutput = (this.#pendingBoltOutput + data).slice(-64_000);
+      this.#pendingfluixyOutput = (this.#pendingfluixyOutput + data).slice(-64_000);
     }
   }
 
-  async attachBoltTerminal(terminal: ITerminal) {
-    this.#boltOutputReady = false;
+  async attachfluixyTerminal(terminal: ITerminal) {
+    this.#fluixyOutputReady = false;
 
     try {
       const wc = await this.#webcontainer;
-      await this.#boltTerminal.init(wc, terminal);
+      await this.#fluixyTerminal.init(wc, terminal);
 
-      if (this.#pendingBoltOutput) {
-        terminal.write(this.#pendingBoltOutput);
-        this.#pendingBoltOutput = '';
+      if (this.#pendingfluixyOutput) {
+        terminal.write(this.#pendingfluixyOutput);
+        this.#pendingfluixyOutput = '';
       }
 
-      this.#boltOutputReady = true;
+      this.#fluixyOutputReady = true;
     } catch (error: any) {
-      terminal.write(coloredText.red('Failed to spawn bolt shell\n\n') + error.message);
+      terminal.write(coloredText.red('Failed to spawn fluixy shell\n\n') + error.message);
       return;
     }
   }

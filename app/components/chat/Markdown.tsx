@@ -161,7 +161,7 @@ export const Markdown = memo(
         div: ({ className, children, node, ...props }) => {
           const dataProps = node?.properties as Record<string, unknown>;
 
-          if (className?.includes('__boltArtifact__')) {
+          if (className?.includes('__fluixyArtifact__')) {
             const messageId = node?.properties.dataMessageId as string;
             const artifactId = node?.properties.dataArtifactId as string;
 
@@ -176,7 +176,7 @@ export const Markdown = memo(
             return <Artifact messageId={messageId} artifactId={artifactId} />;
           }
 
-          if (className?.includes('__boltSelectedElement__')) {
+          if (className?.includes('__fluixySelectedElement__')) {
             const messageId = node?.properties.dataMessageId as string;
             const elementDataAttr = node?.properties.dataElement as string;
 
@@ -200,27 +200,27 @@ export const Markdown = memo(
             }
 
             return (
-              <div className="bg-bolt-elements-background-depth-3 border border-bolt-elements-borderColor rounded-lg p-3 my-2">
+              <div className="bg-fluixy-elements-background-depth-3 border border-fluixy-elements-borderColor rounded-lg p-3 my-2">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs font-mono bg-bolt-elements-background-depth-2 px-2 py-1 rounded text-bolt-elements-textTer">
+                  <span className="text-xs font-mono bg-fluixy-elements-background-depth-2 px-2 py-1 rounded text-fluixy-elements-textTer">
                     {elementData?.tagName}
                   </span>
                   {elementData?.className && (
-                    <span className="text-xs text-bolt-elements-textSecondary">.{elementData.className}</span>
+                    <span className="text-xs text-fluixy-elements-textSecondary">.{elementData.className}</span>
                   )}
                 </div>
-                <code className="block text-sm !text-bolt-elements-textSecondary !bg-bolt-elements-background-depth-2 border border-bolt-elements-borderColor p-2 rounded">
+                <code className="block text-sm !text-fluixy-elements-textSecondary !bg-fluixy-elements-background-depth-2 border border-fluixy-elements-borderColor p-2 rounded">
                   {elementData?.displayText}
                 </code>
               </div>
             );
           }
 
-          if (className?.includes('__boltThought__')) {
+          if (className?.includes('__fluixyThought__')) {
             return <ThoughtBox title="Thought process">{children}</ThoughtBox>;
           }
 
-          if (className?.includes('__boltQuickAction__') || dataProps?.dataBoltQuickAction) {
+          if (className?.includes('__fluixyQuickAction__') || dataProps?.datafluixyQuickAction) {
             return <div className="flex items-center gap-2 flex-wrap mt-3.5">{children}</div>;
           }
 
@@ -265,8 +265,8 @@ export const Markdown = memo(
           const dataProps = node?.properties as Record<string, unknown>;
 
           if (
-            dataProps?.class?.toString().includes('__boltQuickAction__') ||
-            dataProps?.dataBoltQuickAction === 'true'
+            dataProps?.class?.toString().includes('__fluixyQuickAction__') ||
+            dataProps?.datafluixyQuickAction === 'true'
           ) {
             const type = dataProps['data-type'] || dataProps.dataType;
             const message = dataProps['data-message'] || dataProps.dataMessage;
@@ -285,7 +285,7 @@ export const Markdown = memo(
 
             return (
               <button
-                className="rounded-md justify-center px-3 py-1.5 text-xs bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent opacity-90 hover:opacity-100 flex items-center gap-2 cursor-pointer"
+                className="rounded-md justify-center px-3 py-1.5 text-xs bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent opacity-90 hover:opacity-100 flex items-center gap-2 cursor-pointer"
                 data-type={type}
                 data-message={message}
                 data-path={path}
@@ -387,23 +387,23 @@ export const Markdown = memo(
  *
  * @example
  * // Removes code fences around artifact
- * const input = "```xml\n<div class='__boltArtifact__'></div>\n```";
+ * const input = "```xml\n<div class='__fluixyArtifact__'></div>\n```";
  * stripCodeFenceFromArtifact(input);
- * // Returns: "\n<div class='__boltArtifact__'></div>\n"
+ * // Returns: "\n<div class='__fluixyArtifact__'></div>\n"
  *
  * @remarks
- * - Only removes code fences that directly wrap an artifact (marked with __boltArtifact__ class)
+ * - Only removes code fences that directly wrap an artifact (marked with __fluixyArtifact__ class)
  * - Handles code fences with optional language specifications (e.g. ```xml, ```typescript)
  * - Preserves original content if no artifact is found
  * - Safely handles edge cases like empty input or artifacts at start/end of content
  */
 export const stripCodeFenceFromArtifact = (content: string) => {
-  if (!content || !content.includes('__boltArtifact__')) {
+  if (!content || !content.includes('__fluixyArtifact__')) {
     return content;
   }
 
   const lines = content.split('\n');
-  const artifactLineIndex = lines.findIndex((line) => line.includes('__boltArtifact__'));
+  const artifactLineIndex = lines.findIndex((line) => line.includes('__fluixyArtifact__'));
 
   // Return original content if artifact line not found
   if (artifactLineIndex === -1) {

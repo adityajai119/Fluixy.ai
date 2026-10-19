@@ -245,15 +245,15 @@ export function useChatHistory({ loadHistory = true }: { loadHistory?: boolean }
               // Call the modified function to get only the command actions string
               const commandActionsString = createCommandActionsString(projectCommands);
 
-              const restoredAssistantText = `Bolt Restored your chat from a snapshot. You can revert this message to load the full chat history.
-                  <boltArtifact id="restored-project-setup" title="Restored Project & Setup" type="bundled">
+              const restoredAssistantText = `fluixy Restored your chat from a snapshot. You can revert this message to load the full chat history.
+                  <fluixyArtifact id="restored-project-setup" title="Restored Project & Setup" type="bundled">
                   ${Object.entries(snapshot?.files || {})
-                    .map(([key, value]) => {
-                      if (value?.type === 'file') {
-                        return `
-                      <boltAction type="file" filePath="${key}">
+                      .map(([key, value]) => {
+                        if (value?.type === 'file') {
+                          return `
+                      <fluixyAction type="file" filePath="${key}">
 ${value.content}
-                      </boltAction>
+                      </fluixyAction>
                       `;
                       } else {
                         return ``;
@@ -261,7 +261,7 @@ ${value.content}
                     })
                     .join('\n')}
                   ${commandActionsString}
-                  </boltArtifact>
+                  </fluixyArtifact>
                   `;
 
               const restoredSummary = summary
@@ -319,7 +319,6 @@ ${value.content}
                   parts: restoredParts as unknown as UIMessage['parts'],
                   annotations: ['no-store', ...restoredSummary],
                 } as unknown as UIMessage,
-
                 ...filteredMessages,
               ];
               await restoreSnapshot(validSnapshot, isCurrentLoad);

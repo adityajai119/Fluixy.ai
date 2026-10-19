@@ -62,19 +62,19 @@ export function ToolApprovalTray({
           animate={{ opacity: 1, y: 0, height: 'auto' }}
           exit={{ opacity: 0, y: 24, height: 0 }}
           transition={{ duration: 0.2 }}
-          className="overflow-hidden rounded-lg border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 shadow-lg"
+          className="overflow-hidden rounded-lg border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 shadow-lg"
           aria-label="Tool approval requests"
         >
-          <div className="px-3 py-2 text-sm text-bolt-elements-textSecondary">Accept these tool requests?</div>
-          <ul className="divide-y divide-bolt-elements-borderColor">
+          <div className="px-3 py-2 text-sm text-fluixy-elements-textSecondary">Accept these tool requests?</div>
+          <ul className="divide-y divide-fluixy-elements-borderColor">
             {pending.map((tool) => {
               const responding = respondingIds.has(tool.id);
               return (
                 <li key={tool.id} className="flex items-center justify-between gap-3 px-3 py-2">
                   <span className="flex min-w-0 flex-col">
-                    <span className="truncate text-sm text-bolt-elements-textPrimary">{tool.name}</span>
+                    <span className="truncate text-sm text-fluixy-elements-textPrimary">{tool.name}</span>
                     {approvalDetail(tool.name, tool.input) && (
-                      <span className="truncate text-xs text-bolt-elements-textSecondary">
+                      <span className="truncate text-xs text-fluixy-elements-textSecondary">
                         {approvalDetail(tool.name, tool.input)}
                       </span>
                     )}
@@ -84,7 +84,7 @@ export function ToolApprovalTray({
                       type="button"
                       disabled={responding}
                       onClick={() => respond(tool, false)}
-                      className="rounded-md border border-bolt-elements-borderColor px-3 py-1.5 text-xs text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary disabled:opacity-50"
+                      className="rounded-md border border-fluixy-elements-borderColor px-3 py-1.5 text-xs text-fluixy-elements-textSecondary hover:text-fluixy-elements-textPrimary disabled:opacity-50"
                     >
                       Reject
                     </button>

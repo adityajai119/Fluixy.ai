@@ -15,7 +15,7 @@ interface PerformanceEvent {
 }
 
 export class PerformanceMonitor {
-  private static readonly _storageKey = 'bolt_performance_events';
+  private static readonly _storageKey = 'fluixy_performance_events';
   private static readonly _maxEvents = 1000; // Keep last 1000 events
   private static _isEnabled = true;
 
@@ -39,7 +39,7 @@ export class PerformanceMonitor {
 
     // Also log to console in dev mode
     if (import.meta.env.DEV) {
-      console.log(`⚡ Performance: ${name} took ${duration.toFixed(2)}ms`, metadata);
+      console.log(`ΓÜí Performance: ${name} took ${duration.toFixed(2)}ms`, metadata);
     }
   }
 

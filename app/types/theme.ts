@@ -16,6 +16,7 @@ export const THEMES = [
   { id: 'light-mint-breeze', name: 'Mint Breeze', mode: 'light', colors: ['#f1fbf7', '#d9f3e8', '#22a982'] },
   { id: 'light-lemonade', name: 'Lemonade', mode: 'light', colors: ['#fffdf0', '#fff2b8', '#d49a13'] },
   { id: 'light-lavender-fields', name: 'Lavender Fields', mode: 'light', colors: ['#faf7ff', '#ece3ff', '#8b5cf6'] },
+  { id: 'saffron', name: 'Saffron', mode: 'light', colors: ['#FFF7ED', '#FFEDD5', '#EA580C'] },
   { id: 'dark-aurora', name: 'Aurora', mode: 'dark', colors: ['#111827', '#312e81', '#a78bfa'] },
   { id: 'dark-solarized', name: 'Solarized', mode: 'dark', colors: ['#002b36', '#073642', '#2aa198'] },
   { id: 'dark-nord', name: 'Nord', mode: 'dark', colors: ['#2e3440', '#3b4252', '#88c0d0'] },

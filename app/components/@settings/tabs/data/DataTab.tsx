@@ -3,15 +3,16 @@ import Cookies from 'js-cookie';
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { Button } from '~/components/ui/Button';
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '~/components/ui/Card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '~/components/ui/Card';
 import { ConfirmationDialog, SelectionDialog } from '~/components/ui/Dialog';
 import { useDataOperations } from '~/lib/hooks/useDataOperations';
 import { getAllChats, type Chat } from '~/lib/persistence/chats';
+import { DataVisualization } from './DataVisualization';
 import { openDatabase } from '~/lib/persistence/db';
 import { classNames } from '~/utils/classNames';
 
-// Create a custom hook to connect to the boltHistory database
-function useBoltHistoryDB() {
+// Create a custom hook to connect to the fluixyHistory database
+function usefluixyHistoryDB() {
   const [db, setDb] = useState<IDBDatabase | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -74,8 +75,8 @@ interface ChatItem {
 }
 
 export function DataTab() {
-  // Use our custom hook for the boltHistory database
-  const { db, isLoading: dbLoading } = useBoltHistoryDB();
+  // Use our custom hook for the fluixyHistory database
+  const { db, isLoading: dbLoading } = usefluixyHistoryDB();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const apiKeyFileInputRef = useRef<HTMLInputElement>(null);
   const chatFileInputRef = useRef<HTMLInputElement>(null);
@@ -101,7 +102,7 @@ export function DataTab() {
   const [availableChats, setAvailableChats] = useState<ExtendedChat[]>([]);
   const [chatItems, setChatItems] = useState<ChatItem[]>([]);
 
-  // Data operations hook with boltHistory database
+  // Data operations hook with fluixyHistory database
   const {
     isExporting,
     isImporting,
@@ -118,7 +119,7 @@ export function DataTab() {
     handleDownloadTemplate,
     handleImportAPIKeys,
   } = useDataOperations({
-    customDb: db || undefined, // Pass the boltHistory database, converting null to undefined
+    customDb: db || undefined, // Pass the fluixyHistory database, converting null to undefined
     onReloadSettings: () => window.location.reload(),
     onReloadChats: () => {
       // Reload chats after reset
@@ -142,7 +143,7 @@ export function DataTab() {
   // Load available chats
   useEffect(() => {
     if (db) {
-      console.log('Loading chats from boltHistory database', {
+      console.log('Loading chats from fluixyHistory database', {
         name: db.name,
         version: db.version,
         objectStoreNames: Array.from(db.objectStoreNames),
@@ -298,7 +299,7 @@ export function DataTab() {
 
       {/* Chats Section */}
       <div>
-        <h2 className="text-xl font-semibold mb-4 text-bolt-elements-textPrimary">Chats</h2>
+        <h2 className="text-xl font-semibold mb-4 text-fluixy-elements-textPrimary">Chats</h2>
         {dbLoading ? (
           <div className="flex items-center justify-center p-4">
             <div className="i-ph-spinner-gap-bold animate-spin w-6 h-6 mr-2" />
@@ -306,13 +307,13 @@ export function DataTab() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Card className="bg-bolt-elements-background-depth-2 transition-colors hover:bg-bolt-elements-background-depth-3">
+            <Card className="bg-fluixy-elements-background-depth-2 transition-colors hover:bg-fluixy-elements-background-depth-3">
               <CardHeader>
                 <div className="flex items-center mb-2">
                   <motion.div className="text-accent-500 mr-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                     <div className="i-ph-download-duotone w-5 h-5" />
                   </motion.div>
-                  <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
+                  <CardTitle className="text-lg group-hover:text-fluixy-elements-item-contentAccent transition-colors">
                     Export All Chats
                   </CardTitle>
                 </div>
@@ -351,7 +352,7 @@ export function DataTab() {
                     variant="outline"
                     size="sm"
                     className={classNames(
-                      'hover:text-bolt-elements-item-contentAccent hover:border-bolt-elements-item-backgroundAccent hover:bg-bolt-elements-item-backgroundAccent transition-colors w-full justify-center',
+                      'hover:text-fluixy-elements-item-contentAccent hover:border-fluixy-elements-item-backgroundAccent hover:bg-fluixy-elements-item-backgroundAccent transition-colors w-full justify-center',
                       isExporting || availableChats.length === 0 ? 'cursor-not-allowed' : '',
                     )}
                   >
@@ -370,13 +371,13 @@ export function DataTab() {
               </CardFooter>
             </Card>
 
-            <Card className="bg-bolt-elements-background-depth-2 transition-colors hover:bg-bolt-elements-background-depth-3">
+            <Card className="bg-fluixy-elements-background-depth-2 transition-colors hover:bg-fluixy-elements-background-depth-3">
               <CardHeader>
                 <div className="flex items-center mb-2">
                   <motion.div className="text-accent-500 mr-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                     <div className="i-ph:list-checks w-5 h-5" />
                   </motion.div>
-                  <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
+                  <CardTitle className="text-lg group-hover:text-fluixy-elements-item-contentAccent transition-colors">
                     Export Selected Chats
                   </CardTitle>
                 </div>
@@ -390,7 +391,7 @@ export function DataTab() {
                     variant="outline"
                     size="sm"
                     className={classNames(
-                      'hover:text-bolt-elements-item-contentAccent hover:border-bolt-elements-item-backgroundAccent hover:bg-bolt-elements-item-backgroundAccent transition-colors w-full justify-center',
+                      'hover:text-fluixy-elements-item-contentAccent hover:border-fluixy-elements-item-backgroundAccent hover:bg-fluixy-elements-item-backgroundAccent transition-colors w-full justify-center',
                       isExporting || chatItems.length === 0 ? 'cursor-not-allowed' : '',
                     )}
                   >
@@ -407,13 +408,13 @@ export function DataTab() {
               </CardFooter>
             </Card>
 
-            <Card className="bg-bolt-elements-background-depth-2 transition-colors hover:bg-bolt-elements-background-depth-3">
+            <Card className="bg-fluixy-elements-background-depth-2 transition-colors hover:bg-fluixy-elements-background-depth-3">
               <CardHeader>
                 <div className="flex items-center mb-2">
                   <motion.div className="text-accent-500 mr-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                     <div className="i-ph-upload-duotone w-5 h-5" />
                   </motion.div>
-                  <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
+                  <CardTitle className="text-lg group-hover:text-fluixy-elements-item-contentAccent transition-colors">
                     Import Chats
                   </CardTitle>
                 </div>
@@ -427,7 +428,7 @@ export function DataTab() {
                     variant="outline"
                     size="sm"
                     className={classNames(
-                      'hover:text-bolt-elements-item-contentAccent hover:border-bolt-elements-item-backgroundAccent hover:bg-bolt-elements-item-backgroundAccent transition-colors w-full justify-center',
+                      'hover:text-fluixy-elements-item-contentAccent hover:border-fluixy-elements-item-backgroundAccent hover:bg-fluixy-elements-item-backgroundAccent transition-colors w-full justify-center',
                       isImporting ? 'cursor-not-allowed' : '',
                     )}
                   >
@@ -449,15 +450,15 @@ export function DataTab() {
 
       {/* Settings Section */}
       <div>
-        <h2 className="text-xl font-semibold mb-4 text-bolt-elements-textPrimary">Settings</h2>
+        <h2 className="text-xl font-semibold mb-4 text-fluixy-elements-textPrimary">Settings</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card className="bg-bolt-elements-background-depth-2 transition-colors hover:bg-bolt-elements-background-depth-3">
+          <Card className="bg-fluixy-elements-background-depth-2 transition-colors hover:bg-fluixy-elements-background-depth-3">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <motion.div className="text-accent-500 mr-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <div className="i-ph-download-duotone w-5 h-5" />
                 </motion.div>
-                <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
+                <CardTitle className="text-lg group-hover:text-fluixy-elements-item-contentAccent transition-colors">
                   Export All Settings
                 </CardTitle>
               </div>
@@ -471,7 +472,7 @@ export function DataTab() {
                   variant="outline"
                   size="sm"
                   className={classNames(
-                    'hover:text-bolt-elements-item-contentAccent hover:border-bolt-elements-item-backgroundAccent hover:bg-bolt-elements-item-backgroundAccent transition-colors w-full justify-center',
+                    'hover:text-fluixy-elements-item-contentAccent hover:border-fluixy-elements-item-backgroundAccent hover:bg-fluixy-elements-item-backgroundAccent transition-colors w-full justify-center',
                     isExporting ? 'cursor-not-allowed' : '',
                   )}
                 >
@@ -488,13 +489,13 @@ export function DataTab() {
             </CardFooter>
           </Card>
 
-          <Card className="bg-bolt-elements-background-depth-2 transition-colors hover:bg-bolt-elements-background-depth-3">
+          <Card className="bg-fluixy-elements-background-depth-2 transition-colors hover:bg-fluixy-elements-background-depth-3">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <motion.div className="text-accent-500 mr-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <div className="i-ph:funnel-duotone w-5 h-5" />
                 </motion.div>
-                <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
+                <CardTitle className="text-lg group-hover:text-fluixy-elements-item-contentAccent transition-colors">
                   Export Selected Settings
                 </CardTitle>
               </div>
@@ -508,7 +509,7 @@ export function DataTab() {
                   variant="outline"
                   size="sm"
                   className={classNames(
-                    'hover:text-bolt-elements-item-contentAccent hover:border-bolt-elements-item-backgroundAccent hover:bg-bolt-elements-item-backgroundAccent transition-colors w-full justify-center',
+                    'hover:text-fluixy-elements-item-contentAccent hover:border-fluixy-elements-item-backgroundAccent hover:bg-fluixy-elements-item-backgroundAccent transition-colors w-full justify-center',
                     isExporting || settingsCategories.length === 0 ? 'cursor-not-allowed' : '',
                   )}
                 >
@@ -525,13 +526,13 @@ export function DataTab() {
             </CardFooter>
           </Card>
 
-          <Card className="bg-bolt-elements-background-depth-2 transition-colors hover:bg-bolt-elements-background-depth-3">
+          <Card className="bg-fluixy-elements-background-depth-2 transition-colors hover:bg-fluixy-elements-background-depth-3">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <motion.div className="text-accent-500 mr-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <div className="i-ph-upload-duotone w-5 h-5" />
                 </motion.div>
-                <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
+                <CardTitle className="text-lg group-hover:text-fluixy-elements-item-contentAccent transition-colors">
                   Import Settings
                 </CardTitle>
               </div>
@@ -545,7 +546,7 @@ export function DataTab() {
                   variant="outline"
                   size="sm"
                   className={classNames(
-                    'hover:text-bolt-elements-item-contentAccent hover:border-bolt-elements-item-backgroundAccent hover:bg-bolt-elements-item-backgroundAccent transition-colors w-full justify-center',
+                    'hover:text-fluixy-elements-item-contentAccent hover:border-fluixy-elements-item-backgroundAccent hover:bg-fluixy-elements-item-backgroundAccent transition-colors w-full justify-center',
                     isImporting ? 'cursor-not-allowed' : '',
                   )}
                 >
@@ -566,15 +567,15 @@ export function DataTab() {
 
       {/* API Keys Section */}
       <div>
-        <h2 className="text-xl font-semibold mb-4 text-bolt-elements-textPrimary">API Keys</h2>
+        <h2 className="text-xl font-semibold mb-4 text-fluixy-elements-textPrimary">API Keys</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card className="bg-bolt-elements-background-depth-2 transition-colors hover:bg-bolt-elements-background-depth-3">
+          <Card className="bg-fluixy-elements-background-depth-2 transition-colors hover:bg-fluixy-elements-background-depth-3">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <motion.div className="text-accent-500 mr-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <div className="i-ph-file-text-duotone w-5 h-5" />
                 </motion.div>
-                <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
+                <CardTitle className="text-lg group-hover:text-fluixy-elements-item-contentAccent transition-colors">
                   Download Template
                 </CardTitle>
               </div>
@@ -588,7 +589,7 @@ export function DataTab() {
                   variant="outline"
                   size="sm"
                   className={classNames(
-                    'hover:text-bolt-elements-item-contentAccent hover:border-bolt-elements-item-backgroundAccent hover:bg-bolt-elements-item-backgroundAccent transition-colors w-full justify-center',
+                    'hover:text-fluixy-elements-item-contentAccent hover:border-fluixy-elements-item-backgroundAccent hover:bg-fluixy-elements-item-backgroundAccent transition-colors w-full justify-center',
                     isDownloadingTemplate ? 'cursor-not-allowed' : '',
                   )}
                 >
@@ -605,13 +606,13 @@ export function DataTab() {
             </CardFooter>
           </Card>
 
-          <Card className="bg-bolt-elements-background-depth-2 transition-colors hover:bg-bolt-elements-background-depth-3">
+          <Card className="bg-fluixy-elements-background-depth-2 transition-colors hover:bg-fluixy-elements-background-depth-3">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <motion.div className="text-accent-500 mr-2" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <div className="i-ph-upload-duotone w-5 h-5" />
                 </motion.div>
-                <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
+                <CardTitle className="text-lg group-hover:text-fluixy-elements-item-contentAccent transition-colors">
                   Import API Keys
                 </CardTitle>
               </div>
@@ -625,7 +626,7 @@ export function DataTab() {
                   variant="outline"
                   size="sm"
                   className={classNames(
-                    'hover:text-bolt-elements-item-contentAccent hover:border-bolt-elements-item-backgroundAccent hover:bg-bolt-elements-item-backgroundAccent transition-colors w-full justify-center',
+                    'hover:text-fluixy-elements-item-contentAccent hover:border-fluixy-elements-item-backgroundAccent hover:bg-fluixy-elements-item-backgroundAccent transition-colors w-full justify-center',
                     isImportingKeys ? 'cursor-not-allowed' : '',
                   )}
                 >
@@ -648,7 +649,7 @@ export function DataTab() {
       <div>
         <h2 className="text-xl font-semibold mb-4 text-red-500 dark:text-red-400">Danger</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card className="border-red-500/30 bg-bolt-elements-background-depth-2">
+          <Card className="border-red-500/30 bg-fluixy-elements-background-depth-2">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <div className="i-ph-trash-duotone w-5 h-5 text-red-500 dark:text-red-400 mr-2" />
@@ -669,7 +670,7 @@ export function DataTab() {
             </CardFooter>
           </Card>
 
-          <Card className="border-red-500/30 bg-bolt-elements-background-depth-2">
+          <Card className="border-red-500/30 bg-fluixy-elements-background-depth-2">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <div className="i-ph-arrow-counter-clockwise-duotone w-5 h-5 text-red-500 dark:text-red-400 mr-2" />
@@ -690,7 +691,7 @@ export function DataTab() {
             </CardFooter>
           </Card>
 
-          <Card className="border-red-500/30 bg-bolt-elements-background-depth-2">
+          <Card className="border-red-500/30 bg-fluixy-elements-background-depth-2">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <div className="i-ph-key-duotone w-5 h-5 text-red-500 dark:text-red-400 mr-2" />
@@ -712,6 +713,16 @@ export function DataTab() {
             </CardFooter>
           </Card>
         </div>
+      </div>
+
+      {/* Data Visualization */}
+      <div>
+        <h2 className="text-xl font-semibold mb-4 text-fluixy-elements-textPrimary">Data Usage</h2>
+        <Card>
+          <CardContent className="p-5">
+            <DataVisualization chats={availableChats} />
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

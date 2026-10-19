@@ -5,7 +5,7 @@ import { defineConfig, presetIcons, presetUno, transformerDirectives } from 'uno
 
 const iconPaths = globSync('./icons/*.svg');
 
-const collectionName = 'bolt';
+const collectionName = 'fluixy';
 
 const customIconCollection = iconPaths.reduce(
   (acc, iconPath) => {
@@ -35,17 +35,17 @@ const BASE_COLORS = {
     950: '#0A0A0A',
   },
   accent: {
-    50: '#F8F5FF',
-    100: '#F0EBFF',
-    200: '#E1D6FF',
-    300: '#CEBEFF',
-    400: '#B69EFF',
-    500: '#9C7DFF',
-    600: '#8A5FFF',
-    700: '#7645E8',
-    800: '#6234BB',
-    900: '#502D93',
-    950: '#2D1959',
+    50: '#F5F3FF',
+    100: '#EDE9FE',
+    200: '#DDD6FE',
+    300: '#C4B5FD',
+    400: '#A78BFA',
+    500: '#8B5CF6',
+    600: '#7C3AED',
+    700: '#6D28D9',
+    800: '#5B21B6',
+    900: '#4C1D95',
+    950: '#2E1065',
   },
   green: {
     50: '#F0FDF4',
@@ -98,11 +98,19 @@ const COLOR_PRIMITIVES = {
 };
 
 export default defineConfig({
-  safelist: [...Object.keys(customIconCollection[collectionName] || {}).map((x) => `i-bolt:${x}`)],
+  safelist: [
+    ...Object.keys(customIconCollection[collectionName] || {}).map((x) => `i-fluixy:${x}`),
+    'i-ph:pencil-simple',
+    'i-ph:check',
+    'i-ph:x',
+    'i-ph:key',
+    'i-ph:check-circle-fill',
+    'i-ph:x-circle-fill',
+  ],
   shortcuts: {
-    'bolt-ease-cubic-bezier': 'ease-[cubic-bezier(0.4,0,0.2,1)]',
-    'transition-theme': 'transition-[background-color,border-color,color] duration-150 bolt-ease-cubic-bezier',
-    kdb: 'bg-bolt-elements-code-background text-bolt-elements-code-text py-1 px-1.5 rounded-md',
+    'fluixy-ease-cubic-bezier': 'ease-[cubic-bezier(0.4,0,0.2,1)]',
+    'transition-theme': 'transition-[background-color,border-color,color] duration-150 fluixy-ease-cubic-bezier',
+    kdb: 'bg-fluixy-elements-code-background text-fluixy-elements-code-text py-1 px-1.5 rounded-md',
     'max-w-chat': 'max-w-[var(--chat-max-width)]',
   },
   rules: [
@@ -115,115 +123,115 @@ export default defineConfig({
   theme: {
     colors: {
       ...COLOR_PRIMITIVES,
-      bolt: {
+      fluixy: {
         elements: {
-          borderColor: 'var(--bolt-elements-borderColor)',
-          borderColorActive: 'var(--bolt-elements-borderColorActive)',
+          borderColor: 'var(--fluixy-elements-borderColor)',
+          borderColorActive: 'var(--fluixy-elements-borderColorActive)',
           background: {
             depth: {
-              1: 'var(--bolt-elements-bg-depth-1)',
-              2: 'var(--bolt-elements-bg-depth-2)',
-              3: 'var(--bolt-elements-bg-depth-3)',
-              4: 'var(--bolt-elements-bg-depth-4)',
+              1: 'var(--fluixy-elements-bg-depth-1)',
+              2: 'var(--fluixy-elements-bg-depth-2)',
+              3: 'var(--fluixy-elements-bg-depth-3)',
+              4: 'var(--fluixy-elements-bg-depth-4)',
             },
           },
-          textPrimary: 'var(--bolt-elements-textPrimary)',
-          textSecondary: 'var(--bolt-elements-textSecondary)',
-          textTertiary: 'var(--bolt-elements-textTertiary)',
+          textPrimary: 'var(--fluixy-elements-textPrimary)',
+          textSecondary: 'var(--fluixy-elements-textSecondary)',
+          textTertiary: 'var(--fluixy-elements-textTertiary)',
           code: {
-            background: 'var(--bolt-elements-code-background)',
-            text: 'var(--bolt-elements-code-text)',
+            background: 'var(--fluixy-elements-code-background)',
+            text: 'var(--fluixy-elements-code-text)',
           },
           button: {
             primary: {
-              background: 'var(--bolt-elements-button-primary-background)',
-              backgroundHover: 'var(--bolt-elements-button-primary-backgroundHover)',
-              text: 'var(--bolt-elements-button-primary-text)',
+              background: 'var(--fluixy-elements-button-primary-background)',
+              backgroundHover: 'var(--fluixy-elements-button-primary-backgroundHover)',
+              text: 'var(--fluixy-elements-button-primary-text)',
             },
             secondary: {
-              background: 'var(--bolt-elements-button-secondary-background)',
-              backgroundHover: 'var(--bolt-elements-button-secondary-backgroundHover)',
-              text: 'var(--bolt-elements-button-secondary-text)',
+              background: 'var(--fluixy-elements-button-secondary-background)',
+              backgroundHover: 'var(--fluixy-elements-button-secondary-backgroundHover)',
+              text: 'var(--fluixy-elements-button-secondary-text)',
             },
             danger: {
-              background: 'var(--bolt-elements-button-danger-background)',
-              backgroundHover: 'var(--bolt-elements-button-danger-backgroundHover)',
-              text: 'var(--bolt-elements-button-danger-text)',
+              background: 'var(--fluixy-elements-button-danger-background)',
+              backgroundHover: 'var(--fluixy-elements-button-danger-backgroundHover)',
+              text: 'var(--fluixy-elements-button-danger-text)',
             },
           },
           item: {
-            contentDefault: 'var(--bolt-elements-item-contentDefault)',
-            contentActive: 'var(--bolt-elements-item-contentActive)',
-            contentAccent: 'var(--bolt-elements-item-contentAccent)',
-            contentDanger: 'var(--bolt-elements-item-contentDanger)',
-            backgroundDefault: 'var(--bolt-elements-item-backgroundDefault)',
-            backgroundActive: 'var(--bolt-elements-item-backgroundActive)',
-            backgroundAccent: 'var(--bolt-elements-item-backgroundAccent)',
-            backgroundDanger: 'var(--bolt-elements-item-backgroundDanger)',
+            contentDefault: 'var(--fluixy-elements-item-contentDefault)',
+            contentActive: 'var(--fluixy-elements-item-contentActive)',
+            contentAccent: 'var(--fluixy-elements-item-contentAccent)',
+            contentDanger: 'var(--fluixy-elements-item-contentDanger)',
+            backgroundDefault: 'var(--fluixy-elements-item-backgroundDefault)',
+            backgroundActive: 'var(--fluixy-elements-item-backgroundActive)',
+            backgroundAccent: 'var(--fluixy-elements-item-backgroundAccent)',
+            backgroundDanger: 'var(--fluixy-elements-item-backgroundDanger)',
           },
           actions: {
-            background: 'var(--bolt-elements-actions-background)',
+            background: 'var(--fluixy-elements-actions-background)',
             code: {
-              background: 'var(--bolt-elements-actions-code-background)',
+              background: 'var(--fluixy-elements-actions-code-background)',
             },
           },
           artifacts: {
-            background: 'var(--bolt-elements-artifacts-background)',
-            backgroundHover: 'var(--bolt-elements-artifacts-backgroundHover)',
-            borderColor: 'var(--bolt-elements-artifacts-borderColor)',
+            background: 'var(--fluixy-elements-artifacts-background)',
+            backgroundHover: 'var(--fluixy-elements-artifacts-backgroundHover)',
+            borderColor: 'var(--fluixy-elements-artifacts-borderColor)',
             inlineCode: {
-              background: 'var(--bolt-elements-artifacts-inlineCode-background)',
-              text: 'var(--bolt-elements-artifacts-inlineCode-text)',
+              background: 'var(--fluixy-elements-artifacts-inlineCode-background)',
+              text: 'var(--fluixy-elements-artifacts-inlineCode-text)',
             },
           },
           messages: {
-            background: 'var(--bolt-elements-messages-background)',
-            linkColor: 'var(--bolt-elements-messages-linkColor)',
+            background: 'var(--fluixy-elements-messages-background)',
+            linkColor: 'var(--fluixy-elements-messages-linkColor)',
             code: {
-              background: 'var(--bolt-elements-messages-code-background)',
+              background: 'var(--fluixy-elements-messages-code-background)',
             },
             inlineCode: {
-              background: 'var(--bolt-elements-messages-inlineCode-background)',
-              text: 'var(--bolt-elements-messages-inlineCode-text)',
+              background: 'var(--fluixy-elements-messages-inlineCode-background)',
+              text: 'var(--fluixy-elements-messages-inlineCode-text)',
             },
           },
           icon: {
-            success: 'var(--bolt-elements-icon-success)',
-            error: 'var(--bolt-elements-icon-error)',
-            primary: 'var(--bolt-elements-icon-primary)',
-            secondary: 'var(--bolt-elements-icon-secondary)',
-            tertiary: 'var(--bolt-elements-icon-tertiary)',
+            success: 'var(--fluixy-elements-icon-success)',
+            error: 'var(--fluixy-elements-icon-error)',
+            primary: 'var(--fluixy-elements-icon-primary)',
+            secondary: 'var(--fluixy-elements-icon-secondary)',
+            tertiary: 'var(--fluixy-elements-icon-tertiary)',
           },
           preview: {
             addressBar: {
-              background: 'var(--bolt-elements-preview-addressBar-background)',
-              backgroundHover: 'var(--bolt-elements-preview-addressBar-backgroundHover)',
-              backgroundActive: 'var(--bolt-elements-preview-addressBar-backgroundActive)',
-              text: 'var(--bolt-elements-preview-addressBar-text)',
-              textActive: 'var(--bolt-elements-preview-addressBar-textActive)',
+              background: 'var(--fluixy-elements-preview-addressBar-background)',
+              backgroundHover: 'var(--fluixy-elements-preview-addressBar-backgroundHover)',
+              backgroundActive: 'var(--fluixy-elements-preview-addressBar-backgroundActive)',
+              text: 'var(--fluixy-elements-preview-addressBar-text)',
+              textActive: 'var(--fluixy-elements-preview-addressBar-textActive)',
             },
           },
           terminals: {
-            background: 'var(--bolt-elements-terminals-background)',
-            buttonBackground: 'var(--bolt-elements-terminals-buttonBackground)',
+            background: 'var(--fluixy-elements-terminals-background)',
+            buttonBackground: 'var(--fluixy-elements-terminals-buttonBackground)',
           },
-          dividerColor: 'var(--bolt-elements-dividerColor)',
+          dividerColor: 'var(--fluixy-elements-dividerColor)',
           loader: {
-            background: 'var(--bolt-elements-loader-background)',
-            progress: 'var(--bolt-elements-loader-progress)',
+            background: 'var(--fluixy-elements-loader-background)',
+            progress: 'var(--fluixy-elements-loader-progress)',
           },
           prompt: {
-            background: 'var(--bolt-elements-prompt-background)',
+            background: 'var(--fluixy-elements-prompt-background)',
           },
           sidebar: {
-            dropdownShadow: 'var(--bolt-elements-sidebar-dropdownShadow)',
-            buttonBackgroundDefault: 'var(--bolt-elements-sidebar-buttonBackgroundDefault)',
-            buttonBackgroundHover: 'var(--bolt-elements-sidebar-buttonBackgroundHover)',
-            buttonText: 'var(--bolt-elements-sidebar-buttonText)',
+            dropdownShadow: 'var(--fluixy-elements-sidebar-dropdownShadow)',
+            buttonBackgroundDefault: 'var(--fluixy-elements-sidebar-buttonBackgroundDefault)',
+            buttonBackgroundHover: 'var(--fluixy-elements-sidebar-buttonBackgroundHover)',
+            buttonText: 'var(--fluixy-elements-sidebar-buttonText)',
           },
           cta: {
-            background: 'var(--bolt-elements-cta-background)',
-            text: 'var(--bolt-elements-cta-text)',
+            background: 'var(--fluixy-elements-cta-background)',
+            text: 'var(--fluixy-elements-cta-text)',
           },
         },
       },
@@ -241,6 +249,7 @@ export default defineConfig({
       warn: true,
       collections: {
         ...customIconCollection,
+        ph: () => import('@iconify-json/ph/icons.json').then((i) => i.default as any),
       },
       unit: 'em',
     }),

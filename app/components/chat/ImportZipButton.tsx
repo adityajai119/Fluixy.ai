@@ -46,14 +46,14 @@ export const ImportZipButton: React.FC<ImportZipButtonProps> = ({ className, imp
         if (result.hasExpoConfig) {
           /*
            * Expo/React Native - WebContainer can't run native code.
-           * Ask bolt to review the code instead of trying to boot the project.
+           * Ask Fluixy.Ai to review the code instead of trying to boot the project.
            */
           localStorage.setItem(
-            'bolt_zip_autorun',
+            'fluixy_zip_autorun',
             'This is an Expo/React Native project. Review the code structure and give me a summary of what the app does and how it is organized. Do not run any install or dev server commands - I will run this locally with Expo CLI.',
           );
         } else if (result.hasPackageJson) {
-          localStorage.setItem('bolt_zip_autorun', 'Install the dependencies and start the development server.');
+          localStorage.setItem('fluixy_zip_autorun', 'Install the dependencies and start the development server.');
         }
 
         await importChat(file.name.replace(/\.zip$/i, ''), result.messages);
@@ -91,10 +91,10 @@ export const ImportZipButton: React.FC<ImportZipButtonProps> = ({ className, imp
         variant="default"
         size="lg"
         className={classNames(
-          'gap-2 bg-bolt-elements-background-depth-1',
-          'text-bolt-elements-textPrimary',
-          'hover:bg-bolt-elements-background-depth-2',
-          'border border-bolt-elements-borderColor',
+          'gap-2 bg-fluixy-elements-background-depth-1',
+          'text-fluixy-elements-textPrimary',
+          'hover:bg-fluixy-elements-background-depth-2',
+          'border border-fluixy-elements-borderColor',
           'h-10 px-4 py-2 min-w-[120px] justify-center',
           'transition-all duration-200 ease-in-out',
           className,

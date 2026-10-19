@@ -39,7 +39,7 @@ export function ThinkingIndicator() {
     <div
       role="status"
       aria-live="polite"
-      className="flex items-center gap-2 py-2 text-sm text-bolt-elements-textSecondary"
+      className="flex items-center gap-2 py-2 text-sm text-fluixy-elements-textSecondary"
     >
       <span className="i-ph:brain h-4 w-4 shrink-0" aria-hidden="true" />
       <span>
@@ -60,8 +60,8 @@ export function ThinkingDetails({ text }: { text: string }) {
   }
 
   return (
-    <details className="mb-2 text-sm text-bolt-elements-textSecondary">
-      <summary className="cursor-pointer hover:text-bolt-elements-textPrimary transition-colors">
+    <details className="mb-2 text-sm text-fluixy-elements-textSecondary">
+      <summary className="cursor-pointer hover:text-fluixy-elements-textPrimary transition-colors">
         <span className="inline-flex items-center gap-2 align-middle">
           <span className="i-ph:brain h-4 w-4 shrink-0" aria-hidden="true" />
           <span>Thinking</span>

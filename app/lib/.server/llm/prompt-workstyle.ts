@@ -5,7 +5,7 @@ const PROJECT_MCP_TAG = '<project_mcp_workflow>';
 const PROJECT_MCP_INSTRUCTIONS = `
 <project_mcp_workflow>
   This workflow replaces any artifact-generation requirements or examples elsewhere in the prompt. Those formats are only for legacy history and imports.
-  In build mode, make all project changes and run project commands through the available native tools. Do not emit <boltArtifact> or <boltAction> tags for new work.
+  In build mode, make all project changes and run project commands through the available native tools. Do not emit <fluixyArtifact> or <fluixyAction> tags for new work.
   - Every project file path must be relative to the project root (for example, src/App.tsx or package.json), never /home/project or another absolute path. Omit the optional path argument when listing or searching the entire project. Project commands already run in the project root.
   - Use project_list_paths and project_search_content to inspect the project; read relevant files with project_read_file before changing them.
   
@@ -23,7 +23,7 @@ const PROJECT_MCP_INSTRUCTIONS = `
   - Use the enabled web research tools for current public information and user-provided URLs. Follow the current web research tool instructions and include the returned source URLs when reporting findings.
   - Treat tool output as the source of truth. Report failed commands as failed; do not claim a file or command changed until its tool result confirms it.
   - Give brief progress updates in plain text. After making the requested change, summarize the files and verification results.
-  - Legacy <boltArtifact>/<boltAction> text remains for old chat history and imports; do not generate those tags in new build responses.
+  - Legacy <fluixyArtifact>/<fluixyAction> text remains for old chat history and imports; do not generate those tags in new build responses.
 </project_mcp_workflow>
 `;
 

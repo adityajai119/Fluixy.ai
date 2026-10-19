@@ -257,7 +257,7 @@ export default function ConnectorsTab() {
       <div className="space-y-4">
         <button
           onClick={handleBack}
-          className="flex appearance-none items-center gap-2 border-0 bg-transparent text-sm text-bolt-elements-textSecondary transition-colors hover:text-bolt-elements-textPrimary"
+          className="flex appearance-none items-center gap-2 border-0 bg-transparent text-sm text-fluixy-elements-textSecondary transition-colors hover:text-fluixy-elements-textPrimary"
         >
           <div className="i-ph:arrow-left w-4 h-4" />
           Back to Connectors
@@ -272,10 +272,10 @@ export default function ConnectorsTab() {
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
         <div className="flex items-center gap-3 mb-2">
-          <div className="i-ph:plug w-6 h-6 text-bolt-elements-item-contentAccent" />
-          <h2 className="text-lg font-medium text-bolt-elements-textPrimary">Connectors</h2>
+          <div className="i-ph:plug w-6 h-6 text-fluixy-elements-item-contentAccent" />
+          <h2 className="text-lg font-medium text-fluixy-elements-textPrimary">Connectors</h2>
         </div>
-        <p className="text-sm text-bolt-elements-textSecondary">
+        <p className="text-sm text-fluixy-elements-textSecondary">
           Connect and manage your development tools and services in one place
         </p>
       </motion.div>
@@ -287,8 +287,8 @@ export default function ConnectorsTab() {
           className={classNames(
             'appearance-none rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors',
             selectedCategory === null
-              ? 'border-bolt-elements-borderColorActive bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent'
-              : 'border-bolt-elements-borderColor bg-transparent text-bolt-elements-textSecondary hover:border-bolt-elements-borderColorActive hover:text-bolt-elements-textPrimary',
+              ? 'border-fluixy-elements-borderColorActive bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent'
+              : 'border-fluixy-elements-borderColor bg-transparent text-fluixy-elements-textSecondary hover:border-fluixy-elements-borderColorActive hover:text-fluixy-elements-textPrimary',
           )}
         >
           All
@@ -300,8 +300,8 @@ export default function ConnectorsTab() {
             className={classNames(
               'appearance-none rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors',
               selectedCategory === category
-                ? 'border-bolt-elements-borderColorActive bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent'
-                : 'border-bolt-elements-borderColor bg-transparent text-bolt-elements-textSecondary hover:border-bolt-elements-borderColorActive hover:text-bolt-elements-textPrimary',
+                ? 'border-fluixy-elements-borderColorActive bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent'
+                : 'border-fluixy-elements-borderColor bg-transparent text-fluixy-elements-textSecondary hover:border-fluixy-elements-borderColorActive hover:text-fluixy-elements-textPrimary',
             )}
           >
             {CATEGORY_LABELS[category as keyof typeof CATEGORY_LABELS]}
@@ -320,7 +320,7 @@ export default function ConnectorsTab() {
           return (
             <div key={category} className="space-y-4">
               {!selectedCategory && (
-                <h3 className="text-sm font-medium text-bolt-elements-textPrimary">
+                <h3 className="text-sm font-medium text-fluixy-elements-textPrimary">
                   {CATEGORY_LABELS[category as keyof typeof CATEGORY_LABELS]}
                 </h3>
               )}
@@ -331,23 +331,23 @@ export default function ConnectorsTab() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="group flex w-full items-center gap-4 rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 px-5 py-4 text-left text-bolt-elements-textPrimary transition-colors hover:border-bolt-elements-borderColorActive hover:bg-bolt-elements-background-depth-3"
+                    className="group flex w-full items-center gap-4 rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 px-5 py-4 text-left text-fluixy-elements-textPrimary transition-colors hover:border-fluixy-elements-borderColorActive hover:bg-fluixy-elements-background-depth-3"
                   >
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-bolt-elements-background-depth-3 text-bolt-elements-textSecondary">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-fluixy-elements-background-depth-3 text-fluixy-elements-textSecondary">
                       {connector.icon}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="mb-1 flex flex-wrap items-center gap-2">
-                        <h4 className="text-sm font-semibold text-bolt-elements-textPrimary">{connector.name}</h4>
-                        <span className="rounded-full bg-bolt-elements-background-depth-3 px-2 py-0.5 text-[11px] text-bolt-elements-textSecondary">
+                        <h4 className="text-sm font-semibold text-fluixy-elements-textPrimary">{connector.name}</h4>
+                        <span className="rounded-full bg-fluixy-elements-background-depth-3 px-2 py-0.5 text-[11px] text-fluixy-elements-textSecondary">
                           {CATEGORY_LABELS[connector.category]}
                         </span>
                       </div>
-                      <p className="text-sm text-bolt-elements-textSecondary">{connector.description}</p>
+                      <p className="text-sm text-fluixy-elements-textSecondary">{connector.description}</p>
                     </div>
                     <div className="flex shrink-0 items-center gap-4">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-bolt-elements-textSecondary">
+                        <span className="text-xs text-fluixy-elements-textSecondary">
                           {connectorEnabled[getSettingsId(connector)] ? 'On' : 'Off'}
                         </span>
                         <Switch
@@ -360,7 +360,7 @@ export default function ConnectorsTab() {
                       <button
                         type="button"
                         onClick={() => setSelectedConnector(connector.id)}
-                        className="flex items-center gap-2 rounded-md border border-bolt-elements-borderColor bg-bolt-elements-background-depth-3 px-3 py-1.5 text-sm font-medium text-bolt-elements-textSecondary transition-colors hover:border-bolt-elements-borderColorActive hover:bg-bolt-elements-background-depth-1 hover:text-bolt-elements-textPrimary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/50"
+                        className="flex items-center gap-2 rounded-md border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-3 px-3 py-1.5 text-sm font-medium text-fluixy-elements-textSecondary transition-colors hover:border-fluixy-elements-borderColorActive hover:bg-fluixy-elements-background-depth-1 hover:text-fluixy-elements-textPrimary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/50"
                       >
                         Configure <span aria-hidden="true">→</span>
                       </button>
@@ -391,10 +391,10 @@ export default function ConnectorsTab() {
               value={apiKey}
               onChange={(event) => setApiKey(event.target.value)}
               placeholder="Paste your API key"
-              className="mt-2 w-full rounded-md border border-bolt-elements-borderColor bg-bolt-elements-background-depth-1 px-3 py-2 text-sm text-bolt-elements-textPrimary outline-none focus:border-bolt-elements-borderColorActive"
+              className="mt-2 w-full rounded-md border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-1 px-3 py-2 text-sm text-fluixy-elements-textPrimary outline-none focus:border-fluixy-elements-borderColorActive"
             />
             {credentialError && (
-              <p role="alert" className="mt-2 text-sm text-bolt-elements-icon-error">
+              <p role="alert" className="mt-2 text-sm text-fluixy-elements-icon-error">
                 {credentialError}
               </p>
             )}

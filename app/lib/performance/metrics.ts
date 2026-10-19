@@ -327,7 +327,7 @@ export function observeWebVitals() {
 
 // Export for debugging in console
 if (typeof window !== 'undefined') {
-  (window as any).__BOLT_PERFORMANCE__ = {
+  (window as any).__FLUIXY_PERFORMANCE__ = {
     monitor: performanceMonitor,
     journeys,
     report: () => console.log(performanceMonitor.generateReport()),

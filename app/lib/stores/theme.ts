@@ -4,7 +4,7 @@ import { getThemeMode, THEMES, type Theme } from '~/types/theme';
 
 export type { Theme } from '~/types/theme';
 
-export const kTheme = 'bolt_theme';
+export const kTheme = 'fluixy_theme';
 
 export function themeIsDark() {
   return getThemeMode(themeStore.get()) === 'dark';
@@ -32,15 +32,10 @@ function initStore() {
 
 export function toggleTheme() {
   const currentTheme = themeStore.get();
-  const targetMode = getThemeMode(currentTheme) === 'dark' ? 'light' : 'dark';
-  const savedTheme = localStorage.getItem(`bolt_theme_${targetMode}`);
-
-  const newTheme =
-    isTheme(savedTheme) && getThemeMode(savedTheme) === targetMode
-      ? savedTheme
-      : targetMode === 'dark'
-        ? 'dark-dracula'
-        : 'light';
+  let newTheme: Theme;
+  if (currentTheme === 'light') newTheme = 'dark';
+  else if (currentTheme === 'dark') newTheme = 'saffron';
+  else newTheme = 'light';
 
   setTheme(newTheme);
 }
@@ -51,21 +46,21 @@ export function setTheme(newTheme: Theme | 'dark') {
 
   // Update localStorage
   localStorage.setItem(kTheme, newTheme);
-  localStorage.setItem(`bolt_theme_${getThemeMode(newTheme)}`, newTheme);
+  localStorage.setItem(`fluixy_theme_${getThemeMode(newTheme)}`, newTheme);
 
   // Update the HTML attribute
   const root = document.querySelector('html');
   root?.setAttribute('data-theme', getThemeMode(newTheme));
-  root?.setAttribute('data-color-theme', newTheme === 'dark' ? 'dark-dracula' : newTheme);
+  root?.setAttribute('data-color-theme', newTheme);
 
   // Update user profile if it exists
   try {
-    const userProfile = localStorage.getItem('bolt_user_profile');
+    const userProfile = localStorage.getItem('fluixy_user_profile');
 
     if (userProfile) {
       const profile = JSON.parse(userProfile);
       profile.theme = newTheme;
-      localStorage.setItem('bolt_user_profile', JSON.stringify(profile));
+      localStorage.setItem('fluixy_user_profile', JSON.stringify(profile));
     }
   } catch (error) {
     console.error('Error updating user profile theme:', error);

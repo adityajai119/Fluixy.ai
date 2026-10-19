@@ -31,6 +31,14 @@ export const PROVIDER_COMPLETION_LIMITS: Record<string, number> = {
 };
 
 /*
+ * Groq free-tier safe budgeting
+ * Keep a conservative buffer under TPM to avoid 429 token-per-minute failures.
+ */
+export const GROQ_FREE_TIER_TPM_LIMIT = 6000;
+export const GROQ_FREE_TIER_COMPLETION_BUDGET = 1024;
+export const GROQ_FREE_TIER_SAFETY_BUFFER = 300;
+
+/*
  * Reasoning models that require maxCompletionTokens instead of maxTokens
  * These models use internal reasoning tokens and have different API parameter requirements
  */

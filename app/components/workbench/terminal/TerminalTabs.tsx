@@ -39,7 +39,7 @@ export const TerminalTabs = memo(() => {
     (index: number) => {
       if (index === 0) {
         return;
-      } // Can't close bolt terminal
+      } // Can't close fluixy terminal
 
       const terminalRef = terminalRefs.current.get(index);
 
@@ -123,10 +123,10 @@ export const TerminalTabs = memo(() => {
       }}
     >
       {isMinimized && (
-        <div className="h-full min-h-[34px] flex items-center justify-end bg-bolt-elements-background-depth-2 border-t border-bolt-elements-borderColor px-2">
+        <div className="h-full min-h-[34px] flex items-center justify-end bg-fluixy-elements-background-depth-2 border-t border-fluixy-elements-borderColor px-2">
           <button
             type="button"
-            className="flex items-center gap-2 px-3 py-1 rounded-md bg-transparent text-sm text-bolt-elements-textPrimary hover:bg-bolt-elements-terminals-buttonBackground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bolt-elements-focus"
+            className="flex items-center gap-2 px-3 py-1 rounded-md bg-transparent text-sm text-fluixy-elements-textPrimary hover:bg-fluixy-elements-terminals-buttonBackground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fluixy-elements-focus"
             title="Expand terminal"
             onClick={() => {
               terminalPanelRef.current?.resize(`${DEFAULT_TERMINAL_SIZE}%`);
@@ -140,8 +140,8 @@ export const TerminalTabs = memo(() => {
         </div>
       )}
       <div className={classNames('h-full', { hidden: isMinimized })}>
-        <div className="bg-bolt-elements-terminals-background h-full flex flex-col">
-          <div className="flex items-center bg-bolt-elements-background-depth-2 border-y border-bolt-elements-borderColor gap-1.5 min-h-[34px] p-2">
+        <div className="bg-fluixy-elements-terminals-background h-full flex flex-col">
+          <div className="flex items-center bg-fluixy-elements-background-depth-2 border-y border-fluixy-elements-borderColor gap-1.5 min-h-[34px] p-2">
             {Array.from({ length: terminalCount + 1 }, (_, index) => {
               const isActive = activeTerminal === index;
 
@@ -153,16 +153,16 @@ export const TerminalTabs = memo(() => {
                       className={classNames(
                         'flex items-center text-sm cursor-pointer gap-1.5 px-3 py-2 h-full whitespace-nowrap rounded-full',
                         {
-                          'bg-bolt-elements-terminals-buttonBackground text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary':
+                          'bg-fluixy-elements-terminals-buttonBackground text-fluixy-elements-textSecondary hover:text-fluixy-elements-textPrimary':
                             isActive,
-                          'bg-bolt-elements-background-depth-2 text-bolt-elements-textSecondary hover:bg-bolt-elements-terminals-buttonBackground':
+                          'bg-fluixy-elements-background-depth-2 text-fluixy-elements-textSecondary hover:bg-fluixy-elements-terminals-buttonBackground':
                             !isActive,
                         },
                       )}
                       onClick={() => setActiveTerminal(index)}
                     >
                       <div className="i-ph:terminal-window-duotone text-lg" />
-                      Bolt Terminal
+                      fluixy Terminal
                     </button>
                   ) : (
                     <React.Fragment>
@@ -171,8 +171,8 @@ export const TerminalTabs = memo(() => {
                         className={classNames(
                           'flex items-center text-sm cursor-pointer gap-1.5 px-3 py-2 h-full whitespace-nowrap rounded-full',
                           {
-                            'bg-bolt-elements-terminals-buttonBackground text-bolt-elements-textPrimary': isActive,
-                            'bg-bolt-elements-background-depth-2 text-bolt-elements-textSecondary hover:bg-bolt-elements-terminals-buttonBackground':
+                            'bg-fluixy-elements-terminals-buttonBackground text-fluixy-elements-textPrimary': isActive,
+                            'bg-fluixy-elements-background-depth-2 text-fluixy-elements-textSecondary hover:bg-fluixy-elements-terminals-buttonBackground':
                               !isActive,
                           },
                         )}
@@ -181,7 +181,7 @@ export const TerminalTabs = memo(() => {
                         <div className="i-ph:terminal-window-duotone text-lg" />
                         Terminal {terminalCount > 1 && index}
                         <button
-                          className="bg-transparent text-bolt-elements-textTertiary hover:text-bolt-elements-textPrimary hover:bg-transparent rounded"
+                          className="bg-transparent text-fluixy-elements-textTertiary hover:text-fluixy-elements-textPrimary hover:bg-transparent rounded"
                           onClick={(e) => {
                             e.stopPropagation();
                             closeTerminal(index);
@@ -209,7 +209,7 @@ export const TerminalTabs = memo(() => {
                   terminal.focus();
 
                   if (activeTerminal === 0) {
-                    workbenchStore.attachBoltTerminal(terminal);
+                    workbenchStore.attachfluixyTerminal(terminal);
                   } else {
                     workbenchStore.attachTerminal(terminal);
                   }
@@ -230,7 +230,7 @@ export const TerminalTabs = memo(() => {
           {Array.from({ length: terminalCount + 1 }, (_, index) => {
             const isActive = activeTerminal === index;
 
-            logger.debug(`Starting bolt terminal [${index}]`);
+            logger.debug(`Starting fluixy terminal [${index}]`);
 
             if (index == 0) {
               return (
@@ -246,7 +246,7 @@ export const TerminalTabs = memo(() => {
                         terminalRefs.current.set(index, ref);
                       }
                     }}
-                    onTerminalReady={(terminal) => workbenchStore.attachBoltTerminal(terminal)}
+                    onTerminalReady={(terminal) => workbenchStore.attachfluixyTerminal(terminal)}
                     onTerminalResize={(cols, rows) => workbenchStore.onTerminalResize(cols, rows)}
                     theme={theme}
                   />

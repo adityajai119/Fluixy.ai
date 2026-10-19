@@ -16,11 +16,9 @@ let commitJson = {
 
 console.log(`
 ★═══════════════════════════════════════★
-          B O L T . D I Y
+           F L U I X Y . A I - by Aditya
          ⚡️  Welcome  ⚡️
 ★═══════════════════════════════════════★
 `);
-console.log('📍 Current Version Tag:', `v${commitJson.version}`);
-console.log('📍 Current Commit Version:', commitJson.hash);
 console.log('  Please wait until the URL appears here');
 console.log('★═══════════════════════════════════════★');

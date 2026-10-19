@@ -10,7 +10,7 @@ import { LoadingOverlay } from '~/components/ui/LoadingOverlay';
 import { useGit } from '~/lib/hooks/useGit';
 import { useChatHistory } from '~/lib/persistence';
 import { createMessage } from '~/lib/persistence/messageMigration';
-import { createCommandsMessage, detectProjectCommands, escapeBoltTags } from '~/utils/projectCommands';
+import { createCommandsMessage, detectProjectCommands, escapefluixyTags } from '~/utils/projectCommands';
 
 const IGNORE_PATTERNS = [
   'node_modules/**',
@@ -77,16 +77,16 @@ export function GitUrlImport() {
             role: 'assistant',
             id: generateId(),
             text: `Cloning the repo ${repoUrl} into ${workdir}
-<boltArtifact id="imported-files" title="Git Cloned Files"  type="bundled">
+<fluixyArtifact id="imported-files" title="Git Cloned Files"  type="bundled">
 ${fileContents
   .map(
     (file) =>
-      `<boltAction type="file" filePath="${file.path}">
-${escapeBoltTags(file.content)}
-</boltAction>`,
+      `<fluixyAction type="file" filePath="${file.path}">
+${escapefluixyTags(file.content)}
+</fluixyAction>`,
   )
   .join('\n')}
-</boltArtifact>`,
+</fluixyArtifact>`,
           }) as UIMessage;
 
           const messages: UIMessage[] = [filesMessage];

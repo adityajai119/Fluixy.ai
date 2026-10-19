@@ -107,8 +107,8 @@ export function StaticComposer({
         }
 
         // Report the handoff for monitoring
-        if (typeof window !== 'undefined' && (window as any).__BOLT_PERFORMANCE__) {
-          (window as any).__BOLT_PERFORMANCE__.monitor.recordMetric('static-composer-handoff', verticalShift, {
+        if (typeof window !== 'undefined' && (window as any).__FLUIXY_PERFORMANCE__) {
+          (window as any).__FLUIXY_PERFORMANCE__.monitor.recordMetric('static-composer-handoff', verticalShift, {
             horizontal: horizontalShift,
           });
         }

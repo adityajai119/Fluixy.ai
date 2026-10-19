@@ -8,7 +8,7 @@ const XML_TOOL_CALL_OPEN = '<tool_call>';
 const XML_TOOL_CALL_CLOSE = '</tool_call>';
 
 const UNSUPPORTED_TOOL_CALL_NOTICE =
-  'The selected model returned an unsupported tool call instead of a Bolt file action. Choose a model with tool-calling support or ask it to use a Bolt artifact.';
+  'The selected model returned an unsupported tool call instead of a Fluixy file action. Choose a model with tool-calling support or ask it to use a Fluixy artifact.';
 
 interface TextFileWrite {
   filePath: string;
@@ -441,13 +441,13 @@ export class EnhancedStreamingMessageParser extends StreamingMessageParser {
   private _writeCallAsArtifact(messageId: string, write: TextFileWrite): string {
     const artifactId = `tool-write-${messageId}-${this._artifactCounter++}`;
     const title = write.filePath.split('/').pop() || 'File';
-    const safeContent = write.content.replace(/<\/(boltAction|boltArtifact)\b/gi, '&lt;/$1');
+    const safeContent = write.content.replace(/<\/(boltAction|boltArtifact|fluixyAction|fluixyArtifact)\b/gi, '&lt;/$1');
 
-    return `<boltArtifact id="${artifactId}" title="${title}" type="bundled"><boltAction type="file" filePath="${write.filePath}">${safeContent}</boltAction></boltArtifact>`;
+    return `<fluixyArtifact id="${artifactId}" title="${title}" type="bundled"><fluixyAction type="file" filePath="${write.filePath}">${safeContent}</fluixyAction></fluixyArtifact>`;
   }
 
   private _hasDetectedArtifacts(input: string): boolean {
-    return input.includes('<boltArtifact') || input.includes('</boltArtifact>');
+    return input.includes('<fluixyArtifact') || input.includes('</fluixyArtifact>');
   }
 
   private _detectAndWrapCodeBlocks(messageId: string, input: string): string {
@@ -600,21 +600,21 @@ export class EnhancedStreamingMessageParser extends StreamingMessageParser {
   private _wrapInArtifact(artifactId: string, filePath: string, content: string): string {
     const title = filePath.split('/').pop() || 'File';
 
-    return `<boltArtifact id="${artifactId}" title="${title}" type="bundled">
-<boltAction type="file" filePath="${filePath}">
+    return `<fluixyArtifact id="${artifactId}" title="${title}" type="bundled">
+<fluixyAction type="file" filePath="${filePath}">
 ${content}
-</boltAction>
-</boltArtifact>`;
+</fluixyAction>
+</fluixyArtifact>`;
   }
 
   private _wrapInShellAction(content: string, messageId: string): string {
     const artifactId = `artifact-${messageId}-${this._artifactCounter++}`;
 
-    return `<boltArtifact id="${artifactId}" title="Shell Command" type="shell">
-<boltAction type="shell">
+    return `<fluixyArtifact id="${artifactId}" title="Shell Command" type="shell">
+<fluixyAction type="shell">
 ${content.trim()}
-</boltAction>
-</boltArtifact>`;
+</fluixyAction>
+</fluixyArtifact>`;
   }
 
   private _normalizeFilePath(filePath: string): string {

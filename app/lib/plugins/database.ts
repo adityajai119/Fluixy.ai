@@ -1,4 +1,4 @@
-const DATABASE_NAME = 'boltPlugins';
+const DATABASE_NAME = 'fluixyPlugins';
 const DATABASE_VERSION = 1;
 
 export type InstalledPlugin = {

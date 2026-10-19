@@ -5,11 +5,11 @@ import { Header } from '~/components/header/Header';
 import BackgroundRays from '~/components/ui/BackgroundRays';
 import { LoadingOverlay } from '~/components/ui/LoadingOverlay';
 
-export const meta: MetaFunction = () => [{ title: 'Start a blank app | Bolt' }];
+export const meta: MetaFunction = () => [{ title: 'Start a blank app | Fluixy.Ai' }];
 
 export default function Starter() {
   return (
-    <div className="flex flex-col h-full w-full bg-bolt-elements-background-depth-1">
+    <div className="flex flex-col h-full w-full bg-fluixy-elements-background-depth-1">
       <BackgroundRays />
       <Header />
       <ClientOnly fallback={<LoadingOverlay message="Loading starter template..." />}>

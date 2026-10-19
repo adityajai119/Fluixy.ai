@@ -1,24 +1,24 @@
 import type { WebContainer } from '@webcontainer/api';
 import { atom, map, type MapStore } from 'nanostores';
 import type { ActionCallbackData } from './message-parser';
-import type { ActionAlert, BoltAction, DeployAlert, FileHistory, SupabaseAction, SupabaseAlert } from '~/types/actions';
+import type { ActionAlert, fluixyAction, DeployAlert, FileHistory, SupabaseAction, SupabaseAlert } from '~/types/actions';
 import { createScopedLogger } from '~/utils/logger';
 import { path as nodePath } from '~/utils/path';
-import type { BoltShell } from '~/utils/shell';
+import type { fluixyShell } from '~/utils/shell';
 import { unreachable } from '~/utils/unreachable';
 
 const logger = createScopedLogger('ActionRunner');
 
 export type ActionStatus = 'pending' | 'running' | 'complete' | 'aborted' | 'failed';
 
-export type BaseActionState = BoltAction & {
+export type BaseActionState = fluixyAction & {
   status: Exclude<ActionStatus, 'failed'>;
   abort: () => void;
   executed: boolean;
   abortSignal: AbortSignal;
 };
 
-export type FailedActionState = BoltAction &
+export type FailedActionState = fluixyAction &
   Omit<BaseActionState, 'status'> & {
     status: Extract<ActionStatus, 'failed'>;
     error: string;
@@ -65,7 +65,7 @@ class ActionCommandError extends Error {
 export class ActionRunner {
   #webcontainer: Promise<WebContainer>;
   #currentExecutionPromise: Promise<void> = Promise.resolve();
-  #shellTerminal: () => BoltShell;
+  #shellTerminal: () => fluixyShell;
   runnerId = atom<string>(`${Date.now()}`);
   actions: ActionsMap = map({});
   onAlert?: (alert: ActionAlert) => void;
@@ -75,7 +75,7 @@ export class ActionRunner {
 
   constructor(
     webcontainerPromise: Promise<WebContainer>,
-    getShellTerminal: () => BoltShell,
+    getShellTerminal: () => fluixyShell,
     onAlert?: (alert: ActionAlert) => void,
     onSupabaseAlert?: (alert: SupabaseAlert) => void,
     onDeployAlert?: (alert: DeployAlert) => void,
@@ -352,7 +352,7 @@ export class ActionRunner {
     }
 
     /*
-     * The parser tolerates `<boltAction type="file">` without a `filePath` so the
+     * The parser tolerates `<fluixyAction type="file">` without a `filePath` so the
      * model's text is not swallowed, but there is nothing to write in that case.
      * Failing explicitly keeps this out of `nodePath.relative`, which would throw a
      * bare TypeError on `undefined`.
@@ -467,21 +467,12 @@ export class ActionRunner {
     );
 
     const exitCode = await buildProcess.exit;
+
     await outputPromise.catch(() => {
       // Ignore output piping errors; we still have whatever was captured
     });
 
-    let buildDir = '';
-
     if (exitCode !== 0) {
-      const buildResult = {
-        path: buildDir,
-        exitCode,
-        output,
-      };
-
-      this.buildOutput = buildResult;
-
       // Trigger build failed alert
       this.onDeployAlert?.({
         type: 'error',
@@ -511,6 +502,8 @@ export class ActionRunner {
     // Check for common build directories
     const commonBuildDirs = ['dist', 'build', 'out', 'output', '.next', 'public'];
 
+    let buildDir = '';
+
     // Try to find the first existing build directory
     for (const dir of commonBuildDirs) {
       const dirPath = nodePath.join(webcontainer.workdir, dir);
@@ -529,15 +522,11 @@ export class ActionRunner {
       buildDir = nodePath.join(webcontainer.workdir, 'dist');
     }
 
-    const buildResult = {
+    return {
       path: buildDir,
       exitCode,
       output,
     };
-
-    this.buildOutput = buildResult;
-
-    return buildResult;
   }
   async handleSupabaseAction(action: SupabaseAction) {
     const { operation, content, filePath } = action;

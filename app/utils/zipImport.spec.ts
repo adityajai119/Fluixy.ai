@@ -37,14 +37,14 @@ describe('createChatFromZip', () => {
      * content fallback.
      */
     expect(getMessageText(userMessage)).toBe('Import the "demo" project from ZIP');
-    expect(getMessageText(filesMessage)).toContain('<boltArtifact id="imported-files"');
+    expect(getMessageText(filesMessage)).toContain('<fluixyArtifact id="imported-files"');
     expect(
       filesMessage.parts
         .filter((part) => part.type === 'text')
         .map((part) => part.text)
         .join(''),
-    ).toContain('<boltArtifact id="imported-files"');
-    expect(getMessageText(filesMessage)).toContain('<boltAction type="file" filePath="index.ts">');
+    ).toContain('<fluixyArtifact id="imported-files"');
+    expect(getMessageText(filesMessage)).toContain('<fluixyAction type="file" filePath="index.ts">');
     expect(getMessageText(filesMessage)).toContain('export const a = 1;');
   });
 

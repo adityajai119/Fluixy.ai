@@ -12,9 +12,9 @@ import { getToolOutput } from '~/lib/persistence/messageMigration';
 import { TOOL_EXECUTION_APPROVAL } from '~/utils/constants';
 
 /*
- * `processToolInvocations` is the only place bolt turns a user-approved MCP tool
+ * `processToolInvocations` is the only place Fluixy.Ai turns a user-approved MCP tool
  * call into an executed tool call and forwards the result to the client. It also
- * emits one of the few wire parts bolt writes by hand, so it is pinned here
+ * emits one of the few wire parts Fluixy.Ai writes by hand, so it is pinned here
  * before the AI SDK upgrade changes the surrounding stream API.
  */
 

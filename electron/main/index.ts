@@ -22,11 +22,11 @@ console.log('NODE_ENV:', global.process.env.NODE_ENV);
 console.log('isPackaged:', app.isPackaged);
 
 // Log unhandled errors
-process.on('uncaughtException', async (error) => {
+process.on('uncaughtException', async (error: unknown) => {
   console.log('Uncaught Exception:', error);
 });
 
-process.on('unhandledRejection', async (error) => {
+process.on('unhandledRejection', async (error: unknown) => {
   console.log('Unhandled Rejection:', error);
 });
 
@@ -158,7 +158,7 @@ declare global {
         }
 
         const listen = await viteServer.listen();
-        global.__electron__ = electron;
+        (global as any).__electron__ = electron;
         viteServer.printUrls();
 
         return `http://localhost:${listen.config.server.port}`;

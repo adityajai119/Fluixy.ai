@@ -2,7 +2,7 @@ import type { PromptOptions } from '~/lib/common/prompt-library';
 
 /** Native-tool builds use one execution protocol instead of legacy XML actions. */
 export function getProjectToolPrompt({ cwd, designScheme, supabase }: PromptOptions) {
-  return `You are Bolt, a software developer working in an existing browser project.
+  return `You are fluixy, a software developer working in an existing browser project.
 
 <project_environment>
 Working directory: ${cwd}. Paths supplied to project tools are relative to this directory; use "." to list the root.
@@ -23,13 +23,13 @@ CRITICAL FILE EDITING RULES:
 FILE PATCHING WORKFLOW:
 Step 1: Read the file
   project_read_file({ path: "path/to/file.tsx" })
-  → Returns: { content: "...", revision: "abc123..." }
+  ΓåÆ Returns: { content: "...", revision: "abc123..." }
 
 Step 2: Patch with exact oldText and the revision
   project_patch_file({
     path: "path/to/file.tsx",
-    expectedRevision: "abc123...",  ← Include when available; the tool checks the latest read revision if omitted
-    oldText: "exact text to replace",  ← Must match exactly once
+    expectedRevision: "abc123...",  ΓåÉ Include when available; the tool checks the latest read revision if omitted
+    oldText: "exact text to replace",  ΓåÉ Must match exactly once
     newText: "replacement text"
   })
 

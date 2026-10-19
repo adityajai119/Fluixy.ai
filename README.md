@@ -1,162 +1,144 @@
-# bolt.diy
+<p align="center">
+  <img src="public/logo-dark-styled.png" alt="Fluixy.Ai Logo" width="200"/>
+</p>
 
-[![bolt.diy: AI-Powered Full-Stack Web Development in the Browser](./public/social_preview_index(1).jpg)](https://bolt.diy)
+<h1 align="center">Fluixy.Ai</h1>
 
-Welcome to **bolt.diy**, the open-source AI developer workspace that lets you select your preferred LLM for every prompt. Build full-stack web applications in the browser with support for 22+ model providers (OpenAI, Anthropic, Gemini, Groq, xAI, DeepSeek, Ollama, LM Studio, and more), or extend it with any provider supported by the Vercel AI SDK. OpenRouter, Anthropic, OpenAI, and Google are enabled by default; enable and configure other providers in Settings.
+<p align="center">
+  <strong>Where Ideas Begin ΓÜí</strong>
+</p>
 
-[Documentation](https://stackblitz-labs.github.io/bolt.diy/) | [Community Forum](https://thinktank.ottomator.ai) | [FAQ & Troubleshooting](FAQ.md)
+<p align="center">
+  An AI-powered full-stack web development assistant that brings your ideas to life in seconds
+</p>
 
----
-
-Also [this pinned post in our community](https://thinktank.ottomator.ai/t/videos-tutorial-helpful-content/3243) has a bunch of incredible resources for running and deploying bolt.diy yourself!
-
-bolt.diy was originally started by [Cole Medin](https://www.youtube.com/@ColeMedin) but has quickly grown into a massive community effort to build the BEST open source AI coding assistant!
-
----
-
-## Table of Contents
-
-- [Quick Start](#quick-start)
-- [Running with Docker](#running-with-docker)
-- [Desktop App (Electron)](#desktop-app-electron)
-- [Configuring API Keys and Providers](#configuring-api-keys-and-providers)
-- [Features](#features)
-- [Recent Highlights](#recent-highlights)
-- [Available Scripts](#available-scripts)
-- [Contributing & Community](#contributing--community)
-- [Licensing](#licensing)
+<p align="center">
+  <a href="#features">Features</a> ΓÇó
+  <a href="#getting-started">Getting Started</a> ΓÇó
+  <a href="#tech-stack">Tech Stack</a> ΓÇó
+  <a href="#usage">Usage</a> ΓÇó
+  <a href="#contributing">Contributing</a>
+</p>
 
 ---
 
-## Quick Start
+## ≡ƒÜÇ About Fluixy.Ai
+
+**Fluixy.Ai** is an intelligent AI coding assistant that helps you build full-stack web applications with ease. Simply describe what you want to build, and Fluixy.Ai will generate the code, create files, and set up your project automatically.
+
+Built with a beautiful cyan-themed interface featuring a rainbow dragon logo, Fluixy.Ai provides a seamless development experience with real-time code generation, file management, and an integrated preview environment.
+
+## Γ£¿ Features
+
+- ≡ƒñû **AI-Powered Code Generation** - Describe your idea and watch it come to life
+- ≡ƒôü **Full-Stack File Management** - Automatic file creation, editing, and organization
+- ≡ƒûÑ∩╕Å **Live Preview** - See your changes in real-time with the built-in preview
+- ≡ƒÄ¿ **Beautiful UI** - Modern, responsive interface with light/dark theme support
+- ≡ƒöº **Multi-Model Support** - Works with various AI providers (Google Gemini, OpenAI, Anthropic, and more)
+- ≡ƒÆ╛ **Chat History** - Save and resume your development conversations
+- ≡ƒôñ **Export & Import** - Easily backup and share your projects
+- ≡ƒöù **GitHub Integration** - Clone repos and deploy directly to GitHub
+- ≡ƒîÉ **Starter Templates** - Quick start with popular frameworks (React, Vue, Next.js, etc.)
+
+## ≡ƒ¢á∩╕Å Tech Stack
+
+| Category | Technologies |
+|----------|-------------|
+| **Frontend** | React, Remix, TypeScript, UnoCSS |
+| **AI Integration** | AI SDK, Multiple LLM Providers |
+| **State Management** | Nanostores |
+| **Styling** | SCSS, CSS Variables, UnoCSS |
+| **Build Tool** | Vite |
+| **Package Manager** | pnpm |
+
+## ≡ƒÜª Getting Started
 
 ### Prerequisites
-- **Node.js** >= 22.12.0
-- **pnpm** >= 9.15.9 (`npm install -g pnpm`)
 
-### 1. Clone & Install
+- Node.js 18+ 
+- pnpm (recommended)
 
-```bash
-git clone https://github.com/stackblitz-labs/bolt.diy.git
-cd bolt.diy
-pnpm install
-```
+### Installation
 
-### 2. Run the Development Server
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/adityajai119/Fluixy.ai.git
+   cd Fluixy.ai
+   ```
 
-```bash
-pnpm run dev
-```
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-> **Pre-built Desktop Binaries**: Prefer a standalone app? Download binaries for Windows, macOS, and Linux from our [Latest Releases](https://github.com/stackblitz-labs/bolt.diy/releases/latest).
-
----
-
-## Running with Docker
-
-1. **Configure Environment Variables**:
+3. **Set up environment variables**
    ```bash
    cp .env.example .env.local
    ```
+   Add your API keys (e.g., Google Gemini, OpenAI) to the `.env.local` file.
 
-2. **Build and Run**:
+4. **Start the development server**
    ```bash
-   # Development mode with hot-reload:
-   docker compose --profile development up
-
-   # Production build:
-   pnpm run dockerbuild:prod
-   docker compose --profile production up
+   pnpm run dev
    ```
 
----
+5. **Open your browser**
+   Navigate to `http://localhost:5173` and start building!
 
-## Desktop App (Electron)
+## ≡ƒÆí Usage
 
-bolt.diy is also available as a cross-platform desktop application:
+1. **Enter your API Key** - Configure your preferred AI provider in the settings
+2. **Start a new chat** - Click "Start new chat" or describe your project idea
+3. **Describe your idea** - Tell Fluixy.Ai what you want to build
+4. **Watch it build** - See the AI generate code, create files, and build your app
+5. **Preview & Iterate** - Use the live preview and make adjustments as needed
+6. **Export** - Download your completed project or push to GitHub
 
-- **Download**: Grab pre-built installers from [Latest Releases](https://github.com/stackblitz-labs/bolt.diy/releases/latest).
-- **Build from Source**:
-  ```bash
-  pnpm electron:build:dist
-  ```
+## ≡ƒÄ¿ Themes
 
----
+Fluixy.Ai supports both light and dark themes with a beautiful cyan color palette:
 
-## Configuring API Keys and Providers
+- **Dark Mode**: Perfect for late-night coding sessions
+- **Light Mode**: Clean and professional for daytime use
 
-You can configure model providers either directly in the UI or via environment variables:
+Toggle themes using the theme switch button in the header.
 
-### Option A: In the UI (Recommended)
-Click the **Settings** icon (⚙️) in the sidebar → **Providers**. Enter your API keys or configure local endpoints (Ollama, LM Studio, OpenAI-compatible). Keys are validated in real time and stored securely in your browser cookies.
+## ≡ƒô╕ Screenshots
 
-### Option B: Environment Variables
-Copy `.env.example` to `.env.local` and add your keys or local endpoints:
+Coming soon...
 
-```bash
-# Cloud Providers
-ANTHROPIC_API_KEY=your_key_here
-OPENAI_API_KEY=your_key_here
-GEMINI_API_KEY=your_key_here
+## ≡ƒñ¥ Contributing
 
-# Local Providers
-OLLAMA_BASE_URL=http://127.0.0.1:11434
-LMSTUDIO_BASE_URL=http://127.0.0.1:1234
-```
+Contributions are welcome! Feel free to:
 
----
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Features
+## ≡ƒôä License
 
-- **In-Browser Web Development**: Full-stack Node.js development environment powered by WebContainers.
-- **22+ AI Providers**: Cloud (Anthropic, OpenAI, Google, DeepSeek, Groq, xAI, Mistral, etc.) and Local (Ollama, LM Studio). OpenRouter, Anthropic, OpenAI, and Google are enabled by default.
-- **Interactive Workbench**: Integrated code editor, terminal, visual diff viewer, and real-time live preview. Opens by default for a started chat and can be reopened after closing.
-- **Starter Setup**: Explicit framework requests select a matching starter in code. Starter files include detected install and development server commands before the first customization request.
-- **Prompt Library**: Choose a system prompt under Settings → Workspace → Features, including Simple Sal for concise guidance and Tiny Tim for smaller models.
-- **Project Workflows**: Git cloning/pushing, snapshot restoration, file conflict locking, and ZIP export.
-- **Deployments**: One-click deployment to Netlify, Vercel, and GitHub Pages.
-- **Database & Visuals**: Supabase integration, data visualization charts, and Model Context Protocol (MCP) tooling.
+This project is licensed under the MIT License.
+
+## ≡ƒæ¿ΓÇì≡ƒÆ╗ Author
+
+**Aditya**
+
+- GitHub: [@adityajai119](https://github.com/adityajai119)
 
 ---
 
-## Recent Highlights
+<p align="center">
+  Made with Γ¥ñ∩╕Å by Aditya
+</p>
 
-- **Expanded AI & Tooling Ecosystem**: 22+ cloud and local LLM providers, Model Context Protocol (MCP) integration, and voice prompting.
-- **Enhanced Code & Project Workflows**: Visual diff inspection, file conflict locking, codebase search, Git integration, and snapshot restoration.
-- **Cross-Platform & Deployments**: Native Electron desktop app, Expo (React Native) support, and direct deployment to Netlify, Vercel, and GitHub Pages.
-- **Data & Backend Integrations**: Built-in Supabase management, interactive charts, and bulk chat operations.
-- **Prompt and Connector Controls**: Select MCP tools from the prompt attachment menu; manage GitHub, GitLab, Netlify, and other service connections under Settings → Integrations → Connectors.
-
-> **Looking Ahead**: Ongoing work includes bug Fixes, dependance updates and fixes for reliability issues no new features are planed.
+<p align="center">
+  <strong>Where ideas begin ΓÜí</strong>
+</p>
 
 ---
 
-## Available Scripts
+## Attribution
 
-| Command | Description |
-|---|---|
-| `pnpm run dev` | Start development server with hot module reloading |
-| `pnpm run build` | Build the application for production (`react-router build`) |
-| `pnpm run preview` | Preview production build locally |
-| `pnpm test` | Run unit and integration tests with Vitest |
-| `pnpm run typecheck` | Run TypeScript type checks (`tsc`) |
-| `pnpm run lint` | Run ESLint across the codebase |
-| `pnpm run dockerbuild` | Build Docker container for development |
-| `pnpm run electron:dev` | Start Electron desktop application in dev mode |
-| `pnpm electron:build:dist` | Package Electron desktop app for current OS |
-
----
-
-## Contributing & Community
-
-- **Contributing**: Contributions are welcome! Read our [Contributing Guide](CONTRIBUTING.md) and [Project Management Guide](./PROJECT.md) to get started.
-- **Troubleshooting & FAQ**: Common errors and setup fixes are documented in our [FAQ](FAQ.md) and [Official Docs](https://stackblitz-labs.github.io/bolt.diy/).
-
-
----
-
-## Licensing
-
-bolt.diy is open-source under the MIT License. It utilizes the [WebContainers API](https://webcontainers.io/enterprise), which has specific commercial licensing terms for enterprise deployment.
+Fluixy.Ai is built on top of [bolt.diy](https://github.com/stackblitz-labs/bolt.diy), created by StackBlitz, Inc. and the bolt.diy contributors, and is distributed under the [MIT License](LICENSE).

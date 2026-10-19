@@ -14,7 +14,8 @@ interface Profile {
   avatar: string;
 }
 
-const storedProfile = typeof window !== 'undefined' ? localStorage.getItem('bolt_profile') : null;
+// Initialize with stored profile or defaults
+const storedProfile = typeof window !== 'undefined' ? localStorage.getItem('fluixy_profile') : null;
 
 function loadProfile(): Profile {
   if (storedProfile) {
@@ -40,6 +41,6 @@ export const updateProfile = (updates: Partial<Profile>) => {
   profileStore.set({ ...profileStore.get(), ...updates });
 
   if (typeof window !== 'undefined') {
-    localStorage.setItem('bolt_profile', JSON.stringify(profileStore.get()));
+    localStorage.setItem('fluixy_profile', JSON.stringify(profileStore.get()));
   }
 };

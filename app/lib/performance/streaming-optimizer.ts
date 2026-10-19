@@ -283,7 +283,7 @@ export const batchedDOMUpdater = new BatchedDOMUpdater();
 
 // Export for debugging
 if (typeof window !== 'undefined') {
-  (window as any).__BOLT_STREAMING__ = {
+  (window as any).__FLUIXY_STREAMING__ = {
     optimizer: streamingOptimizer,
     getStats: () => streamingOptimizer.getStats(),
   };

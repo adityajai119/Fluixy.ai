@@ -1,11 +1,11 @@
 import type { WebContainer, WebContainerProcess } from '@webcontainer/api';
 import { describe, expect, it, vi } from 'vitest';
-import { BoltShell } from './shell';
+import { fluixyShell } from './shell';
 import type { ITerminal } from '~/types/terminal';
 
-describe('BoltShell.stop', () => {
+describe('fluixyShell.stop', () => {
   it('interrupts the server and waits for its exit before completing a reset', async () => {
-    const shell = new BoltShell();
+    const shell = new fluixyShell();
     const input = vi.fn();
     const abort = vi.fn();
 
@@ -35,12 +35,12 @@ describe('BoltShell.stop', () => {
   });
 
   it('returns immediately when there is no active command', async () => {
-    const shell = new BoltShell();
+    const shell = new fluixyShell();
     await expect(shell.stop()).resolves.toBeUndefined();
   });
 
   it('does not interrupt the incoming chat when the outgoing session has already changed', async () => {
-    const shell = new BoltShell();
+    const shell = new fluixyShell();
     const input = vi.fn();
     const abort = vi.fn();
 
@@ -55,7 +55,7 @@ describe('BoltShell.stop', () => {
 });
 
 async function initializedShell(onInput: (data: string, output: ReadableStreamDefaultController<string>) => void) {
-  const shell = new BoltShell();
+  const shell = new fluixyShell();
 
   let output!: ReadableStreamDefaultController<string>;
 
@@ -68,7 +68,7 @@ async function initializedShell(onInput: (data: string, output: ReadableStreamDe
 
   const input = vi.fn((data: string) => onInput(data, output));
   const terminal = { input } as unknown as ITerminal;
-  vi.spyOn(shell, 'newBoltShellProcess').mockResolvedValue({
+  vi.spyOn(shell, 'newfluixyShellProcess').mockResolvedValue({
     process: {} as WebContainerProcess,
     terminalStream: commandStream,
     commandStream,
@@ -79,7 +79,7 @@ async function initializedShell(onInput: (data: string, output: ReadableStreamDe
   return { shell, input, output };
 }
 
-describe('BoltShell command handoff', () => {
+describe('fluixyShell command handoff', () => {
   it('stops a running dev server before installing dependencies when exit and prompt arrive together', async () => {
     let serverRunning = false;
 

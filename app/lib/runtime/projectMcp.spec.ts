@@ -1,9 +1,9 @@
 import { atom } from 'nanostores';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-const { spawn, writeToBoltTerminal, toggleTerminal, readFile, saveFileContent, createFile } = vi.hoisted(() => ({
+const { spawn, writeTofluixyTerminal, toggleTerminal, readFile, saveFileContent, createFile } = vi.hoisted(() => ({
   spawn: vi.fn(),
-  writeToBoltTerminal: vi.fn(),
+  writeTofluixyTerminal: vi.fn(),
   toggleTerminal: vi.fn(),
   readFile: vi.fn(),
   saveFileContent: vi.fn(),
@@ -26,7 +26,7 @@ vi.mock('~/lib/stores/workbench', () => ({
     queueProjectMutation: (operation: () => Promise<unknown>) => operation(),
     waitForExecutionQueue: async () => undefined,
     toggleTerminal,
-    writeToBoltTerminal,
+    writeTofluixyTerminal,
   },
 }));
 vi.mock('./ripgrepClient', () => ({ searchWithRipgrep: vi.fn() }));
@@ -85,7 +85,7 @@ describe('project command tools', () => {
       reused: true,
     });
   });
-  it('executes in the default project directory and forwards real output to Bolt Terminal', async () => {
+  it('executes in the default project directory and forwards real output to Fluixy Terminal', async () => {
     spawn.mockResolvedValueOnce(processWithOutput('command-marker\n', 0));
     bridge = await createProjectMcpBridge();
 
@@ -93,7 +93,7 @@ describe('project command tools', () => {
 
     expect(spawn).toHaveBeenCalledWith('/bin/jsh', ['-c', 'echo command-marker']);
     expect(toggleTerminal).toHaveBeenCalledWith(true);
-    expect(writeToBoltTerminal).toHaveBeenCalledWith('command-marker\n');
+    expect(writeTofluixyTerminal).toHaveBeenCalledWith('command-marker\n');
     expect(result.structuredContent).toMatchObject({
       status: 'exited',
       exitCode: 0,
@@ -111,7 +111,7 @@ describe('project command tools', () => {
 
     expect(result.isError).toBe(true);
     expect(result.content).toEqual([{ type: 'text', text: 'no such file or directory' }]);
-    expect(writeToBoltTerminal).toHaveBeenCalledWith(
+    expect(writeTofluixyTerminal).toHaveBeenCalledWith(
       expect.stringContaining('Command failed: no such file or directory'),
     );
   });

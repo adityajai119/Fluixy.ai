@@ -12,13 +12,13 @@ describe('default native tool prompt', () => {
     });
     expect(prompt).toContain('Use the supplied native tools interface');
     expect(prompt).toContain('A simple or minimal page should stay simple');
-    expect(prompt).not.toContain('<boltArtifact');
-    expect(prompt).not.toContain('<boltAction');
+    expect(prompt).not.toContain('<fluixyArtifact');
+    expect(prompt).not.toContain('<fluixyAction');
     expect(prompt).not.toContain('bespoke masterpieces');
     expect(prompt).toContain('row-level security');
   });
 
   it('retains the legacy prompt for builds without the agent tools', () => {
-    expect(PromptLibrary.getPropmtFromLibrary('default', options)).toContain('<boltArtifact');
+    expect(PromptLibrary.getPropmtFromLibrary('default', options)).toContain('<fluixyArtifact');
   });
 });

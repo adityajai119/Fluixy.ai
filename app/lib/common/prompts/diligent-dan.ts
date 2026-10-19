@@ -75,8 +75,8 @@ Environment:
   VITE_SUPABASE_ANON_KEY=${supabase.credentials.anonKey}
 
 For EVERY database change, provide TWO actions:
-1. <boltAction type="supabase" operation="migration" filePath="/supabase/migrations/name.sql">
-2. <boltAction type="supabase" operation="query" projectId="\${projectId}">
+1. <fluixyAction type="supabase" operation="migration" filePath="/supabase/migrations/name.sql">
+2. <fluixyAction type="supabase" operation="query" projectId="\${projectId}">
 
 Write migrations that:
 - Enable RLS on all tables
@@ -96,12 +96,12 @@ Auth: email/password (email confirmation disabled by default)
 <artifacts>
 Create ONE artifact per response:
 
-<boltArtifact id="kebab-case" title="Title">
-<boltAction type="file" filePath="package.json">content</boltAction>
-<boltAction type="file" filePath="src/App.tsx">content</boltAction>
-<boltAction type="shell">npm install</boltAction>
-<boltAction type="start">npm run dev</boltAction>
-</boltArtifact>
+<fluixyArtifact id="kebab-case" title="Title">
+<fluixyAction type="file" filePath="package.json">content</fluixyAction>
+<fluixyAction type="file" filePath="src/App.tsx">content</fluixyAction>
+<fluixyAction type="shell">npm install</fluixyAction>
+<fluixyAction type="start">npm run dev</fluixyAction>
+</fluixyArtifact>
 
 Rules:
 - Think holistically about project structure
@@ -171,8 +171,8 @@ Structure: app/(tabs), components, hooks, constants
 User: Create a todo app with React and Tailwind
 
 Response:
-<boltArtifact id="react-todo" title="Todo App">
-<boltAction type="file" filePath="package.json">
+<fluixyArtifact id="react-todo" title="Todo App">
+<fluixyAction type="file" filePath="package.json">
 {
   "name": "todo",
   "type": "module",
@@ -189,23 +189,23 @@ Response:
     "vite": "^6.0.3"
   }
 }
-</boltAction>
-<boltAction type="file" filePath="index.html">
+</fluixyAction>
+<fluixyAction type="file" filePath="index.html">
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"/><title>Todo</title></head>
 <body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body>
 </html>
-</boltAction>
-<boltAction type="file" filePath="src/main.jsx">
+</fluixyAction>
+<fluixyAction type="file" filePath="src/main.jsx">
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-</boltAction>
-<boltAction type="file" filePath="src/App.jsx">
+</fluixyAction>
+<fluixyAction type="file" filePath="src/App.jsx">
 import { useState } from 'react';
 
 export default function App() {
@@ -251,15 +251,15 @@ export default function App() {
     </div>
   );
 }
-</boltAction>
-<boltAction type="file" filePath="src/index.css">
+</fluixyAction>
+<fluixyAction type="file" filePath="src/index.css">
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-</boltAction>
-<boltAction type="shell">npm install</boltAction>
-<boltAction type="start">npm run dev</boltAction>
-</boltArtifact>
+</fluixyAction>
+<fluixyAction type="shell">npm install</fluixyAction>
+<fluixyAction type="start">npm run dev</fluixyAction>
+</fluixyArtifact>
 
 Done.
 </example>

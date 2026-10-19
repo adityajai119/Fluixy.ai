@@ -38,7 +38,7 @@ export const links: LinksFunction = () => [
   },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap',
   },
   {
     rel: 'preconnect',
@@ -55,7 +55,7 @@ const inlineThemeCode = stripIndents`
 
   function setTutorialKitTheme() {
     try {
-      const options = JSON.parse(localStorage.getItem('bolt_interface_options') || '{}');
+      const options = JSON.parse(localStorage.getItem('fluixy_interface_options') || '{}');
       const root = document.documentElement;
       root.dataset.accentIntensity = String(typeof options.accentIntensity === 'number' ? options.accentIntensity : 50);
       root.style.setProperty('--interface-accent-strength', String(typeof options.accentIntensity === 'number' ? options.accentIntensity : 50) + '%');
@@ -63,15 +63,15 @@ const inlineThemeCode = stripIndents`
       root.dataset.compactMode = String(Boolean(options.compactMode));
       root.dataset.animatedTransitions = String(options.animatedTransitions !== false);
     } catch {}
-    let colorTheme = localStorage.getItem('bolt_theme');
+    let colorTheme = localStorage.getItem('fluixy_theme');
 
     if (!colorTheme) {
-      colorTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark-dracula' : 'light';
+      colorTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
     const mode = colorTheme === 'dark' || colorTheme.startsWith('dark-') ? 'dark' : 'light';
     document.querySelector('html')?.setAttribute('data-theme', mode);
-    document.querySelector('html')?.setAttribute('data-color-theme', colorTheme === 'dark' ? 'dark-dracula' : colorTheme);
+    document.querySelector('html')?.setAttribute('data-color-theme', colorTheme);
   }
 `;
 
@@ -81,7 +81,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const mode = theme === 'dark' || theme.startsWith('dark-') ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', mode);
-    document.documentElement.setAttribute('data-color-theme', theme === 'dark' ? 'dark-dracula' : theme);
+    document.documentElement.setAttribute('data-color-theme', theme);
   }, [theme]);
 
   // The theme script applies saved browser preferences before hydration.
@@ -90,7 +90,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       lang="en"
       suppressHydrationWarning
       data-theme={theme === 'dark' || theme.startsWith('dark-') ? 'dark' : 'light'}
-      data-color-theme={theme === 'dark' ? 'dark-dracula' : theme}
+      data-color-theme={theme}
       className="w-full h-full"
     >
       <head>
@@ -121,11 +121,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
           icon={({ type }) => {
             switch (type) {
               case 'success': {
-                return <div className="i-ph:check-bold text-bolt-elements-icon-success text-2xl" />;
+                return <div className="i-ph:check-bold text-fluixy-elements-icon-success text-2xl" />;
               }
               case 'error': {
-                return <div className="i-ph:warning-circle-bold text-bolt-elements-icon-error text-2xl" />;
+                return <div className="i-ph:warning-circle-bold text-fluixy-elements-icon-error text-2xl" />;
               }
+
             }
 
             return undefined;

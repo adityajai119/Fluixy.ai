@@ -31,6 +31,7 @@ const GlowingEffect = memo(
     const containerRef = useRef<HTMLDivElement>(null);
     const lastPosition = useRef({ x: 0, y: 0 });
     const animationFrameRef = useRef<number>(0);
+    const framerAnimationRef = useRef<any>(null);
 
     const handleMove = useCallback(
       (e?: MouseEvent | { x: number; y: number }) => {
@@ -84,7 +85,11 @@ const GlowingEffect = memo(
           const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
           const newAngle = currentAngle + angleDiff;
 
-          animate(currentAngle, newAngle, {
+          if (framerAnimationRef.current) {
+            framerAnimationRef.current.stop();
+          }
+
+          framerAnimationRef.current = animate(currentAngle, newAngle, {
             duration: movementDuration,
             ease: [0.16, 1, 0.3, 1],
             onUpdate: (value) => {
@@ -101,10 +106,8 @@ const GlowingEffect = memo(
         return undefined;
       }
 
-      const handleScroll = () => handleMove();
       const handlePointerMove = (e: PointerEvent) => handleMove(e);
 
-      window.addEventListener('scroll', handleScroll, { passive: true });
       document.body.addEventListener('pointermove', handlePointerMove, {
         passive: true,
       });
@@ -113,8 +116,10 @@ const GlowingEffect = memo(
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
         }
+        if (framerAnimationRef.current) {
+          framerAnimationRef.current.stop();
+        }
 
-        window.removeEventListener('scroll', handleScroll);
         document.body.removeEventListener('pointermove', handlePointerMove);
       };
     }, [handleMove, disabled]);

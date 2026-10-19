@@ -11,13 +11,23 @@ html,
 body {
   height: 100%;
   width: 100%;
-  background-color: var(--bolt-elements-bg-depth-1);
+  background-color: var(--fluixy-elements-bg-depth-1);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
 }
 
 html[data-accent-intensity] .bg-accent-500 {
   background-color: color-mix(
     in srgb,
-    var(--bolt-elements-button-primary-text) var(--interface-accent-strength),
+    var(--fluixy-elements-button-primary-text) var(--interface-accent-strength),
     transparent
   ) !important;
 }
@@ -59,13 +69,92 @@ html[data-animated-transitions='false'] *::after {
 
 :root {
   --gradient-opacity: 0.8;
-  --primary-color: rgba(158, 117, 240, var(--gradient-opacity));
-  --secondary-color: rgba(138, 43, 226, var(--gradient-opacity));
-  --accent-color: rgba(128, 59, 239, var(--gradient-opacity));
-  // --primary-color: rgba(147, 112, 219, var(--gradient-opacity));
-  // --secondary-color: rgba(138, 43, 226, var(--gradient-opacity));
-  // --accent-color: rgba(180, 170, 220, var(--gradient-opacity));
+  --primary-color: rgba(139, 92, 246, var(--gradient-opacity));
+  --secondary-color: rgba(99, 102, 241, var(--gradient-opacity));
+  --accent-color: rgba(59, 130, 246, var(--gradient-opacity));
 }
+
+/* ============================================
+   Glassmorphism Utilities
+   ============================================ */
+
+.glass {
+  background: var(--fluixy-glass-background);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border: 1px solid var(--fluixy-glass-border);
+}
+
+.glass-subtle {
+  background: var(--fluixy-glass-background);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border: 1px solid var(--fluixy-glass-border);
+}
+
+.glass-strong {
+  background: var(--fluixy-glass-background);
+  backdrop-filter: blur(40px) saturate(2.0);
+  -webkit-backdrop-filter: blur(40px) saturate(2.0);
+  border: 1px solid var(--fluixy-glass-border);
+}
+
+/* ============================================
+   Glow Effects
+   ============================================ */
+
+.glow-accent {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15), 0 0 40px rgba(139, 92, 246, 0.05);
+}
+
+.glow-accent-hover:hover {
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.25), 0 0 50px rgba(139, 92, 246, 0.10);
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--fluixy-accent-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   Gradient Text
+   ============================================ */
+
+.gradient-text {
+  background: var(--fluixy-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: var(--fluixy-accent-gradient-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Modern Scrollbar
+   ============================================ */
 
 .modern-scrollbar {
   overflow: auto;
@@ -78,8 +167,8 @@ html[data-animated-transitions='false'] *::after {
   scrollbar-color: var(--modern-scrollbar-thumb-background) transparent;
 
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 4px;
+    height: 4px;
   }
 
   &::-webkit-scrollbar-track,
@@ -94,17 +183,79 @@ html[data-animated-transitions='false'] *::after {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--modern-scrollbar-thumb-background);
+    background: var(--modern-scrollbar-thumb-background);
     border-radius: 9999px;
-    border: 2px solid transparent;
-    background-clip: padding-box;
+    border: 1px solid transparent;
+    background-clip: content-box;
+    transition: background-color 0.3s ease;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: var(--modern-scrollbar-thumb-backgroundHover);
+    background: var(--modern-scrollbar-thumb-backgroundHover);
   }
 
-  &:hover {
-    scrollbar-color: var(--modern-scrollbar-thumb-backgroundHover) transparent;
+  scrollbar-width: thin;
+  scrollbar-color: var(--modern-scrollbar-thumb-backgroundHover) transparent;
+}
+
+.modern-scrollbar-invert {
+  &::-webkit-scrollbar-thumb {
+    background-color: color-mix(in srgb, var(--fluixy-elements-textPrimary), transparent 70%);
   }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in srgb, var(--fluixy-elements-textPrimary), transparent 50%);
+  }
+
+  scrollbar-color: color-mix(in srgb, var(--fluixy-elements-textPrimary), transparent 50%) transparent;
+}
+
+/* ============================================
+   Transition Utilities
+   ============================================ */
+
+.transition-theme {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.transition-all-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   Global Custom Scrollbar (#13)
+   ============================================ */
+
+* {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.2);
+    border-radius: 99px;
+    transition: background 0.3s ease;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.45);
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.2) transparent;
+}
+
+/* ============================================
+   Global Interactive Polish (#19, #20)
+   ============================================ */
+
+button,
+a,
+[role="button"] {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }

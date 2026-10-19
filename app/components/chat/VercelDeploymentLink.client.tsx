@@ -48,7 +48,7 @@ export function VercelDeploymentLink() {
         const chatNumber = currentChatId.split('-')[0];
 
         // Find project by matching the chat number in the name
-        const project = projects.find((p: { name: string | string[] }) => p.name.includes(`bolt-diy-${chatNumber}`));
+        const project = projects.find((p: { name: string | string[] }) => p.name.includes(`fluixy.ai-${chatNumber}`));
 
         if (project) {
           // Fetch project details including deployments
@@ -137,7 +137,7 @@ export function VercelDeploymentLink() {
             href={deploymentUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-8 h-8 rounded hover:bg-bolt-elements-item-backgroundActive text-bolt-elements-textSecondary hover:text-[#000000] z-50"
+            className="inline-flex items-center justify-center w-8 h-8 rounded hover:bg-fluixy-elements-item-backgroundActive text-fluixy-elements-textSecondary hover:text-[#000000] z-50"
             onClick={(e) => {
               e.stopPropagation();
             }}
@@ -147,11 +147,11 @@ export function VercelDeploymentLink() {
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            className="px-3 py-2 rounded bg-bolt-elements-background-depth-3 text-bolt-elements-textPrimary text-xs z-50"
+            className="px-3 py-2 rounded bg-fluixy-elements-background-depth-3 text-fluixy-elements-textPrimary text-xs z-50"
             sideOffset={5}
           >
             {deploymentUrl}
-            <Tooltip.Arrow className="fill-bolt-elements-background-depth-3" />
+            <Tooltip.Arrow className="fill-fluixy-elements-background-depth-3" />
           </Tooltip.Content>
         </Tooltip.Portal>
       </Tooltip.Root>

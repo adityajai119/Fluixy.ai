@@ -36,6 +36,9 @@ import type { DesignScheme } from '~/types/design-scheme';
 import type { ProviderInfo } from '~/types/model';
 import { classNames } from '~/utils/classNames';
 import { PROVIDER_LIST } from '~/utils/constants';
+import { ThinkingVisualizer } from './ThinkingVisualizer';
+import { PromptEnhancer } from './PromptEnhancer';
+import { SkeletonLoader } from '~/components/ui/SkeletonLoader';
 
 const TEXTAREA_MIN_HEIGHT = 76;
 
@@ -384,15 +387,49 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
         <div className="flex flex-col lg:flex-row overflow-y-auto w-full h-full">
           <div className={classNames(styles.Chat, 'flex flex-col flex-grow lg:min-w-[var(--chat-min-width)] h-full')}>
             {!chatStarted && (
-              <div id="intro" className="mt-[16vh] max-w-2xl mx-auto text-center px-4 lg:px-0">
-                <h1 className="text-3xl lg:text-6xl font-bold text-bolt-elements-textPrimary mb-4 animate-fade-in">
-                  Where ideas begin
+              <div id="intro" className="mt-[12vh] max-w-4xl mx-auto text-center px-4 lg:px-0">
+                <h1
+                  className={classNames(
+                    styles.WelcomeHeading,
+                    'text-3xl lg:text-5xl font-bold mb-3',
+                  )}
+                  style={{ animation: 'slide-up-fade 0.6s ease-out forwards' }}
+                >
+                  Build Anything with AI
                 </h1>
-                <p className="text-md lg:text-xl mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200">
-                  Bring ideas to life in seconds or get help on existing projects.
+                <p
+                  className="text-base lg:text-lg text-fluixy-elements-textSecondary mb-5 max-w-xl mx-auto"
+                  style={{ animation: 'slide-up-fade 0.6s ease-out 0.15s forwards', opacity: 0 }}
+                >
+                  Describe your idea, and watch Fluixy.ai bring it to life — in seconds.
                 </p>
+                <div
+                  className="flex items-center justify-center gap-3 flex-wrap mb-2"
+                  style={{ animation: 'slide-up-fade 0.6s ease-out 0.3s forwards', opacity: 0 }}
+                >
+                  <span className={styles.FloatingBadge}>
+                    <span>⚡</span> AI Powered
+                  </span>
+                  <span className={styles.FloatingBadge}>
+                    <span>🎤</span> Voice Input
+                  </span>
+                  <span className={styles.FloatingBadge}>
+                    <span>🇮🇳</span> Made for Bharat
+                  </span>
+                  <span className={styles.FloatingBadge}>
+                    <span>⌨️</span> Ctrl+K
+                  </span>
+                </div>
               </div>
             )}
+
+            {/* Show skeleton loader if enhancing prompt or models loading */}
+            {(enhancingPrompt || (chatStarted && !messages?.length && isStreaming)) && (
+              <div className="max-w-4xl mx-auto w-full px-4 lg:px-0 mt-8">
+                <SkeletonLoader type="card" count={2} className="opacity-60" />
+              </div>
+            )}
+
             <StickToBottom
               className={classNames('pt-6 px-2 sm:px-6 relative', {
                 'h-full flex flex-col modern-scrollbar': chatStarted,
@@ -449,6 +486,22 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 </div>
                 <ToolApprovalTray messages={messages} addToolOutput={addToolOutput} />
                 {incomingProgressAnnotations && <ProgressCompilation data={incomingProgressAnnotations} />}
+                {chatStarted && <ThinkingVisualizer isStreaming={isStreaming} messages={messages} />}
+                {!chatStarted && input && input.trim().length > 0 && (
+                  <div className="flex justify-center mb-2">
+                    <PromptEnhancer
+                      inputValue={input}
+                      onEnhanced={(enhanced) => {
+                        if (handleInputChange) {
+                          const syntheticEvent = {
+                            target: { value: enhanced },
+                          } as React.ChangeEvent<HTMLTextAreaElement>;
+                          handleInputChange(syntheticEvent);
+                        }
+                      }}
+                    />
+                  </div>
+                )}
                 <ChatBox
                   isModelSettingsCollapsed={isModelSettingsCollapsed}
                   setIsModelSettingsCollapsed={setIsModelSettingsCollapsed}
@@ -495,15 +548,15 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 />
               </div>
             </StickToBottom>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center transform-gpu will-change-transform">
               {!chatStarted && (
                 <div className="flex justify-center gap-2">
                   <ImportFolderButton
                     importChat={importChat}
                     className={classNames(
-                      'gap-2 bg-bolt-elements-background-depth-1',
-                      'text-bolt-elements-textPrimary',
-                      'hover:bg-bolt-elements-background-depth-2',
+                      'gap-2 bg-fluixy-elements-background-depth-1',
+                      'text-fluixy-elements-textPrimary',
+                      'hover:bg-fluixy-elements-background-depth-2',
                       'border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)]',
                       'h-10 px-4 py-2 min-w-[120px] justify-center',
                       'transition-all duration-200 ease-in-out rounded-lg',
@@ -512,9 +565,9 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   <ImportZipButton
                     importChat={importChat}
                     className={classNames(
-                      'gap-2 bg-bolt-elements-background-depth-1',
-                      'text-bolt-elements-textPrimary',
-                      'hover:bg-bolt-elements-background-depth-2',
+                      'gap-2 bg-fluixy-elements-background-depth-1',
+                      'text-fluixy-elements-textPrimary',
+                      'hover:bg-fluixy-elements-background-depth-2',
                       'border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)]',
                       'h-10 px-4 py-2 min-w-[120px] justify-center',
                       'transition-all duration-200 ease-in-out rounded-lg',
@@ -564,9 +617,12 @@ function ScrollToBottom() {
   return (
     !isAtBottom && (
       <>
-        <div className="sticky bottom-0 left-0 right-0 bg-gradient-to-t from-bolt-elements-background-depth-1 to-transparent h-20 z-10" />
+        <div className="sticky bottom-0 left-0 right-0 bg-gradient-to-t from-fluixy-elements-background-depth-1 to-transparent h-20 z-10" />
         <button
-          className="sticky z-50 bottom-0 left-0 right-0 text-4xl rounded-lg px-1.5 py-0.5 flex items-center justify-center mx-auto gap-2 bg-bolt-elements-background-depth-2 border border-bolt-elements-borderColor text-bolt-elements-textPrimary text-sm"
+          className={classNames(
+            styles.ScrollToBottomBtn,
+            'sticky z-50 bottom-0 left-0 right-0 rounded-xl px-4 py-2 flex items-center justify-center mx-auto gap-2 text-fluixy-elements-textPrimary text-sm font-medium',
+          )}
           onClick={() => scrollToBottom()}
         >
           Go to last message

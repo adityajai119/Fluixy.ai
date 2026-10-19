@@ -1,7 +1,7 @@
 import type { UIMessage } from 'ai';
 import JSZip from 'jszip';
 import { generateId, shouldIncludeFile } from './fileUtils';
-import { escapeBoltTags } from './projectCommands';
+import { escapefluixyTags } from './projectCommands';
 import { createMessage } from '~/lib/persistence/messageMigration';
 
 /**
@@ -57,9 +57,9 @@ export interface ZipImportResult {
 }
 
 /**
- * Reads a ZIP file and converts its contents into the same boltArtifact
+ * Reads a ZIP file and converts its contents into the same fluixyArtifact
  * chat-message structure that createChatFromFolder produces. This lets
- * bolt load the project correctly without writing directly to the
+ * Fluixy.Ai load the project correctly without writing directly to the
  * WebContainer filesystem (which can be wiped by navigation resets).
  */
 export const createChatFromZip = async (zipFile: File): Promise<ZipImportResult> => {
@@ -137,7 +137,7 @@ export const createChatFromZip = async (zipFile: File): Promise<ZipImportResult>
     });
 
   /*
-   * For Expo projects, strip the scripts from package.json so bolt has
+   * For Expo projects, strip the scripts from package.json so Fluixy.Ai has
    * nothing to execute even if it tries. The user will run the project
    * locally with Expo CLI. We preserve the rest of package.json intact.
    */
@@ -179,15 +179,15 @@ export const createChatFromZip = async (zipFile: File): Promise<ZipImportResult>
     id: generateId(),
     text: `I've imported the contents of the "${folderName}" ZIP archive.${binaryFilesMessage}
 
-<boltArtifact id="imported-files" title="Imported Files" type="bundled">
+<fluixyArtifact id="imported-files" title="Imported Files" type="bundled">
 ${fileArtifacts
   .map(
-    (file) => `<boltAction type="file" filePath="${file.path}">
-${escapeBoltTags(file.content)}
-</boltAction>`,
+    (file) => `<fluixyAction type="file" filePath="${file.path}">
+${escapefluixyTags(file.content)}
+</fluixyAction>`,
   )
   .join('\n\n')}
-</boltArtifact>`,
+</fluixyArtifact>`,
   }) as UIMessage;
 
   const userMessage = createMessage({

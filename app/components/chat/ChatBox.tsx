@@ -160,13 +160,11 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
   return (
     <div
       className={classNames(
-        'relative bg-bolt-elements-background-depth-2 backdrop-blur p-3 rounded-lg border border-bolt-elements-borderColor relative w-full max-w-chat mx-auto z-prompt',
-
-        /*
-         * {
-         *   'sticky bottom-2': chatStarted,
-         * },
-         */
+        'relative bg-fluixy-elements-background-depth-2/80 backdrop-blur-xl p-3 rounded-2xl border border-fluixy-elements-borderColor relative w-full max-w-chat mx-auto z-prompt transition-all duration-300 ease-out',
+        {
+          'hover:shadow-[0_0_20px_rgba(20,136,252,0.15)] hover:border-fluixy-elements-borderColorActive': !props.isStreaming,
+          'shadow-[0_0_25px_rgba(20,136,252,0.25)] border-accent-500/50 scale-[1.01]': props.isStreaming,
+        }
       )}
     >
       <svg className={classNames(styles.PromptEffectContainer)}>
@@ -198,7 +196,7 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
       <div>
         <ClientOnly>
           {() => (
-            <div className={props.isModelSettingsCollapsed ? 'hidden' : ''}>
+            <div className={classNames(props.isModelSettingsCollapsed ? 'hidden' : '', 'w-[80%] mx-auto mb-2')}>
               <ModelSelector
                 key={props.provider?.name}
                 model={props.model}
@@ -244,7 +242,7 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
         )}
       </ClientOnly>
       {props.selectedElement && (
-        <div className="flex mx-1.5 gap-2 items-center justify-between rounded-lg rounded-b-none border border-b-none border-bolt-elements-borderColor text-bolt-elements-textPrimary flex py-1 px-2.5 font-medium text-xs">
+        <div className="flex mx-1.5 gap-2 items-center justify-between rounded-lg rounded-b-none border border-b-none border-fluixy-elements-borderColor text-fluixy-elements-textPrimary flex py-1 px-2.5 font-medium text-xs">
           <div className="flex gap-2 items-center lowercase">
             <code className="bg-accent-500 rounded-4px px-1.5 py-1 mr-0.5 text-white">
               {props?.selectedElement?.tagName}
@@ -260,14 +258,15 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
         </div>
       )}
       <div
-        className={classNames('relative shadow-xs border border-bolt-elements-borderColor backdrop-blur rounded-lg')}
+        className={classNames(
+          'relative shadow-inner border border-fluixy-elements-borderColor/50 backdrop-blur rounded-xl bg-fluixy-elements-background-depth-1 hover:border-accent-500/50 transition-colors duration-300'
+        )}
       >
         <textarea
           ref={props.textareaRef}
           className={classNames(
-            'w-full pl-4 pt-4 pr-16 outline-none resize-none text-bolt-elements-textPrimary placeholder-bolt-elements-textTertiary bg-transparent text-sm',
+            'w-full pl-4 pt-4 pr-16 outline-none resize-none text-fluixy-elements-textPrimary placeholder-fluixy-elements-textTertiary bg-transparent text-sm',
             'transition-all duration-200',
-            'hover:border-bolt-elements-focus',
           )}
           onDragEnter={(e) => {
             e.preventDefault();
@@ -279,11 +278,11 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
           }}
           onDragLeave={(e) => {
             e.preventDefault();
-            e.currentTarget.style.border = '1px solid var(--bolt-elements-borderColor)';
+            e.currentTarget.style.border = '1px solid var(--fluixy-elements-borderColor)';
           }}
           onDrop={(e) => {
             e.preventDefault();
-            e.currentTarget.style.border = '1px solid var(--bolt-elements-borderColor)';
+            e.currentTarget.style.border = '1px solid var(--fluixy-elements-borderColor)';
 
             const files = Array.from(e.dataTransfer.files);
             files.forEach((file) => {
@@ -329,7 +328,7 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
             minHeight: props.TEXTAREA_MIN_HEIGHT,
             maxHeight: props.TEXTAREA_MAX_HEIGHT,
           }}
-          placeholder={props.chatMode === 'build' ? 'How can Bolt help you today?' : 'What would you like to discuss?'}
+          placeholder={props.chatMode === 'build' ? 'How can fluixy help you today?' : 'What would you like to discuss?'}
           translate="no"
         />
         <ClientOnly>
@@ -394,10 +393,10 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
                   className={classNames(
                     'transition-all flex items-center gap-1 rounded-md px-1.5 py-1 text-xs',
                     props.chatMode === 'discuss'
-                      ? 'bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent'
+                      ? 'bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent'
                       : props.agentMode
-                        ? 'bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent'
-                        : 'bg-bolt-elements-item-backgroundDefault text-bolt-elements-item-contentDefault hover:bg-bolt-elements-item-backgroundActive',
+                        ? 'bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent'
+                        : 'bg-fluixy-elements-item-backgroundDefault text-fluixy-elements-item-contentDefault hover:bg-fluixy-elements-item-backgroundActive',
                   )}
                 >
                   {props.chatMode === 'discuss' ? (
@@ -418,8 +417,8 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
                 <DropdownMenu.Content
                   className={classNames(
                     'min-w-[160px] rounded-lg p-1',
-                    'bg-bolt-elements-background-depth-2',
-                    'border border-bolt-elements-borderColor',
+                    'bg-fluixy-elements-background-depth-2',
+                    'border border-fluixy-elements-borderColor',
                     'shadow-lg',
                     'z-50',
                   )}
@@ -429,10 +428,10 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
                   <DropdownMenu.Item
                     className={classNames(
                       'flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer',
-                      'text-bolt-elements-textPrimary',
-                      'hover:bg-bolt-elements-item-backgroundActive',
+                      'text-fluixy-elements-textPrimary',
+                      'hover:bg-fluixy-elements-item-backgroundActive',
                       'focus:outline-none',
-                      props.chatMode === 'build' && props.agentMode && 'bg-bolt-elements-item-backgroundAccent',
+                      props.chatMode === 'build' && props.agentMode && 'bg-fluixy-elements-item-backgroundAccent',
                     )}
                     onSelect={() => {
                       props.setChatMode?.('build');
@@ -442,16 +441,16 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
                     <div className="i-ph:robot text-lg" />
                     <div className="flex flex-col">
                       <span>Agent</span>
-                      <span className="text-xs text-bolt-elements-textSecondary">Plans & uses tools</span>
+                      <span className="text-xs text-fluixy-elements-textSecondary">Plans & uses tools</span>
                     </div>
                   </DropdownMenu.Item>
                   <DropdownMenu.Item
                     className={classNames(
                       'flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer',
-                      'text-bolt-elements-textPrimary',
-                      'hover:bg-bolt-elements-item-backgroundActive',
+                      'text-fluixy-elements-textPrimary',
+                      'hover:bg-fluixy-elements-item-backgroundActive',
                       'focus:outline-none',
-                      props.chatMode === 'discuss' && 'bg-bolt-elements-item-backgroundAccent',
+                      props.chatMode === 'discuss' && 'bg-fluixy-elements-item-backgroundAccent',
                     )}
                     onSelect={() => {
                       props.setChatMode?.('discuss');
@@ -461,7 +460,7 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
                     <div className="i-ph:chats text-lg" />
                     <div className="flex flex-col">
                       <span>Discuss</span>
-                      <span className="text-xs text-bolt-elements-textSecondary">Chat without tools</span>
+                      <span className="text-xs text-fluixy-elements-textSecondary">Chat without tools</span>
                     </div>
                   </DropdownMenu.Item>
                 </DropdownMenu.Content>
@@ -476,9 +475,9 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
             <IconButton
               title="Model Settings"
               className={classNames('transition-all flex items-center gap-1', {
-                'bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent':
+                'bg-fluixy-elements-item-backgroundAccent text-fluixy-elements-item-contentAccent':
                   props.isModelSettingsCollapsed,
-                'bg-bolt-elements-item-backgroundDefault text-bolt-elements-item-contentDefault':
+                'bg-fluixy-elements-item-backgroundDefault text-fluixy-elements-item-contentDefault':
                   !props.isModelSettingsCollapsed,
               })}
               onClick={() => props.setIsModelSettingsCollapsed(!props.isModelSettingsCollapsed)}

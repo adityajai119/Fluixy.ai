@@ -88,10 +88,10 @@ export default function ProfileTab() {
               onClick={() => setIsAvatarPickerOpen((open) => !open)}
               className={classNames(
                 'w-24 h-24 rounded-full overflow-hidden',
-                'bg-bolt-elements-background-depth-2',
-                'ring-1 ring-bolt-elements-borderColor',
+                'bg-fluixy-elements-background-depth-2',
+                'ring-1 ring-fluixy-elements-borderColor',
                 'relative group transition-all duration-300 ease-out',
-                'hover:ring-bolt-elements-borderColorActive hover:shadow-lg',
+                'hover:ring-fluixy-elements-borderColorActive hover:shadow-lg',
               )}
             >
               <img
@@ -109,16 +109,16 @@ export default function ProfileTab() {
             </button>
 
             <div className="flex-1 pt-1">
-              <label className="block text-base font-medium text-bolt-elements-textPrimary mb-1">Profile Picture</label>
-              <p className="text-sm text-bolt-elements-textSecondary">
+              <label className="block text-base font-medium text-fluixy-elements-textPrimary mb-1">Profile Picture</label>
+              <p className="text-sm text-fluixy-elements-textSecondary">
                 Choose a default avatar or upload one from your computer.
               </p>
             </div>
           </div>
 
           {isAvatarPickerOpen && (
-            <div className="mb-8 rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-1 p-4">
-              <h3 className="mb-3 text-sm font-medium text-bolt-elements-textPrimary">Choose your avatar</h3>
+            <div className="mb-8 rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-1 p-4">
+              <h3 className="mb-3 text-sm font-medium text-fluixy-elements-textPrimary">Choose your avatar</h3>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {DEFAULT_AVATARS.map((avatar) => {
                   const selected = profile.avatar === avatar.src;
@@ -131,21 +131,21 @@ export default function ProfileTab() {
                       aria-pressed={selected}
                       onClick={() => handleChooseAvatar(avatar.src)}
                       style={{
-                        backgroundColor: 'var(--bolt-elements-bg-depth-2)',
-                        color: 'var(--bolt-elements-textPrimary)',
+                        backgroundColor: 'var(--fluixy-elements-bg-depth-2)',
+                        color: 'var(--fluixy-elements-textPrimary)',
                       }}
                       className={classNames(
                         'flex min-h-28 flex-col items-center justify-center rounded-lg border p-2 transition-colors',
                         selected
-                          ? 'border-bolt-elements-borderColorActive bg-bolt-elements-background-depth-2 ring-1 ring-bolt-elements-borderColorActive'
-                          : 'border-bolt-elements-borderColor hover:bg-bolt-elements-background-depth-2',
+                          ? 'border-fluixy-elements-borderColorActive bg-fluixy-elements-background-depth-2 ring-1 ring-fluixy-elements-borderColorActive'
+                          : 'border-fluixy-elements-borderColor hover:bg-fluixy-elements-background-depth-2',
                       )}
                     >
                       <img src={avatar.src} alt="" className="h-24 w-24 rounded-full" />
                     </button>
                   );
                 })}
-                <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-bolt-elements-borderColor p-3 text-bolt-elements-textSecondary transition-colors hover:bg-bolt-elements-background-depth-2">
+                <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-fluixy-elements-borderColor p-3 text-fluixy-elements-textSecondary transition-colors hover:bg-fluixy-elements-background-depth-2">
                   <input
                     type="file"
                     accept="image/*"
@@ -153,7 +153,7 @@ export default function ProfileTab() {
                     onChange={handleAvatarUpload}
                     disabled={isUploading}
                   />
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-bolt-elements-background-depth-3">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-fluixy-elements-background-depth-3">
                     <span className="i-ph-upload-simple h-6 w-6" />
                   </span>
                   <span className="text-xs font-medium">Upload from computer</span>

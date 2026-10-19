@@ -134,21 +134,21 @@ export const ToolInvocations = memo(
     }
 
     return (
-      <div className="tool-invocation border border-bolt-elements-borderColor flex flex-col overflow-hidden rounded-lg w-full transition-border duration-150">
+      <div className="tool-invocation border border-fluixy-elements-borderColor flex flex-col overflow-hidden rounded-lg w-full transition-border duration-150">
         <div className="flex">
           <button
-            className="flex items-stretch bg-bolt-elements-background-depth-2 hover:bg-bolt-elements-artifacts-backgroundHover w-full overflow-hidden"
+            className="flex items-stretch bg-fluixy-elements-background-depth-2 hover:bg-fluixy-elements-artifacts-backgroundHover w-full overflow-hidden"
             onClick={toggleDetails}
             aria-label={showDetails ? 'Collapse details' : 'Expand details'}
           >
             <div className="p-2.5">
-              <div className="i-ph:wrench text-xl text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary transition-colors"></div>
+              <div className="i-ph:wrench text-xl text-fluixy-elements-textSecondary hover:text-fluixy-elements-textPrimary transition-colors"></div>
             </div>
             <div className="p-2.5 w-full text-left">
-              <div className="w-full text-bolt-elements-textPrimary font-medium leading-5 text-sm">
+              <div className="w-full text-fluixy-elements-textPrimary font-medium leading-5 text-sm">
                 {activitySummary(toolInvocations)}{' '}
                 {hasToolResults && (
-                  <span className="w-full w-full text-bolt-elements-textSecondary text-xs mt-0.5">
+                  <span className="w-full w-full text-fluixy-elements-textSecondary text-xs mt-0.5">
                     ({toolResults.length} tool{hasToolResults ? 's' : ''} used)
                   </span>
                 )}
@@ -162,12 +162,12 @@ export const ToolInvocations = memo(
                 animate={{ width: 'auto' }}
                 exit={{ width: 0 }}
                 transition={{ duration: 0.15, ease: cubicEasingFn }}
-                className="bg-bolt-elements-artifacts-background hover:bg-bolt-elements-artifacts-backgroundHover"
+                className="bg-fluixy-elements-artifacts-background hover:bg-fluixy-elements-artifacts-backgroundHover"
                 onClick={toggleDetails}
               >
                 <div className="p-2">
                   <div
-                    className={`${showDetails ? 'i-ph:caret-up-bold' : 'i-ph:caret-down-bold'} text-xl text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary transition-colors`}
+                    className={`${showDetails ? 'i-ph:caret-up-bold' : 'i-ph:caret-down-bold'} text-xl text-fluixy-elements-textSecondary hover:text-fluixy-elements-textPrimary transition-colors`}
                   ></div>
                 </div>
               </motion.button>
@@ -183,9 +183,9 @@ export const ToolInvocations = memo(
               exit={{ height: '0px' }}
               transition={{ duration: 0.15 }}
             >
-              <div className="bg-bolt-elements-artifacts-borderColor h-[1px]" />
+              <div className="bg-fluixy-elements-artifacts-borderColor h-[1px]" />
 
-              <div className="px-3 py-3 text-left bg-bolt-elements-background-depth-2">
+              <div className="px-3 py-3 text-left bg-fluixy-elements-background-depth-2">
                 <ToolCallsList
                   toolInvocations={toolInvocations}
                   toolCallAnnotations={toolCallAnnotations}
@@ -204,9 +204,9 @@ export const ToolInvocations = memo(
               exit={{ height: '0px' }}
               transition={{ duration: 0.15 }}
             >
-              <div className="bg-bolt-elements-artifacts-borderColor h-[1px]" />
+              <div className="bg-fluixy-elements-artifacts-borderColor h-[1px]" />
 
-              <div className="p-5 text-left bg-bolt-elements-actions-background">
+              <div className="p-5 text-left bg-fluixy-elements-actions-background">
                 <ToolResultsList
                   toolInvocations={toolResults}
                   toolCallAnnotations={toolCallAnnotations}
@@ -279,7 +279,7 @@ const ToolResultsList = memo(({ toolInvocations, toolCallAnnotations, theme }: T
             >
               <div className="flex items-center gap-1.5 text-xs mb-1">
                 {isErrorResult ? (
-                  <div className="text-lg text-bolt-elements-icon-error">
+                  <div className="text-lg text-fluixy-elements-icon-error">
                     <div className="i-ph:x"></div>
                   </div>
                 ) : displayState === 'process-running' ? (
@@ -287,27 +287,27 @@ const ToolResultsList = memo(({ toolInvocations, toolCallAnnotations, theme }: T
                     <div className="i-ph:play"></div>
                   </div>
                 ) : (
-                  <div className="text-lg text-bolt-elements-icon-success">
+                  <div className="text-lg text-fluixy-elements-icon-success">
                     <div className="i-ph:check"></div>
                   </div>
                 )}
-                <div className="text-bolt-elements-textSecondary text-xs">Server:</div>
-                <div className="text-bolt-elements-textPrimary font-semibold">{annotation?.serverName}</div>
+                <div className="text-fluixy-elements-textSecondary text-xs">Server:</div>
+                <div className="text-fluixy-elements-textPrimary font-semibold">{annotation?.serverName}</div>
               </div>
 
               <div className="ml-6 mb-2">
-                <div className="text-bolt-elements-textSecondary text-xs mb-1">
-                  Tool: <span className="text-bolt-elements-textPrimary font-semibold">{toolName}</span>
+                <div className="text-fluixy-elements-textSecondary text-xs mb-1">
+                  Tool: <span className="text-fluixy-elements-textPrimary font-semibold">{toolName}</span>
                 </div>
-                <div className="text-bolt-elements-textSecondary text-xs mb-1">
+                <div className="text-fluixy-elements-textSecondary text-xs mb-1">
                   Description:{' '}
-                  <span className="text-bolt-elements-textPrimary font-semibold">{annotation?.toolDescription}</span>
+                  <span className="text-fluixy-elements-textPrimary font-semibold">{annotation?.toolDescription}</span>
                 </div>
-                <div className="text-bolt-elements-textSecondary text-xs mb-1">Parameters:</div>
+                <div className="text-fluixy-elements-textSecondary text-xs mb-1">Parameters:</div>
                 <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] p-3 rounded-md">
                   <JsonCodeBlock className="mb-0" code={JSON.stringify(getToolInput(tool))} theme={theme} />
                 </div>
-                <div className="text-bolt-elements-textSecondary text-xs mt-3 mb-1">Result:</div>
+                <div className="text-fluixy-elements-textSecondary text-xs mt-3 mb-1">Result:</div>
                 <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] p-3 rounded-md">
                   <JsonCodeBlock className="mb-0" code={JSON.stringify(getToolOutput(tool))} theme={theme} />
                 </div>
@@ -378,7 +378,7 @@ const ToolCallsList = memo(
             if (part?.type === 'text' && typeof part.text === 'string') {
               const text = cleanTimelineText(part.text);
               return text.trim() ? (
-                <div key={`text-${index}`} className="text-sm leading-6 text-bolt-elements-textPrimary">
+                <div key={`text-${index}`} className="text-sm leading-6 text-fluixy-elements-textPrimary">
                   <Markdown>{text}</Markdown>
                 </div>
               ) : null;
@@ -398,11 +398,11 @@ const ToolCallsList = memo(
 
               return (
                 <details key={`exploration-${toolCallId}`} className="text-sm" open>
-                  <summary className="cursor-pointer list-none font-medium text-bolt-elements-textPrimary">
-                    <span className="mr-2 inline-block text-bolt-elements-textSecondary">⌄</span>
+                  <summary className="cursor-pointer list-none font-medium text-fluixy-elements-textPrimary">
+                    <span className="mr-2 inline-block text-fluixy-elements-textSecondary">⌄</span>
                     {explorationSummary}
                   </summary>
-                  <div className="ml-5 mt-2 flex flex-col gap-1 border-l border-bolt-elements-borderColor pl-3">
+                  <div className="ml-5 mt-2 flex flex-col gap-1 border-l border-fluixy-elements-borderColor pl-3">
                     {explorationParts.map((item, itemIndex) => (
                       <ToolActivityRow
                         key={getToolCallId(item) ?? itemIndex}
@@ -462,7 +462,7 @@ const ToolCallsList = memo(
               >
                 <div className="py-1">
                   <div key={toolCallId} className="flex min-w-0 items-center gap-2 text-sm">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center text-bolt-elements-textSecondary">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center text-fluixy-elements-textSecondary">
                       {displayState === 'output-available' ? (
                         <span className="i-ph:check text-green-500" />
                       ) : displayState === 'output-error' ? (
@@ -476,13 +476,13 @@ const ToolCallsList = memo(
                       )}
                     </span>
                     <span
-                      className="min-w-0 flex-1 truncate text-bolt-elements-textPrimary"
+                      className="min-w-0 flex-1 truncate text-fluixy-elements-textPrimary"
                       title={annotation?.toolDescription}
                     >
                       {activityLabel(toolName, getToolInput(tool), getToolOutput(tool), displayState)}
                     </span>
                     {state === 'input-available' && !fullAccess && !isServerAgentTool(toolName) && (
-                      <span className="shrink-0 text-xs text-bolt-elements-textTertiary">Awaiting approval</span>
+                      <span className="shrink-0 text-xs text-fluixy-elements-textTertiary">Awaiting approval</span>
                     )}
                   </div>
                   {error && <p className="ml-7 mt-1 break-words text-xs text-red-500">{error}</p>}
@@ -583,7 +583,7 @@ function AgentPlanDetails({ tool }: { tool: AnyPart }) {
   const plan = output.plan;
 
   return (
-    <details className="ml-7 mt-1 text-xs text-bolt-elements-textSecondary">
+    <details className="ml-7 mt-1 text-xs text-fluixy-elements-textSecondary">
       <summary className="cursor-pointer">View plan and completion criteria</summary>
       <p className="mt-2">{plan.goal}</p>
       <ol className="mt-2 list-decimal space-y-1 pl-4">
@@ -621,9 +621,9 @@ function summarizeExploration(parts: AnyPart[]): string {
 
 function cleanTimelineText(text: string): string {
   return text
-    .replace(/<boltAction\b[^>]*>[\s\S]*?(?:<\/boltAction>|$)/g, '')
-    .replace(/<\/?boltArtifact\b[^>]*>/g, '')
-    .replace(/<\/?boltAction\b[^>]*>/g, '');
+    .replace(/<(?:bolt|fluixy)Action\b[^>]*>[\s\S]*?(?:<\/(?:bolt|fluixy)Action>|$)/g, '')
+    .replace(/<\/?(?:bolt|fluixy)Artifact\b[^>]*>/g, '')
+    .replace(/<\/?(?:bolt|fluixy)Action\b[^>]*>/g, '');
 }
 
 function ToolActivityRow({
@@ -655,7 +655,7 @@ function ToolActivityRow({
   return (
     <div>
       <div className="flex min-w-0 items-center gap-2 py-0.5 text-sm">
-        <span className="flex h-4 w-4 shrink-0 items-center justify-center text-bolt-elements-textSecondary">
+        <span className="flex h-4 w-4 shrink-0 items-center justify-center text-fluixy-elements-textSecondary">
           {displayState === 'output-available' ? (
             <span className="i-ph:check-circle-fill text-green-500" />
           ) : displayState === 'output-error' ? (
@@ -668,11 +668,11 @@ function ToolActivityRow({
             <span className={icon} />
           )}
         </span>
-        <span className="min-w-0 flex-1 truncate text-bolt-elements-textPrimary" title={annotation?.toolDescription}>
+        <span className="min-w-0 flex-1 truncate text-fluixy-elements-textPrimary" title={annotation?.toolDescription}>
           {activityLabel(name, getToolInput(tool), getToolOutput(tool), displayState)}
         </span>
         {state === 'input-available' && !fullAccess && !isServerAgentTool(name) && (
-          <span className="shrink-0 text-xs text-bolt-elements-textTertiary">Approval needed</span>
+          <span className="shrink-0 text-xs text-fluixy-elements-textTertiary">Approval needed</span>
         )}
       </div>
       {getToolDisplayError(tool) && (

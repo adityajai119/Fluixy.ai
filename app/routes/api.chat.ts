@@ -51,7 +51,7 @@ export const action = withSecurity(chatAction, {
 async function chatAction({ context, request }: ActionFunctionArgs) {
   /*
    * Validation happens before any provider work, not inside the try block below.
-   * `request.json<T>()` only asserts a TypeScript type — at runtime a crafted
+   * `request.json<T>()` only asserts a TypeScript type ΓÇö at runtime a crafted
    * body with `maxLLMSteps: 100000` or an unbounded `files` map sailed straight
    * into streamText. This reads the body under a byte budget, then checks it
    * against a schema, so malformed input costs one parse and no model calls.
@@ -139,7 +139,7 @@ async function chatAction({ context, request }: ActionFunctionArgs) {
         const isInitialTemplateRequest = messages.some(
           (message) =>
             message.role === 'assistant' &&
-            /<boltArtifact\b[^>]*\bid=["']imported-files["']/i.test(getMessageText(message)),
+            /<(?:bolt|fluixy)Artifact\b[^>]*\bid=["']imported-files["']/i.test(getMessageText(message)),
         );
 
         const processedMessages = await mcpService.processToolInvocations(messages, writer, {
@@ -390,7 +390,7 @@ async function chatAction({ context, request }: ActionFunctionArgs) {
             : {}),
 
           abortSignal: request.signal,
-          telemetry: { functionId: 'bolt-chat' },
+          telemetry: { functionId: 'fluixy-chat' },
           onStepEnd: ({ toolCalls, finishReason }) => {
             if (finishReason !== 'error') {
               recovery.stepSucceeded();

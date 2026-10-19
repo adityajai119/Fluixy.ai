@@ -4,7 +4,7 @@
     --workbench-left: 0;
 
     .Chat {
-      --at-apply: bolt-ease-cubic-bezier;
+      --at-apply: fluixy-ease-cubic-bezier;
       transition-property: transform, opacity;
       transition-duration: 0.3s;
       will-change: transform, opacity;
@@ -17,6 +17,94 @@
 .Chat {
   opacity: 1;
 }
+
+/* ============================================
+   Glassmorphic Chat Input Container
+   ============================================ */
+
+.ChatInputGlass {
+  position: relative;
+  border-radius: 16px;
+  background: var(--fluixy-glass-background);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border: 1px solid var(--fluixy-glass-border);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus-within {
+    border-color: rgba(139, 92, 246, 0.40);
+    box-shadow:
+      0 0 20px rgba(139, 92, 246, 0.12),
+      0 0 40px rgba(139, 92, 246, 0.05),
+      inset 0 0 20px rgba(139, 92, 246, 0.03);
+  }
+
+  /* Animated gradient border */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 17px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(99, 102, 241, 0.1), rgba(59, 130, 246, 0.3), rgba(236, 72, 153, 0.1));
+    background-size: 300% 300%;
+    animation: gradient-shift 8s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  &:focus-within::before {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   Animated Welcome Heading
+   ============================================ */
+
+.WelcomeHeading {
+  background: linear-gradient(135deg, #8B5CF6, #6366F1, #3B82F6, #EC4899);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease infinite;
+  line-height: 1.2;
+  padding-bottom: 0.1em;
+
+  :global(html[data-theme='light']) & {
+    background: linear-gradient(135deg, #7C3AED, #4F46E5, #2563EB, #DB2777);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 6s ease infinite;
+  }
+}
+
+/* ============================================
+   Typewriter cursor
+   ============================================ */
+
+.TypewriterCursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: var(--fluixy-elements-item-contentAccent);
+  margin-left: 2px;
+  animation: typing-cursor 1s step-end infinite;
+  vertical-align: middle;
+}
+
+/* ============================================
+   Prompt Effect (existing, enhanced)
+   ============================================ */
 
 .PromptEffectContainer {
   --prompt-container-offset: 50px;
@@ -44,4 +132,87 @@
 .PromptShine {
   fill: url(#shine-gradient);
   mix-blend-mode: overlay;
+}
+
+/* ============================================
+   Floating badges
+   ============================================ */
+
+.FloatingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--fluixy-glass-background);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--fluixy-glass-border);
+  animation: float 4s ease-in-out infinite;
+  color: var(--fluixy-elements-textSecondary);
+
+  &:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 1s;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes typing-cursor {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Scroll to bottom button
+   ============================================ */
+
+.ScrollToBottomBtn {
+  background: var(--fluixy-glass-background);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--fluixy-glass-border);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(139, 92, 246, 0.35);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+  }
 }

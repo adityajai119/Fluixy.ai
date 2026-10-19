@@ -19,11 +19,11 @@ export const AvatarDropdown = ({ onSelectTab, onOpenDocs }: AvatarDropdownProps)
         <motion.button
           type="button"
           aria-label={`Open profile menu for ${profile?.username || 'Guest User'}`}
-          className="flex h-12 w-full min-w-0 items-center justify-start gap-3 rounded-lg bg-transparent px-2 text-left transition-colors hover:bg-bolt-elements-background-depth-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+          className="flex h-12 w-full min-w-0 items-center justify-start gap-3 rounded-lg bg-transparent px-2 text-left transition-colors hover:bg-fluixy-elements-background-depth-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-bolt-elements-background-depth-4 text-bolt-elements-textSecondary">
+          <span className="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-fluixy-elements-background-depth-4 text-fluixy-elements-textSecondary">
             <img
               src={profile?.avatar || DEFAULT_AVATAR}
               alt=""
@@ -32,7 +32,7 @@ export const AvatarDropdown = ({ onSelectTab, onOpenDocs }: AvatarDropdownProps)
               decoding="sync"
             />
           </span>
-          <span className="min-w-0 truncate text-sm font-medium text-bolt-elements-textPrimary">
+          <span className="min-w-0 truncate text-sm font-medium text-fluixy-elements-textPrimary">
             {profile?.username?.trim() || 'Guest User'}
           </span>
         </motion.button>
@@ -106,7 +106,6 @@ export const AvatarDropdown = ({ onSelectTab, onOpenDocs }: AvatarDropdownProps)
             Settings
           </DropdownMenu.Item>
 
-          <div className="my-1 border-t border-gray-200/50 dark:border-gray-800/50" />
 
           <DropdownMenu.Item
             className={classNames(
@@ -119,7 +118,7 @@ export const AvatarDropdown = ({ onSelectTab, onOpenDocs }: AvatarDropdownProps)
               'group',
             )}
             onClick={() =>
-              window.open('https://github.com/stackblitz-labs/bolt.diy/issues/new?template=bug_report.yml', '_blank')
+              window.open('https://github.com/adityajai119/Fluixy.ai/issues/new', '_blank')
             }
           >
             <div className="i-ph:bug w-4 h-4 text-gray-400 group-hover:text-purple-500 dark:group-hover:text-purple-400 transition-colors" />

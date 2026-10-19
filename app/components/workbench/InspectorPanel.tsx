@@ -88,11 +88,11 @@ export const InspectorPanel = ({
     '';
 
   return (
-    <aside className="absolute right-3 top-14 z-30 flex max-h-[calc(100%-4.25rem)] w-72 flex-col overflow-hidden rounded-xl border border-bolt-elements-borderColor bg-bolt-elements-background-depth-1 shadow-2xl">
-      <header className="flex items-center justify-between border-b border-bolt-elements-borderColor px-3 py-2.5">
+    <aside className="absolute right-3 top-14 z-30 flex max-h-[calc(100%-4.25rem)] w-72 flex-col overflow-hidden rounded-xl border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-1 shadow-2xl">
+      <header className="flex items-center justify-between border-b border-fluixy-elements-borderColor px-3 py-2.5">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold text-bolt-elements-textPrimary">Visual edits</h3>
-          <p className="truncate font-mono text-xs text-bolt-elements-textTertiary">
+          <h3 className="text-sm font-semibold text-fluixy-elements-textPrimary">Visual edits</h3>
+          <p className="truncate font-mono text-xs text-fluixy-elements-textTertiary">
             {selectedElement.tagName.toLowerCase()}
             {selectedElement.id
               ? `#${selectedElement.id}`
@@ -105,14 +105,14 @@ export const InspectorPanel = ({
           type="button"
           onClick={onClose}
           aria-label="Close visual edits"
-          className="rounded bg-bolt-elements-background-depth-1 p-1 text-bolt-elements-textSecondary transition-colors hover:bg-bolt-elements-background-depth-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          className="rounded bg-fluixy-elements-background-depth-1 p-1 text-fluixy-elements-textSecondary transition-colors hover:bg-fluixy-elements-background-depth-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
         >
           ×
         </button>
       </header>
 
       <div className="overflow-y-auto p-3">
-        <label className="mb-3 block text-xs font-medium text-bolt-elements-textSecondary">
+        <label className="mb-3 block text-xs font-medium text-fluixy-elements-textSecondary">
           Text content
           <input
             value={textValue}
@@ -121,11 +121,11 @@ export const InspectorPanel = ({
               setTextValue(event.target.value);
               onTextChange(event.target.value);
             }}
-            className="mt-1 w-full rounded-md border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 px-2 py-1.5 text-sm text-bolt-elements-textPrimary outline-none focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+            className="mt-1 w-full rounded-md border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 px-2 py-1.5 text-sm text-fluixy-elements-textPrimary outline-none focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
             aria-label="Element text content"
           />
           {selectedElement.hasChildElements && (
-            <span className="mt-1 block text-[10px] text-bolt-elements-textTertiary">
+            <span className="mt-1 block text-[10px] text-fluixy-elements-textTertiary">
               Text editing is disabled for elements with nested markup.
             </span>
           )}
@@ -138,14 +138,14 @@ export const InspectorPanel = ({
             return (
               <label
                 key={property}
-                className="flex items-center justify-between gap-3 text-xs text-bolt-elements-textSecondary"
+                className="flex items-center justify-between gap-3 text-xs text-fluixy-elements-textSecondary"
               >
                 <span>{label}</span>
                 {type === 'select' ? (
                   <select
                     value={value}
                     onChange={(event) => onStyleChange(property, event.target.value)}
-                    className="w-32 rounded-md border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 px-2 py-1.5 text-xs text-bolt-elements-textPrimary"
+                    className="w-32 rounded-md border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 px-2 py-1.5 text-xs text-fluixy-elements-textPrimary"
                     aria-label={label}
                   >
                     <option value="">Default</option>
@@ -161,7 +161,7 @@ export const InspectorPanel = ({
                       value={toColorInputValue(value)}
                       onChange={(event) => onStyleChange(property, event.target.value)}
                       aria-label={label}
-                      className="h-7 w-8 cursor-pointer rounded border border-bolt-elements-borderColor bg-transparent p-0.5"
+                      className="h-7 w-8 cursor-pointer rounded border border-fluixy-elements-borderColor bg-transparent p-0.5"
                     />
                     <span className="truncate font-mono text-[10px]" title={value}>
                       {value || '—'}
@@ -172,7 +172,7 @@ export const InspectorPanel = ({
                     value={value}
                     onChange={(event) => onStyleChange(property, event.target.value)}
                     aria-label={label}
-                    className="w-32 rounded-md border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 px-2 py-1.5 font-mono text-xs text-bolt-elements-textPrimary outline-none focus:border-blue-500"
+                    className="w-32 rounded-md border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 px-2 py-1.5 font-mono text-xs text-fluixy-elements-textPrimary outline-none focus:border-blue-500"
                   />
                 )}
               </label>
@@ -186,18 +186,18 @@ export const InspectorPanel = ({
             send a prompt to apply them to project files.
           </p>
         ) : (
-          <p className="mt-3 text-[11px] text-bolt-elements-textTertiary">
+          <p className="mt-3 text-[11px] text-fluixy-elements-textTertiary">
             Changes are live in this preview. Send a prompt with this selection to keep them in your code.
           </p>
         )}
       </div>
 
-      <footer className="flex gap-2 border-t border-bolt-elements-borderColor p-2.5">
+      <footer className="flex gap-2 border-t border-fluixy-elements-borderColor p-2.5">
         <button
           type="button"
           onClick={onUndo}
           disabled={!canUndo}
-          className="flex-1 appearance-none rounded-md border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 px-2 py-1.5 text-xs font-medium text-bolt-elements-textPrimary transition-colors hover:bg-bolt-elements-background-depth-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 disabled:cursor-not-allowed disabled:text-bolt-elements-textSecondary disabled:opacity-100"
+          className="flex-1 appearance-none rounded-md border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 px-2 py-1.5 text-xs font-medium text-fluixy-elements-textPrimary transition-colors hover:bg-fluixy-elements-background-depth-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 disabled:cursor-not-allowed disabled:text-fluixy-elements-textSecondary disabled:opacity-100"
         >
           Undo
         </button>
@@ -205,7 +205,7 @@ export const InspectorPanel = ({
           type="button"
           onClick={onReset}
           disabled={!selectedElement.visualEdits?.length}
-          className="flex-1 appearance-none rounded-md border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 px-2 py-1.5 text-xs font-medium text-bolt-elements-textPrimary transition-colors hover:bg-bolt-elements-background-depth-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 disabled:cursor-not-allowed disabled:text-bolt-elements-textSecondary disabled:opacity-100"
+          className="flex-1 appearance-none rounded-md border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 px-2 py-1.5 text-xs font-medium text-fluixy-elements-textPrimary transition-colors hover:bg-fluixy-elements-background-depth-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 disabled:cursor-not-allowed disabled:text-fluixy-elements-textSecondary disabled:opacity-100"
         >
           Reset preview
         </button>

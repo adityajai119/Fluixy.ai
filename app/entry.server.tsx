@@ -30,6 +30,11 @@ export default async function handleRequest(
    */
   responseHeaders.set('Cross-Origin-Embedder-Policy', 'credentialless');
   responseHeaders.set('Cross-Origin-Opener-Policy', 'same-origin');
+  responseHeaders.set('X-Content-Type-Options', 'nosniff');
+  responseHeaders.set('X-Frame-Options', 'DENY');
+  responseHeaders.set('X-XSS-Protection', '1; mode=block');
+  responseHeaders.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  responseHeaders.set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
   return new Response(body, {
     headers: responseHeaders,

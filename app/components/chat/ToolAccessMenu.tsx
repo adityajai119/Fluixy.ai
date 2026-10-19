@@ -20,11 +20,11 @@ export function ToolAccessMenu() {
           title="Choose tool access mode"
           aria-label={`Tool access: ${selectedMode.label}`}
           className={classNames(
-            'inline-flex items-center gap-1 rounded-md border border-bolt-elements-borderColor bg-bolt-elements-background-depth-3 px-2 py-1 text-xs transition-colors',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bolt-elements-focus',
+            'inline-flex items-center gap-1 rounded-md border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-3 px-2 py-1 text-xs transition-colors',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fluixy-elements-focus',
             mode === 'full-access'
               ? 'text-accent-500 hover:text-accent-500'
-              : 'text-bolt-elements-textPrimary hover:text-bolt-elements-textPrimary',
+              : 'text-fluixy-elements-textPrimary hover:text-fluixy-elements-textPrimary',
           )}
         >
           <div className={mode === 'full-access' ? 'i-ph:shield-warning' : 'i-ph:hand'} />
@@ -37,7 +37,7 @@ export function ToolAccessMenu() {
         <DropdownMenu.Content
           align="start"
           sideOffset={6}
-          className="z-[1000] min-w-[245px] rounded-lg border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 p-1 shadow-lg"
+          className="z-[1000] min-w-[245px] rounded-lg border border-fluixy-elements-borderColor bg-fluixy-elements-background-depth-2 p-1 shadow-lg"
         >
           {MODES.map((item) => {
             const selected = item.id === mode;
@@ -48,9 +48,9 @@ export function ToolAccessMenu() {
                 onSelect={() => setMode(item.id)}
                 className={classNames(
                   'flex cursor-pointer items-start gap-2 rounded-md px-3 py-2 outline-none transition-colors',
-                  'hover:bg-bolt-elements-background-depth-3 data-[highlighted]:bg-bolt-elements-background-depth-3',
+                  'hover:bg-fluixy-elements-background-depth-3 data-[highlighted]:bg-fluixy-elements-background-depth-3',
                   selected && item.id === 'full-access' && 'text-accent-500',
-                  !selected && 'text-bolt-elements-textPrimary',
+                  !selected && 'text-fluixy-elements-textPrimary',
                 )}
               >
                 <div
@@ -61,7 +61,7 @@ export function ToolAccessMenu() {
                 />
                 <span className="flex min-w-0 flex-1 flex-col">
                   <span className="text-sm font-medium">{item.label}</span>
-                  <span className="text-xs text-bolt-elements-textSecondary">{item.description}</span>
+                  <span className="text-xs text-fluixy-elements-textSecondary">{item.description}</span>
                 </span>
                 {selected && <div className="i-ph:check mt-1 text-sm" />}
               </DropdownMenu.Item>

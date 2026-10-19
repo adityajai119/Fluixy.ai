@@ -24,10 +24,10 @@ describe('getTemplates', () => {
     expect(result?.userMessage).toContain('ask whether to proceed');
     expect(result?.userMessage).toContain('install dependencies if needed, start the app, and run relevant checks');
     expect(result?.userMessage).toContain('Keep the starter structure.');
-    expect(result?.assistantMessage).toContain('<boltArtifact id="imported-files"');
-    expect(result?.setupMessage).toContain('<boltArtifact id="project-setup"');
-    expect(result?.setupMessage).toContain('<boltAction type="shell">npm install --no-audit --no-fund</boltAction>');
-    expect(result?.setupMessage).toContain('<boltAction type="start">npm run dev</boltAction>');
+    expect(result?.assistantMessage).toContain('<fluixyArtifact id="imported-files"');
+    expect(result?.setupMessage).toContain('<fluixyArtifact id="project-setup"');
+    expect(result?.setupMessage).toContain('<fluixyAction type="shell">npm install --no-audit --no-fund</fluixyAction>');
+    expect(result?.setupMessage).toContain('<fluixyAction type="start">npm run dev</fluixyAction>');
   });
 });
 

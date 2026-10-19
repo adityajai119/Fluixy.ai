@@ -77,16 +77,16 @@ export const EditorPanel = memo(
 
     return (
       <Group orientation="horizontal">
-        <Panel defaultSize={20} minSize={15} collapsible className="border-r border-bolt-elements-borderColor">
+        <Panel defaultSize={20} minSize={15} collapsible className="border-r border-fluixy-elements-borderColor">
           <div className="h-full">
             <Tabs.Root defaultValue="files" className="flex flex-col h-full">
-              <PanelHeader className="w-full text-sm font-medium text-bolt-elements-textSecondary px-1">
+              <PanelHeader className="w-full text-sm font-medium text-fluixy-elements-textSecondary px-1">
                 <div className="h-full flex-shrink-0 flex items-center justify-between w-full">
                   <Tabs.List className="h-full flex-shrink-0 flex items-center">
                     <Tabs.Trigger
                       value="files"
                       className={classNames(
-                        'h-full bg-transparent hover:bg-bolt-elements-background-depth-3 py-0.5 px-2 rounded-lg text-sm font-medium text-bolt-elements-textTertiary hover:text-bolt-elements-textPrimary data-[state=active]:text-bolt-elements-textPrimary',
+                        'h-full bg-transparent hover:bg-fluixy-elements-background-depth-3 py-0.5 px-2 rounded-lg text-sm font-medium text-fluixy-elements-textTertiary hover:text-fluixy-elements-textPrimary data-[state=active]:text-fluixy-elements-textPrimary',
                       )}
                     >
                       Files
@@ -94,7 +94,7 @@ export const EditorPanel = memo(
                     <Tabs.Trigger
                       value="search"
                       className={classNames(
-                        'h-full bg-transparent hover:bg-bolt-elements-background-depth-3 py-0.5 px-2 rounded-lg text-sm font-medium text-bolt-elements-textTertiary hover:text-bolt-elements-textPrimary data-[state=active]:text-bolt-elements-textPrimary',
+                        'h-full bg-transparent hover:bg-fluixy-elements-background-depth-3 py-0.5 px-2 rounded-lg text-sm font-medium text-fluixy-elements-textTertiary hover:text-fluixy-elements-textPrimary data-[state=active]:text-fluixy-elements-textPrimary',
                       )}
                     >
                       Search
@@ -102,7 +102,7 @@ export const EditorPanel = memo(
                     <Tabs.Trigger
                       value="locks"
                       className={classNames(
-                        'h-full bg-transparent hover:bg-bolt-elements-background-depth-3 py-0.5 px-2 rounded-lg text-sm font-medium text-bolt-elements-textTertiary hover:text-bolt-elements-textPrimary data-[state=active]:text-bolt-elements-textPrimary',
+                        'h-full bg-transparent hover:bg-fluixy-elements-background-depth-3 py-0.5 px-2 rounded-lg text-sm font-medium text-fluixy-elements-textTertiary hover:text-fluixy-elements-textPrimary data-[state=active]:text-fluixy-elements-textPrimary',
                       )}
                     >
                       Locks

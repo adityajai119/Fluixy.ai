@@ -77,6 +77,33 @@ function validateTokenLimits(modelDetails: ModelInfo, requestedTokens: number): 
   return { valid: true };
 }
 
+/*
+ * Groq free-tier and provider rate limiting arrive as 429s with many phrasings.
+ * Classify them so the client shows a retryable rate-limit alert instead of a
+ * generic server error. (Fluixy.Ai Groq work)
+ */
+function toQuotaError(error: unknown, provider: string): ApiError | null {
+  const errorMessage = error instanceof Error ? error.message || '' : String(error || '');
+  const lowerErrorMessage = errorMessage.toLowerCase();
+  const isQuotaError =
+    lowerErrorMessage.includes('quota exceeded') ||
+    lowerErrorMessage.includes('resource_exhausted') ||
+    lowerErrorMessage.includes('rate limit') ||
+    lowerErrorMessage.includes('status code: 429') ||
+    lowerErrorMessage.includes(' 429');
+
+  if (!isQuotaError) {
+    return null;
+  }
+
+  return new ApiError('Quota or rate limit exceeded. Please check your provider usage/billing or try again later.', {
+    status: 429,
+    code: 'rate_limit_exceeded',
+    isRetryable: true,
+    provider,
+  });
+}
+
 async function llmCallAction({ context, request }: ActionFunctionArgs) {
   /*
    * Bounded read + schema check before any provider call. The previous
@@ -137,6 +164,13 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
 
       if (error instanceof Error && error.message?.includes('API key')) {
         return toApiErrorResponse(toMissingCredentialError(providerName, error.message));
+      }
+
+      // Groq free-tier / provider rate limiting: surface as a retryable 429 rather than a 500.
+      const quotaError = toQuotaError(error, providerName);
+
+      if (quotaError) {
+        return toApiErrorResponse(quotaError);
       }
 
       return toApiErrorResponse(error, providerName);
@@ -256,6 +290,13 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
 
       if (error instanceof Error && error.message.includes('API key')) {
         return toApiErrorResponse(toMissingCredentialError(providerName, error.message));
+      }
+
+      // Groq free-tier / provider rate limiting: surface as a retryable 429 rather than a 500.
+      const quotaError = toQuotaError(error, providerName);
+
+      if (quotaError) {
+        return toApiErrorResponse(quotaError);
       }
 
       return toApiErrorResponse(error, providerName);
